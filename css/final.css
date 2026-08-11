@@ -1,0 +1,1966 @@
+@charset "UTF-8";
+
+:root {
+  --font-body: "Optima", "Avenir Next", "Segoe UI", Arial, sans-serif;
+  --font-display: "Palatino Linotype", "Book Antiqua", "Iowan Old Style", Georgia, serif;
+  --font-zh: "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei UI", "Microsoft YaHei", sans-serif;
+  --font-zh-display: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", SimSun, serif;
+  --ink: #34302b;
+  --muted: rgba(52, 48, 43, 0.66);
+  --quiet: rgba(52, 48, 43, 0.46);
+  --paper: #f3eee5;
+  --page-gutter: clamp(28px, 6vw, 116px);
+  --project-max: 1540px;
+}
+
+html,
+body {
+  background: var(--paper) !important;
+  color: var(--ink) !important;
+  font-family: var(--font-body) !important;
+  letter-spacing: 0 !important;
+  text-rendering: geometricPrecision;
+}
+
+html[lang="zh-CN"] body {
+  font-family: var(--font-zh) !important;
+}
+
+h1,
+h2,
+h3,
+.email-address {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+html[lang="zh-CN"] h1,
+html[lang="zh-CN"] h2,
+html[lang="zh-CN"] h3 {
+  font-family: var(--font-zh-display) !important;
+  font-weight: 400 !important;
+}
+
+p,
+a,
+button,
+span {
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+html[lang="zh-CN"] p,
+html[lang="zh-CN"] a,
+html[lang="zh-CN"] button,
+html[lang="zh-CN"] span {
+  line-break: strict !important;
+  word-break: keep-all !important;
+}
+
+.keep-tail {
+  white-space: nowrap !important;
+}
+
+.site-header {
+  gap: clamp(18px, 3vw, 42px) !important;
+  grid-template-columns: auto 1fr auto !important;
+  padding: 28px var(--page-gutter) !important;
+}
+
+.name-link,
+.main-nav a,
+.language-toggle {
+  font-size: 13px !important;
+  letter-spacing: 0.02em !important;
+}
+
+.main-nav {
+  gap: clamp(24px, 4vw, 58px) !important;
+  justify-self: end !important;
+}
+
+.home {
+  min-height: 100svh !important;
+  overflow: hidden !important;
+}
+
+.home-copy {
+  left: var(--page-gutter) !important;
+  top: clamp(120px, 18vh, 190px) !important;
+  width: min(720px, calc(100vw - var(--page-gutter) * 2)) !important;
+}
+
+.home h1 {
+  font-size: clamp(48px, 6vw, 78px) !important;
+  line-height: 1.02 !important;
+  margin: 0.35em 0 0.2em !important;
+}
+
+html[lang="zh-CN"] .home h1 {
+  font-size: clamp(34px, 4.8vw, 58px) !important;
+  line-height: 1.22 !important;
+}
+
+.home .role {
+  font-size: clamp(16px, 1.45vw, 21px) !important;
+  line-height: 1.55 !important;
+}
+
+.home .line {
+  font-size: clamp(15px, 1.2vw, 18px) !important;
+  line-height: 1.85 !important;
+  max-width: 36em !important;
+}
+
+.floating-stage {
+  inset: clamp(150px, 18vh, 210px) clamp(18px, 4vw, 70px) clamp(70px, 10vh, 118px) clamp(18px, 4vw, 70px) !important;
+  overflow: visible !important;
+}
+
+.floating-project {
+  max-width: none !important;
+  overflow: visible !important;
+}
+
+.floating-project span {
+  display: block !important;
+  font-size: 13px !important;
+  line-height: 1.2 !important;
+  margin-top: 8px !important;
+  max-width: none !important;
+  white-space: nowrap !important;
+  width: max-content !important;
+}
+
+html[lang="zh-CN"] .floating-project span {
+  font-size: 13px !important;
+  letter-spacing: 0 !important;
+}
+
+.archive,
+.about,
+.contact {
+  align-items: start !important;
+  column-gap: clamp(54px, 8vw, 150px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(160px, 0.55fr) minmax(0, 1.45fr) !important;
+  margin: 0 auto !important;
+  padding-block: clamp(78px, 10vw, 150px) !important;
+  width: min(var(--project-max), calc(100% - var(--page-gutter) * 2)) !important;
+}
+
+.archive > .tiny,
+.about > .tiny,
+.contact > .tiny {
+  align-self: start !important;
+  grid-column: 1 !important;
+  margin: 0 !important;
+}
+
+.archive-row,
+.about-grid,
+.contact > .email-address,
+.contact > .email-links {
+  grid-column: 2 !important;
+}
+
+.archive-row {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 18px 38px !important;
+}
+
+.archive-row button {
+  font-family: var(--font-display) !important;
+  font-size: clamp(20px, 2vw, 30px) !important;
+  line-height: 1.2 !important;
+}
+
+html[lang="zh-CN"] .archive-row button {
+  font-family: var(--font-zh-display) !important;
+  font-size: clamp(18px, 1.8vw, 26px) !important;
+}
+
+.about-grid {
+  display: grid !important;
+  gap: clamp(34px, 5vw, 86px) !important;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr) !important;
+}
+
+.about-grid p {
+  font-size: clamp(16px, 1.35vw, 20px) !important;
+  line-height: 1.82 !important;
+  margin: 0 0 0.85em !important;
+  max-width: 38em !important;
+}
+
+html[lang="zh-CN"] .about-grid p {
+  font-size: clamp(15px, 1.15vw, 18px) !important;
+  line-height: 2 !important;
+}
+
+.email-address {
+  font-size: clamp(20px, 2vw, 30px) !important;
+  line-height: 1.2 !important;
+  white-space: normal !important;
+  word-break: normal !important;
+}
+
+.email-links {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 18px 34px !important;
+  margin-top: 28px !important;
+}
+
+.email-links a,
+.email-links button {
+  font-size: 13px !important;
+}
+
+.project-room {
+  background: var(--room-paper, var(--paper)) !important;
+  color: var(--ink) !important;
+  overflow: auto !important;
+}
+
+.project-room.theme-generative {
+  --room-paper: #edf0e8;
+  --room-bg-opacity: 0.4;
+}
+
+.project-room.theme-trending {
+  --room-paper: #e8edf0;
+  --room-bg-opacity: 0.38;
+}
+
+.project-room.theme-cherries {
+  --room-paper: #f2e5e3;
+  --room-bg-opacity: 0.36;
+}
+
+.project-room.theme-mossy {
+  --room-paper: #e8eee4;
+  --room-bg-opacity: 0.42;
+}
+
+.project-room.theme-oxidation {
+  --room-paper: #ece8df;
+  --room-bg-opacity: 0.38;
+}
+
+.project-room.theme-greenpepper {
+  --room-paper: #edf0e8;
+  --room-bg-opacity: 0.34;
+}
+
+.project-room.theme-photography {
+  --room-paper: #ecefeb;
+  --room-bg-opacity: 0.42;
+}
+
+.room-background {
+  background-position: var(--bg-pos, 50% 50%) !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  filter: none !important;
+  height: auto !important;
+  inset: -8vh -8vw !important;
+  opacity: var(--room-bg-opacity, 0.38) !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  transform: scale(1.03) !important;
+  width: auto !important;
+  z-index: 0 !important;
+}
+
+.room-background::after {
+  background:
+    linear-gradient(90deg, var(--room-paper) 0%, rgba(255, 255, 255, 0.62) 25%, rgba(255, 255, 255, 0.48) 56%, var(--room-paper) 100%),
+    radial-gradient(circle at 52% 42%, rgba(255, 255, 255, 0.08), var(--room-paper) 88%);
+  content: "";
+  inset: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.room-topbar {
+  align-items: center !important;
+  display: grid !important;
+  gap: 22px !important;
+  grid-template-columns: auto 1fr auto !important;
+  left: var(--page-gutter) !important;
+  position: fixed !important;
+  right: var(--page-gutter) !important;
+  top: 24px !important;
+  z-index: 5 !important;
+}
+
+.room-close {
+  font-size: 13px !important;
+  justify-self: start !important;
+}
+
+.room-language-toggle {
+  justify-self: center !important;
+}
+
+.sound-control {
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.22) !important;
+  backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(52, 48, 43, 0.16) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 10px 30px rgba(52, 48, 43, 0.08) !important;
+  display: flex !important;
+  gap: 14px !important;
+  justify-self: end !important;
+  padding: 9px 17px !important;
+}
+
+.sound-toggle {
+  font-size: 12px !important;
+}
+
+.sound-volume {
+  accent-color: var(--ink) !important;
+  width: 120px !important;
+}
+
+.room-shell {
+  align-items: center !important;
+  display: grid !important;
+  gap: clamp(54px, 7vw, 128px) !important;
+  grid-template-columns: minmax(300px, 0.72fr) minmax(760px, 1.92fr) !important;
+  margin: 0 auto !important;
+  min-height: 100svh !important;
+  padding: clamp(120px, 13vh, 170px) 0 clamp(86px, 10vh, 132px) !important;
+  position: relative !important;
+  width: min(var(--project-max), calc(100% - var(--page-gutter) * 2)) !important;
+  z-index: 2 !important;
+}
+
+.room-menu {
+  align-self: center !important;
+  max-width: 390px !important;
+  position: relative !important;
+  top: auto !important;
+  width: auto !important;
+}
+
+.room-menu .tiny,
+#room-kicker {
+  color: var(--quiet) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.55 !important;
+  text-transform: uppercase !important;
+}
+
+.room-menu h2 {
+  font-size: clamp(36px, 3.5vw, 58px) !important;
+  line-height: 1.06 !important;
+  margin: 18px 0 24px !important;
+  max-width: 8.5em !important;
+}
+
+html[lang="zh-CN"] .room-menu h2 {
+  font-size: clamp(27px, 2.5vw, 40px) !important;
+  line-height: 1.32 !important;
+  max-width: 12em !important;
+}
+
+.room-menu p:not(.tiny) {
+  font-size: clamp(15px, 1.1vw, 17px) !important;
+  line-height: 1.88 !important;
+  margin: 0 0 34px !important;
+  max-width: 24em !important;
+}
+
+html[lang="zh-CN"] .room-menu p:not(.tiny) {
+  font-size: 15px !important;
+  line-height: 2 !important;
+  max-width: 20em !important;
+}
+
+.room-tabs {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 16px 30px !important;
+}
+
+.room-tabs button {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--muted) !important;
+  font-size: 13px !important;
+  padding: 0 0 5px !important;
+}
+
+.room-tabs button.is-active {
+  border-color: var(--ink) !important;
+  color: var(--ink) !important;
+}
+
+.room-view,
+.pane {
+  min-width: 0 !important;
+  overflow: visible !important;
+  width: 100% !important;
+}
+
+.story-pane,
+.video-pane,
+.sound-pane,
+.role-pane,
+.photo-cover {
+  align-items: center !important;
+  display: grid !important;
+  gap: clamp(48px, 6vw, 112px) !important;
+  grid-template-columns: minmax(360px, 0.95fr) minmax(420px, 1.05fr) !important;
+}
+
+.story-media,
+.video-pane video,
+.role-pane > .media-button {
+  background: transparent !important;
+  box-shadow: 0 24px 70px rgba(52, 48, 43, 0.12) !important;
+  justify-self: center !important;
+  max-height: 72svh !important;
+  width: min(100%, 600px) !important;
+}
+
+.story-media img,
+.role-pane img {
+  display: block !important;
+  height: auto !important;
+  max-height: 72svh !important;
+  object-fit: contain !important;
+  width: 100% !important;
+}
+
+.story-text,
+.role-note,
+.side-note,
+.photo-copy {
+  max-width: 560px !important;
+  width: min(100%, 560px) !important;
+}
+
+.story-block {
+  border: 0 !important;
+  margin: 0 0 clamp(28px, 4.2vh, 54px) !important;
+  padding: 0 !important;
+}
+
+.story-block span,
+.process-intro span {
+  color: var(--quiet) !important;
+  display: block !important;
+  font-size: 12px !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.55 !important;
+  margin-bottom: 14px !important;
+  text-transform: uppercase !important;
+}
+
+.story-block h3 {
+  font-size: clamp(30px, 3vw, 48px) !important;
+  line-height: 1.15 !important;
+  margin: 0 !important;
+  max-width: 12.5em !important;
+}
+
+html[lang="zh-CN"] .story-block h3 {
+  font-family: var(--font-zh-display) !important;
+  font-size: clamp(24px, 2.2vw, 34px) !important;
+  line-height: 1.5 !important;
+  max-width: 15em !important;
+}
+
+.story-block p,
+.side-note p,
+.role-note p,
+.photo-copy p,
+.process-intro p {
+  color: rgba(52, 48, 43, 0.78) !important;
+  font-size: clamp(15px, 1.1vw, 17px) !important;
+  line-height: 1.9 !important;
+  margin: 0 0 1.2em !important;
+  max-width: 36em !important;
+}
+
+html[lang="zh-CN"] .story-block p,
+html[lang="zh-CN"] .side-note p,
+html[lang="zh-CN"] .role-note p,
+html[lang="zh-CN"] .photo-copy p,
+html[lang="zh-CN"] .process-intro p {
+  font-size: 15px !important;
+  line-height: 2.05 !important;
+  max-width: 31em !important;
+}
+
+.process-pane {
+  align-items: start !important;
+  display: grid !important;
+  gap: clamp(42px, 6vw, 96px) !important;
+  grid-template-columns: minmax(250px, 0.42fr) minmax(0, 1.58fr) !important;
+}
+
+.process-intro {
+  align-self: start !important;
+  max-width: 280px !important;
+  position: sticky !important;
+  top: 128px !important;
+}
+
+.process-grid {
+  align-items: start !important;
+  display: grid !important;
+  gap: clamp(30px, 4vw, 70px) !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+.process-item {
+  margin: 0 !important;
+}
+
+.process-item:first-child {
+  grid-column: 1 / -1 !important;
+}
+
+.process-item button {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.process-item img {
+  box-shadow: 0 18px 58px rgba(52, 48, 43, 0.1) !important;
+  display: block !important;
+  height: auto !important;
+  max-height: 70svh !important;
+  object-fit: contain !important;
+  width: 100% !important;
+}
+
+.process-caption {
+  color: var(--quiet) !important;
+  font-size: 11px !important;
+  letter-spacing: 0.05em !important;
+  margin-top: 10px !important;
+}
+
+.photo-table {
+  align-items: start !important;
+  display: grid !important;
+  gap: clamp(24px, 3vw, 52px) !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+.photo-tile {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.photo-tile img {
+  box-shadow: 0 16px 52px rgba(52, 48, 43, 0.1) !important;
+  display: block !important;
+  height: auto !important;
+  object-fit: contain !important;
+  width: 100% !important;
+}
+
+.photo-tile:nth-child(3n + 2) {
+  margin-top: clamp(18px, 4vw, 64px) !important;
+}
+
+.photo-tile:nth-child(3n) {
+  margin-top: clamp(38px, 6vw, 94px) !important;
+}
+
+@media (pointer: coarse) {
+  .floating-project {
+    animation: touchDrift 7s ease-in-out infinite alternate;
+  }
+
+  .project-room::after {
+    background: radial-gradient(circle at 50% calc(40% + var(--touch-scroll-shift, 0px)), rgba(255, 255, 255, 0.18), transparent 36%);
+    content: "";
+    inset: 0;
+    pointer-events: none;
+    position: fixed;
+    z-index: 1;
+  }
+}
+
+@keyframes touchDrift {
+  from {
+    filter: drop-shadow(0 8px 16px rgba(52, 48, 43, 0.12));
+  }
+
+  to {
+    filter: drop-shadow(0 18px 32px rgba(52, 48, 43, 0.18));
+  }
+}
+
+@media (max-width: 1180px) {
+  .room-shell {
+    align-items: start !important;
+    grid-template-columns: 1fr !important;
+    width: min(960px, calc(100% - 52px)) !important;
+  }
+
+  .room-menu {
+    max-width: 760px !important;
+  }
+
+  .story-pane,
+  .video-pane,
+  .sound-pane,
+  .role-pane,
+  .photo-cover,
+  .process-pane {
+    grid-template-columns: 1fr !important;
+  }
+
+  .process-intro {
+    max-width: 42em !important;
+    position: relative !important;
+    top: auto !important;
+  }
+
+  .process-grid,
+  .photo-table {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --page-gutter: 22px;
+  }
+
+  .site-header {
+    grid-template-columns: 1fr auto !important;
+  }
+
+  .main-nav {
+    display: none !important;
+  }
+
+  .home-copy {
+    top: 96px !important;
+  }
+
+  .home h1 {
+    font-size: clamp(38px, 12vw, 54px) !important;
+  }
+
+  .floating-stage {
+    inset: 260px 14px 74px 14px !important;
+  }
+
+  .archive,
+  .about,
+  .contact {
+    grid-template-columns: 1fr !important;
+    padding-block: 64px !important;
+    row-gap: 22px !important;
+    width: calc(100% - 44px) !important;
+  }
+
+  .archive-row,
+  .about-grid,
+  .contact > .email-address,
+  .contact > .email-links {
+    grid-column: 1 !important;
+  }
+
+  .room-topbar {
+    gap: 12px !important;
+    grid-template-columns: auto auto !important;
+    left: 18px !important;
+    right: 18px !important;
+  }
+
+  .room-language-toggle {
+    justify-self: end !important;
+  }
+
+  .sound-control {
+    grid-column: 1 / -1 !important;
+    justify-self: end !important;
+    padding: 8px 12px !important;
+  }
+
+  .sound-volume {
+    width: 92px !important;
+  }
+
+  .room-shell {
+    padding-top: 126px !important;
+    width: calc(100% - 36px) !important;
+  }
+
+  .process-grid,
+  .photo-table {
+    grid-template-columns: 1fr !important;
+  }
+
+  .story-block h3 {
+    font-size: clamp(25px, 8vw, 34px) !important;
+  }
+
+  html[lang="zh-CN"] .story-block h3 {
+    font-size: clamp(21px, 6.6vw, 28px) !important;
+  }
+
+  .story-block p,
+  .side-note p,
+  .role-note p,
+  .photo-copy p,
+  .process-intro p,
+  .room-menu p:not(.tiny) {
+    font-size: 14.5px !important;
+    line-height: 1.9 !important;
+  }
+
+  html[lang="zh-CN"] .story-block p,
+  html[lang="zh-CN"] .side-note p,
+  html[lang="zh-CN"] .role-note p,
+  html[lang="zh-CN"] .photo-copy p,
+  html[lang="zh-CN"] .process-intro p,
+  html[lang="zh-CN"] .room-menu p:not(.tiny) {
+    font-size: 14px !important;
+    line-height: 2 !important;
+  }
+}
+
+/* Art-direction pass: stable reading, full-bleed project atmosphere, quieter hierarchy. */
+:root {
+  --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Bodoni 72", "Bodoni MT", "Didot", "Garamond", Georgia, serif;
+  --font-zh: "Microsoft YaHei UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", sans-serif;
+  --font-zh-display: "FangSong", "STFangsong", "Songti SC", "Noto Serif CJK SC", SimSun, serif;
+  --page-gutter: clamp(30px, 5.6vw, 108px);
+  --project-max: 1660px;
+  --ink: #38342f;
+  --muted: rgba(56, 52, 47, 0.66);
+  --quiet: rgba(56, 52, 47, 0.48);
+}
+
+html,
+body {
+  -webkit-font-smoothing: antialiased !important;
+  font-family: var(--font-body) !important;
+  font-feature-settings: "kern" 1 !important;
+}
+
+html[lang="zh-CN"] body {
+  font-family: var(--font-zh) !important;
+  font-weight: 300 !important;
+}
+
+h1,
+h2,
+h3,
+.email-address,
+.archive-row button {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+html[lang="zh-CN"] h1,
+html[lang="zh-CN"] h2,
+html[lang="zh-CN"] h3,
+html[lang="zh-CN"] .archive-row button {
+  font-family: var(--font-zh-display) !important;
+  font-weight: 400 !important;
+}
+
+p,
+a,
+button,
+span,
+h1,
+h2,
+h3 {
+  text-wrap: pretty;
+}
+
+html[lang="zh-CN"] p,
+html[lang="zh-CN"] a,
+html[lang="zh-CN"] button,
+html[lang="zh-CN"] span,
+html[lang="zh-CN"] h1,
+html[lang="zh-CN"] h2,
+html[lang="zh-CN"] h3 {
+  line-break: strict !important;
+  word-break: keep-all !important;
+}
+
+.site-header {
+  padding: 26px var(--page-gutter) !important;
+}
+
+.home-copy {
+  left: var(--page-gutter) !important;
+  top: clamp(118px, 17vh, 172px) !important;
+  width: min(560px, calc(100vw - var(--page-gutter) * 2)) !important;
+}
+
+.home h1 {
+  font-size: clamp(43px, 4.6vw, 68px) !important;
+  line-height: 1.04 !important;
+  margin: 0.28em 0 0.22em !important;
+}
+
+html[lang="zh-CN"] .home h1 {
+  font-size: clamp(32px, 3.9vw, 50px) !important;
+  line-height: 1.24 !important;
+}
+
+.home .role {
+  font-family: var(--font-body) !important;
+  font-size: clamp(15px, 1.08vw, 18px) !important;
+  line-height: 1.65 !important;
+  max-width: 34em !important;
+}
+
+.home .line {
+  font-family: var(--font-body) !important;
+  font-size: clamp(14px, 0.96vw, 16px) !important;
+  line-height: 1.85 !important;
+  max-width: 33em !important;
+}
+
+.floating-stage {
+  inset: clamp(96px, 12vh, 138px) clamp(8px, 1.6vw, 30px) clamp(48px, 7vh, 86px) clamp(8px, 1.6vw, 30px) !important;
+  overflow: visible !important;
+}
+
+.floating-project {
+  overflow: visible !important;
+}
+
+.floating-project span {
+  display: block !important;
+  font-family: var(--font-body) !important;
+  font-size: clamp(11px, 0.82vw, 13px) !important;
+  line-height: 1.2 !important;
+  max-width: none !important;
+  overflow: visible !important;
+  text-align: center !important;
+  white-space: nowrap !important;
+  width: max-content !important;
+}
+
+html[lang="zh-CN"] .floating-project span {
+  font-family: var(--font-zh) !important;
+  font-size: clamp(11px, 0.8vw, 13px) !important;
+  letter-spacing: 0 !important;
+}
+
+.archive,
+.about,
+.contact {
+  column-gap: clamp(42px, 7vw, 124px) !important;
+  grid-template-columns: minmax(128px, 180px) minmax(0, 1fr) !important;
+  padding-block: clamp(70px, 9vw, 128px) !important;
+  width: min(1280px, calc(100% - var(--page-gutter) * 2)) !important;
+}
+
+.archive-row button {
+  font-size: clamp(17px, 1.35vw, 22px) !important;
+  line-height: 1.32 !important;
+}
+
+html[lang="zh-CN"] .archive-row button {
+  font-size: clamp(16px, 1.22vw, 20px) !important;
+}
+
+.about-grid {
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr) !important;
+}
+
+.about-grid p {
+  font-family: var(--font-body) !important;
+  font-size: clamp(14.5px, 1vw, 17px) !important;
+  line-height: 1.95 !important;
+  max-width: 42em !important;
+}
+
+html[lang="zh-CN"] .about-grid p {
+  font-family: var(--font-zh) !important;
+  font-size: clamp(14px, 0.95vw, 16px) !important;
+  line-height: 2.1 !important;
+  max-width: 39em !important;
+}
+
+.about-education p + p {
+  margin-top: 0.9em !important;
+}
+
+.contact > .email-address {
+  font-family: var(--font-body) !important;
+  font-size: clamp(16px, 1.2vw, 20px) !important;
+  line-height: 1.5 !important;
+  max-width: 42em !important;
+}
+
+.email-links {
+  margin-top: 24px !important;
+}
+
+.project-room {
+  background: rgb(var(--room-rgb, 239, 234, 225)) !important;
+}
+
+.project-room.theme-generative {
+  --room-rgb: 232, 237, 231;
+  --room-bg-opacity: 0.52;
+}
+
+.project-room.theme-trending {
+  --room-rgb: 229, 234, 238;
+  --room-bg-opacity: 0.5;
+}
+
+.project-room.theme-cherries {
+  --room-rgb: 243, 229, 228;
+  --room-bg-opacity: 0.48;
+}
+
+.project-room.theme-mossy {
+  --room-rgb: 232, 238, 226;
+  --room-bg-opacity: 0.52;
+}
+
+.project-room.theme-oxidation {
+  --room-rgb: 235, 229, 220;
+  --room-bg-opacity: 0.5;
+}
+
+.project-room.theme-greenpepper {
+  --room-rgb: 232, 236, 225;
+  --room-bg-opacity: 0.48;
+}
+
+.project-room.theme-photography {
+  --room-rgb: 230, 233, 230;
+  --room-bg-opacity: 0.5;
+}
+
+.room-background,
+.project-room.theme-generative .room-background,
+.project-room.theme-trending .room-background,
+.project-room.theme-cherries .room-background,
+.project-room.theme-mossy .room-background,
+.project-room.theme-oxidation .room-background,
+.project-room.theme-greenpepper .room-background,
+.project-room.theme-photography .room-background {
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  filter: saturate(0.92) contrast(0.98) brightness(1.03) !important;
+  height: 100% !important;
+  inset: 0 !important;
+  opacity: var(--room-bg-opacity, 0.5) !important;
+  position: fixed !important;
+  transform: none !important;
+  width: 100% !important;
+  z-index: 0 !important;
+}
+
+.room-background::before {
+  background:
+    linear-gradient(90deg,
+      rgba(var(--room-rgb, 239, 234, 225), 0.92) 0%,
+      rgba(var(--room-rgb, 239, 234, 225), 0.72) 23%,
+      rgba(var(--room-rgb, 239, 234, 225), 0.35) 48%,
+      rgba(var(--room-rgb, 239, 234, 225), 0.56) 73%,
+      rgba(var(--room-rgb, 239, 234, 225), 0.9) 100%),
+    radial-gradient(circle at 56% 48%,
+      rgba(var(--room-rgb, 239, 234, 225), 0.08) 0%,
+      rgba(var(--room-rgb, 239, 234, 225), 0.66) 82%);
+  content: "" !important;
+  display: block !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+}
+
+.room-background::after {
+  content: none !important;
+  display: none !important;
+}
+
+.room-topbar {
+  left: var(--page-gutter) !important;
+  right: var(--page-gutter) !important;
+}
+
+.sound-control {
+  background: rgba(var(--room-rgb, 239, 234, 225), 0.46) !important;
+  border: 1px solid rgba(56, 52, 47, 0.14) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 16px 42px rgba(56, 52, 47, 0.08) !important;
+  gap: 14px !important;
+  padding: 10px 17px !important;
+}
+
+.sound-toggle {
+  color: rgba(56, 52, 47, 0.78) !important;
+  font-family: var(--font-body) !important;
+  font-size: 12px !important;
+  letter-spacing: 0.02em !important;
+}
+
+.sound-volume {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: linear-gradient(90deg, var(--ink) 0 var(--volume-pct, 16%), rgba(56, 52, 47, 0.22) var(--volume-pct, 16%) 100%) !important;
+  border-radius: 99px !important;
+  height: 2px !important;
+  width: 128px !important;
+}
+
+.sound-volume::-webkit-slider-thumb {
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  background: var(--ink) !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 0 7px rgba(56, 52, 47, 0.08) !important;
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.sound-volume::-moz-range-thumb {
+  background: var(--ink) !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  box-shadow: 0 0 0 7px rgba(56, 52, 47, 0.08) !important;
+  height: 16px !important;
+  width: 16px !important;
+}
+
+.room-shell {
+  align-items: center !important;
+  gap: clamp(50px, 5.8vw, 112px) !important;
+  grid-template-columns: minmax(260px, 350px) minmax(0, 1fr) !important;
+  min-height: 100svh !important;
+  padding: clamp(110px, 13vh, 150px) 0 clamp(78px, 9vh, 118px) !important;
+  width: min(var(--project-max), calc(100vw - var(--page-gutter) * 2)) !important;
+}
+
+.room-menu {
+  max-width: 350px !important;
+  width: 100% !important;
+}
+
+.room-menu h2 {
+  font-size: clamp(34px, 3vw, 48px) !important;
+  line-height: 1.08 !important;
+  margin: 16px 0 22px !important;
+  max-width: 10em !important;
+}
+
+html[lang="zh-CN"] .room-menu h2 {
+  font-size: clamp(26px, 2.25vw, 36px) !important;
+  line-height: 1.38 !important;
+  max-width: 10em !important;
+}
+
+.room-menu p:not(.tiny) {
+  font-size: clamp(14.5px, 0.96vw, 16px) !important;
+  line-height: 1.95 !important;
+  max-width: 28em !important;
+}
+
+html[lang="zh-CN"] .room-menu p:not(.tiny) {
+  font-size: clamp(14px, 0.9vw, 15.5px) !important;
+  line-height: 2.05 !important;
+  max-width: 24em !important;
+}
+
+.room-tabs {
+  gap: 14px 28px !important;
+}
+
+.room-tabs button {
+  font-family: var(--font-body) !important;
+  font-size: 12.5px !important;
+  line-height: 1.2 !important;
+}
+
+html[lang="zh-CN"] .room-tabs button {
+  font-family: var(--font-zh) !important;
+}
+
+.story-pane,
+.video-pane,
+.sound-pane,
+.role-pane,
+.photo-cover {
+  align-items: center !important;
+  gap: clamp(44px, 5vw, 96px) !important;
+  grid-template-columns: minmax(420px, 0.96fr) minmax(440px, 0.9fr) !important;
+}
+
+.story-media,
+.video-pane video,
+.role-pane > .media-button {
+  max-height: min(74svh, 760px) !important;
+  width: min(100%, 620px) !important;
+}
+
+.story-text,
+.role-note,
+.side-note,
+.photo-copy {
+  max-width: 640px !important;
+  min-width: 0 !important;
+  width: 100% !important;
+}
+
+.story-block {
+  margin-bottom: clamp(28px, 3.8vh, 48px) !important;
+}
+
+.story-block span,
+.process-intro span,
+.room-menu .tiny,
+#room-kicker {
+  font-family: var(--font-body) !important;
+  font-size: 11.5px !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.45 !important;
+}
+
+.story-block h3,
+.side-note h3,
+.role-note h3,
+.photo-copy h3 {
+  font-size: clamp(25px, 2.05vw, 36px) !important;
+  line-height: 1.2 !important;
+  max-width: 17em !important;
+}
+
+html[lang="zh-CN"] .story-block h3,
+html[lang="zh-CN"] .side-note h3,
+html[lang="zh-CN"] .role-note h3,
+html[lang="zh-CN"] .photo-copy h3 {
+  font-size: clamp(22px, 1.85vw, 31px) !important;
+  line-height: 1.52 !important;
+  max-width: 15em !important;
+}
+
+.story-block p,
+.side-note p,
+.role-note p,
+.photo-copy p,
+.process-intro p {
+  font-family: var(--font-body) !important;
+  font-size: clamp(14.5px, 0.98vw, 16.5px) !important;
+  line-height: 1.92 !important;
+  max-width: 38em !important;
+}
+
+html[lang="zh-CN"] .story-block p,
+html[lang="zh-CN"] .side-note p,
+html[lang="zh-CN"] .role-note p,
+html[lang="zh-CN"] .photo-copy p,
+html[lang="zh-CN"] .process-intro p {
+  font-family: var(--font-zh) !important;
+  font-size: clamp(14px, 0.9vw, 15.5px) !important;
+  line-height: 2.08 !important;
+  max-width: 31em !important;
+}
+
+.role-pane {
+  grid-template-columns: minmax(520px, 1fr) minmax(340px, 0.72fr) !important;
+}
+
+.role-note .story-block p {
+  max-width: 46em !important;
+}
+
+.process-pane {
+  align-items: start !important;
+  gap: clamp(38px, 5vw, 90px) !important;
+  grid-template-columns: minmax(220px, 300px) minmax(0, 1fr) !important;
+}
+
+.process-intro {
+  max-width: 300px !important;
+  top: 116px !important;
+}
+
+.process-grid {
+  gap: clamp(28px, 3.4vw, 58px) !important;
+  grid-template-columns: repeat(2, minmax(320px, 1fr)) !important;
+}
+
+.process-item:first-child {
+  grid-column: auto !important;
+}
+
+.process-item img {
+  background: rgba(var(--room-rgb, 239, 234, 225), 0.22) !important;
+  box-shadow: 0 18px 52px rgba(56, 52, 47, 0.1) !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+
+.process-caption {
+  font-family: var(--font-body) !important;
+  font-size: 10.5px !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+}
+
+.photo-table {
+  align-items: start !important;
+  display: grid !important;
+  gap: clamp(24px, 3vw, 52px) !important;
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+}
+
+.photo-tile {
+  grid-column: span 4 !important;
+  margin: 0 !important;
+}
+
+.photo-tile:nth-child(6n + 1),
+.photo-tile:nth-child(6n + 4) {
+  grid-column: span 5 !important;
+}
+
+.photo-tile:nth-child(6n + 2),
+.photo-tile:nth-child(6n + 5) {
+  grid-column: span 3 !important;
+  margin-top: clamp(36px, 5vw, 78px) !important;
+}
+
+.photo-tile:nth-child(6n + 3),
+.photo-tile:nth-child(6n + 6) {
+  grid-column: span 4 !important;
+  margin-top: clamp(12px, 2.5vw, 44px) !important;
+}
+
+@media (pointer: coarse) {
+  .floating-project img,
+  .process-item img,
+  .photo-tile img {
+    transition: transform 700ms ease, filter 700ms ease !important;
+  }
+
+  .floating-project:active img,
+  .process-item:active img,
+  .photo-tile:active img {
+    filter: saturate(1.05) contrast(1.03) !important;
+    transform: scale(1.025) !important;
+  }
+}
+
+@media (max-width: 1220px) {
+  .room-shell {
+    align-items: start !important;
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+    width: min(940px, calc(100vw - 52px)) !important;
+  }
+
+  .room-menu {
+    max-width: 720px !important;
+  }
+
+  .story-pane,
+  .video-pane,
+  .sound-pane,
+  .role-pane,
+  .photo-cover,
+  .process-pane {
+    grid-template-columns: 1fr !important;
+  }
+
+  .process-intro {
+    max-width: 42em !important;
+    position: relative !important;
+    top: auto !important;
+  }
+
+  .process-grid,
+  .photo-table {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .photo-tile,
+  .photo-tile:nth-child(n) {
+    grid-column: auto !important;
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --page-gutter: 22px;
+  }
+
+  .home-copy {
+    top: 94px !important;
+  }
+
+  .home h1 {
+    font-size: clamp(34px, 10.5vw, 48px) !important;
+  }
+
+  .floating-stage {
+    inset: 228px 10px 64px 10px !important;
+  }
+
+  .archive,
+  .about,
+  .contact {
+    grid-template-columns: 1fr !important;
+    width: calc(100% - 44px) !important;
+  }
+
+  .archive-row,
+  .about-grid,
+  .contact > .email-address,
+  .contact > .email-links {
+    grid-column: 1 !important;
+  }
+
+  .room-topbar {
+    left: 18px !important;
+    right: 18px !important;
+  }
+
+  .room-shell {
+    padding-top: 126px !important;
+    width: calc(100vw - 36px) !important;
+  }
+
+  .room-menu h2 {
+    font-size: clamp(30px, 8vw, 42px) !important;
+  }
+
+  html[lang="zh-CN"] .room-menu h2 {
+    font-size: clamp(24px, 6.6vw, 34px) !important;
+  }
+
+  .story-block h3,
+  .side-note h3,
+  .role-note h3,
+  .photo-copy h3 {
+    font-size: clamp(23px, 6.6vw, 31px) !important;
+    max-width: 100% !important;
+  }
+
+  .story-block p,
+  .side-note p,
+  .role-note p,
+  .photo-copy p,
+  .process-intro p,
+  .room-menu p:not(.tiny) {
+    max-width: 100% !important;
+  }
+
+  .process-grid,
+  .photo-table {
+    grid-template-columns: 1fr !important;
+  }
+
+  .room-background::before {
+    background:
+      linear-gradient(180deg,
+        rgba(var(--room-rgb, 239, 234, 225), 0.92) 0%,
+        rgba(var(--room-rgb, 239, 234, 225), 0.78) 42%,
+        rgba(var(--room-rgb, 239, 234, 225), 0.9) 100%) !important;
+  }
+}
+
+/* Repair pass: restore the original home image and remove nested project scrolling. */
+:root {
+  --font-body: "Palatino Linotype", "Book Antiqua", "Iowan Old Style", Georgia, serif;
+  --font-display: "Baskerville Old Face", Baskerville, "Palatino Linotype", Georgia, serif;
+  --font-ui: "Palatino Linotype", "Book Antiqua", Georgia, serif;
+  --font-zh: "Microsoft YaHei UI", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", sans-serif;
+  --font-zh-display: "Songti SC", STSong, "Source Han Serif SC", "Noto Serif SC", SimSun, serif;
+  --page-gutter: clamp(24px, 5.5vw, 104px);
+  --project-max: 1480px;
+  --ink: #2d2924;
+  --muted: rgba(45, 41, 36, 0.7);
+  --quiet: rgba(45, 41, 36, 0.48);
+}
+
+html,
+body {
+  overflow-x: hidden !important;
+}
+
+body,
+button,
+input {
+  font-family: var(--font-body) !important;
+  font-weight: 400 !important;
+}
+
+body {
+  background: #efe7dc url("../images/background.jpg") center / cover fixed no-repeat !important;
+  color: var(--ink) !important;
+}
+
+html[lang="zh-CN"] body,
+html[lang="zh-CN"] button,
+html[lang="zh-CN"] input {
+  font-family: var(--font-zh) !important;
+}
+
+.home h1,
+.archive-row button,
+.email-address,
+.room-menu h2,
+.story-block h3,
+.side-note h3,
+.photo-copy h3,
+.role-note h3 {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+html[lang="zh-CN"] .home h1,
+html[lang="zh-CN"] .archive-row button,
+html[lang="zh-CN"] .email-address,
+html[lang="zh-CN"] .room-menu h2,
+html[lang="zh-CN"] .story-block h3,
+html[lang="zh-CN"] .side-note h3,
+html[lang="zh-CN"] .photo-copy h3,
+html[lang="zh-CN"] .role-note h3 {
+  font-family: var(--font-zh-display) !important;
+  letter-spacing: 0.02em !important;
+}
+
+html[lang="zh-CN"] p,
+html[lang="zh-CN"] a,
+html[lang="zh-CN"] button,
+html[lang="zh-CN"] span,
+html[lang="zh-CN"] h1,
+html[lang="zh-CN"] h2,
+html[lang="zh-CN"] h3 {
+  line-break: auto !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
+}
+
+.keep-tail {
+  white-space: normal !important;
+}
+
+.preloader {
+  background:
+    linear-gradient(90deg, rgba(239, 231, 220, 0.9), rgba(239, 231, 220, 0.55)),
+    url("../images/background.jpg") center / cover no-repeat !important;
+}
+
+.site-header {
+  color: rgba(31, 28, 24, 0.88) !important;
+  padding: clamp(20px, 3vw, 30px) var(--page-gutter) !important;
+  text-shadow: 0 1px 16px rgba(255, 250, 242, 0.34) !important;
+}
+
+.name-link,
+.main-nav a,
+.language-toggle,
+.room-tabs button,
+.room-close,
+.sound-toggle,
+.tiny {
+  font-family: var(--font-ui) !important;
+  letter-spacing: 0.03em !important;
+}
+
+.home {
+  background: url("../images/background.jpg") center center / cover no-repeat !important;
+  isolation: isolate !important;
+  min-height: 100svh !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.home::before {
+  background:
+    linear-gradient(90deg, rgba(239, 231, 220, 0.58) 0%, rgba(239, 231, 220, 0.2) 38%, rgba(239, 231, 220, 0.36) 100%),
+    linear-gradient(180deg, rgba(255, 251, 245, 0.38) 0%, rgba(255, 251, 245, 0.05) 48%, rgba(239, 231, 220, 0.44) 100%) !important;
+  content: "" !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: 0 !important;
+}
+
+.home::after {
+  background: none !important;
+  content: "" !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: 0 !important;
+}
+
+.home-copy,
+.floating-stage,
+.home-note {
+  position: absolute !important;
+  z-index: 1 !important;
+}
+
+.home-copy {
+  left: var(--page-gutter) !important;
+  top: clamp(106px, 16vh, 168px) !important;
+  width: min(560px, calc(100vw - var(--page-gutter) * 2)) !important;
+}
+
+.home h1 {
+  font-size: clamp(42px, 5.6vw, 78px) !important;
+  line-height: 1 !important;
+  margin: 18px 0 14px !important;
+}
+
+html[lang="zh-CN"] .home h1 {
+  font-size: clamp(34px, 4.7vw, 58px) !important;
+  line-height: 1.24 !important;
+}
+
+.home .role,
+.home .line {
+  color: rgba(37, 33, 29, 0.76) !important;
+  font-family: var(--font-body) !important;
+  font-size: clamp(15px, 1.15vw, 18px) !important;
+  line-height: 1.78 !important;
+  max-width: 34em !important;
+}
+
+html[lang="zh-CN"] .home .role,
+html[lang="zh-CN"] .home .line {
+  font-family: var(--font-zh) !important;
+  line-height: 2 !important;
+}
+
+.floating-stage {
+  inset: clamp(92px, 12vh, 140px) clamp(14px, 2vw, 34px) clamp(52px, 8vh, 96px) clamp(14px, 2vw, 34px) !important;
+  overflow: hidden !important;
+}
+
+.floating-project {
+  max-width: min(42vw, 190px) !important;
+  padding: clamp(10px, 1.4vw, 18px) !important;
+}
+
+.floating-project img {
+  height: auto !important;
+  max-height: min(25vw, 190px) !important;
+  object-fit: contain !important;
+  width: 100% !important;
+}
+
+.floating-project span {
+  color: rgba(34, 30, 26, 0.78) !important;
+  font-family: var(--font-body) !important;
+  font-size: clamp(12px, 0.9vw, 14px) !important;
+  line-height: 1.35 !important;
+  max-width: 13em !important;
+  text-align: left !important;
+  white-space: normal !important;
+}
+
+html[lang="zh-CN"] .floating-project span {
+  font-family: var(--font-zh) !important;
+  line-height: 1.65 !important;
+  max-width: 8em !important;
+}
+
+.archive,
+.about,
+.contact {
+  background: rgba(246, 241, 234, 0.62) !important;
+  width: min(1120px, calc(100% - var(--page-gutter) * 2)) !important;
+}
+
+.about-grid p,
+.about-education p,
+.email-address,
+.email-links a,
+.email-links button,
+.room-menu p:not(.tiny),
+.story-block p,
+.side-note p,
+.role-note p,
+.photo-copy p,
+.process-intro p {
+  color: rgba(45, 41, 36, 0.78) !important;
+}
+
+html[lang="zh-CN"] .about-grid p,
+html[lang="zh-CN"] .about-education p,
+html[lang="zh-CN"] .room-menu p:not(.tiny),
+html[lang="zh-CN"] .story-block p,
+html[lang="zh-CN"] .side-note p,
+html[lang="zh-CN"] .role-note p,
+html[lang="zh-CN"] .photo-copy p,
+html[lang="zh-CN"] .process-intro p {
+  font-size: clamp(14.5px, 0.98vw, 16px) !important;
+  line-height: 2.08 !important;
+  max-width: 34em !important;
+}
+
+body.room-open {
+  overflow: hidden !important;
+}
+
+.project-room {
+  height: 100svh !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+}
+
+.project-room.is-open {
+  display: block !important;
+}
+
+.room-background {
+  height: 100svh !important;
+  inset: 0 !important;
+  width: 100vw !important;
+}
+
+.room-topbar {
+  align-items: center !important;
+  display: grid !important;
+  gap: 16px !important;
+  grid-template-columns: 1fr auto auto !important;
+  left: 50% !important;
+  margin: 0 !important;
+  padding: 22px 0 14px !important;
+  position: sticky !important;
+  right: auto !important;
+  top: 0 !important;
+  transform: translateX(-50%) !important;
+  width: min(var(--project-max), calc(100vw - var(--page-gutter) * 2)) !important;
+  z-index: 10 !important;
+}
+
+.room-topbar::before {
+  background: linear-gradient(180deg, rgba(246, 241, 234, 0.86), rgba(246, 241, 234, 0)) !important;
+  content: "" !important;
+  inset: 0 calc((100vw - 100%) / -2) -24px !important;
+  pointer-events: none !important;
+  position: absolute !important;
+  z-index: -1 !important;
+}
+
+.room-close,
+.back-link {
+  background: rgba(250, 247, 240, 0.66) !important;
+  border: 1px solid rgba(45, 41, 36, 0.22) !important;
+  border-radius: 999px !important;
+  color: rgba(45, 41, 36, 0.88) !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  line-height: 1 !important;
+  padding: 10px 16px !important;
+  text-decoration: none !important;
+}
+
+.room-shell {
+  align-items: start !important;
+  column-gap: clamp(42px, 7vw, 104px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(0, 330px) minmax(0, 1fr) !important;
+  height: auto !important;
+  margin: 0 auto !important;
+  min-height: auto !important;
+  padding: clamp(34px, 5vh, 70px) 0 clamp(78px, 10vh, 120px) !important;
+  width: min(var(--project-max), calc(100vw - var(--page-gutter) * 2)) !important;
+}
+
+.room-menu {
+  max-width: 330px !important;
+  min-width: 0 !important;
+  position: sticky !important;
+  top: 104px !important;
+  width: 100% !important;
+}
+
+.room-tabs {
+  gap: 12px 22px !important;
+}
+
+.room-view {
+  height: auto !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  padding: 0 !important;
+  width: 100% !important;
+}
+
+.pane,
+.story-pane,
+.video-pane,
+.sound-pane,
+.role-pane,
+.photo-cover,
+.process-pane {
+  height: auto !important;
+  min-height: 0 !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+
+.story-pane,
+.sound-pane,
+.role-pane,
+.photo-cover {
+  display: grid !important;
+  gap: clamp(38px, 6vw, 86px) !important;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+}
+
+.video-pane {
+  display: grid !important;
+  gap: clamp(34px, 6vw, 82px) !important;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.44fr) !important;
+}
+
+.process-pane {
+  display: grid !important;
+  gap: clamp(34px, 5vw, 72px) !important;
+  grid-template-columns: minmax(0, 220px) minmax(0, 1fr) !important;
+}
+
+.process-intro {
+  position: sticky !important;
+  top: 104px !important;
+}
+
+.process-grid {
+  display: grid !important;
+  gap: clamp(24px, 3vw, 52px) !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)) !important;
+}
+
+.process-item:first-child {
+  grid-column: auto !important;
+}
+
+.photo-table {
+  display: grid !important;
+  gap: clamp(22px, 3vw, 46px) !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)) !important;
+}
+
+.photo-tile:nth-child(n) {
+  margin-top: 0 !important;
+}
+
+.story-media,
+.role-pane > .media-button,
+.video-pane video,
+.process-item img,
+.photo-tile img {
+  max-width: 100% !important;
+}
+
+.story-media img,
+.role-pane > .media-button img,
+.video-pane video {
+  height: auto !important;
+  max-height: none !important;
+  object-fit: contain !important;
+}
+
+.lightbox {
+  overflow: hidden !important;
+}
+
+@media (max-width: 1024px) {
+  .room-topbar {
+    grid-template-columns: 1fr auto !important;
+    width: calc(100vw - 44px) !important;
+  }
+
+  .sound-control {
+    grid-column: 1 / -1 !important;
+    justify-self: end !important;
+  }
+
+  .room-shell {
+    grid-template-columns: 1fr !important;
+    row-gap: 42px !important;
+    width: calc(100vw - 44px) !important;
+  }
+
+  .room-menu {
+    max-width: 760px !important;
+    position: relative !important;
+    top: auto !important;
+  }
+
+  .story-pane,
+  .video-pane,
+  .sound-pane,
+  .role-pane,
+  .photo-cover,
+  .process-pane {
+    grid-template-columns: 1fr !important;
+  }
+
+  .process-intro {
+    max-width: 36em !important;
+    position: relative !important;
+    top: auto !important;
+  }
+}
+
+@media (max-width: 760px) {
+  :root {
+    --page-gutter: 20px;
+  }
+
+  .site-header {
+    grid-template-columns: 1fr auto !important;
+    padding-top: 20px !important;
+  }
+
+  .home-copy {
+    top: 92px !important;
+  }
+
+  .home h1 {
+    font-size: clamp(38px, 12vw, 56px) !important;
+  }
+
+  html[lang="zh-CN"] .home h1 {
+    font-size: clamp(30px, 9vw, 42px) !important;
+  }
+
+  .home .role,
+  .home .line {
+    font-size: 14.5px !important;
+    max-width: 25em !important;
+  }
+
+  .floating-stage {
+    inset: 242px 8px 76px 8px !important;
+  }
+
+  .floating-project {
+    max-width: min(44vw, 150px) !important;
+  }
+
+  .floating-project img {
+    max-height: 132px !important;
+  }
+
+  .archive,
+  .about,
+  .contact {
+    grid-template-columns: 1fr !important;
+    width: calc(100vw - 40px) !important;
+  }
+
+  .archive > .tiny,
+  .about > .tiny,
+  .contact > .tiny,
+  .archive-row,
+  .about-grid,
+  .contact > .email-address,
+  .contact > .email-links {
+    grid-column: 1 !important;
+  }
+
+  .archive-row,
+  .about-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .room-topbar {
+    gap: 10px !important;
+    padding-top: 16px !important;
+    width: calc(100vw - 32px) !important;
+  }
+
+  .room-close {
+    padding: 9px 13px !important;
+  }
+
+  .room-shell {
+    padding-top: 26px !important;
+    width: calc(100vw - 32px) !important;
+  }
+
+  .room-menu h2 {
+    font-size: clamp(30px, 9vw, 42px) !important;
+  }
+
+  html[lang="zh-CN"] .room-menu h2 {
+    font-size: clamp(24px, 7vw, 32px) !important;
+    line-height: 1.45 !important;
+  }
+
+  .story-block h3,
+  .side-note h3,
+  .photo-copy h3,
+  .role-note h3 {
+    font-size: clamp(25px, 7.4vw, 34px) !important;
+  }
+
+  html[lang="zh-CN"] .story-block h3,
+  html[lang="zh-CN"] .side-note h3,
+  html[lang="zh-CN"] .photo-copy h3,
+  html[lang="zh-CN"] .role-note h3 {
+    font-size: clamp(22px, 6.3vw, 29px) !important;
+    line-height: 1.55 !important;
+  }
+
+  .room-menu p:not(.tiny),
+  .story-block p,
+  .side-note p,
+  .role-note p,
+  .photo-copy p,
+  .process-intro p {
+    font-size: 14.5px !important;
+    line-height: 1.9 !important;
+    max-width: 100% !important;
+  }
+
+  html[lang="zh-CN"] .room-menu p:not(.tiny),
+  html[lang="zh-CN"] .story-block p,
+  html[lang="zh-CN"] .side-note p,
+  html[lang="zh-CN"] .role-note p,
+  html[lang="zh-CN"] .photo-copy p,
+  html[lang="zh-CN"] .process-intro p {
+    font-size: 14px !important;
+    line-height: 2.08 !important;
+  }
+}
