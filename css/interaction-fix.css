@@ -1,0 +1,53 @@
+/* Final interaction safety layer: protection visuals should never catch taps. */
+.preloader.is-hidden,
+.preloader[hidden] {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
+
+body.content-protection-active::before,
+body.content-protection-active::after,
+.content-protection-active::before,
+.content-protection-active::after {
+  pointer-events: none !important;
+}
+
+.cursor,
+.cursor *,
+.trail-image,
+.touch-burst,
+.cursor-fx-trail,
+.cursor-fx-pop {
+  pointer-events: none !important;
+}
+
+.floating-project,
+.archive-row button,
+.language-toggle,
+.room-close,
+.room-tabs button,
+.sound-toggle,
+.sound-volume,
+.lightbox-close,
+.copy-email,
+.email-links a,
+.media-button,
+[data-project],
+[data-room-tab],
+[data-lightbox] {
+  touch-action: manipulation !important;
+  pointer-events: auto !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor,
+  .trail-image,
+  .touch-burst,
+  .cursor-fx-trail,
+  .cursor-fx-pop {
+    animation: none !important;
+    display: none !important;
+  }
+}
