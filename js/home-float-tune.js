@@ -2,6 +2,7 @@
   "use strict";
 
   const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+  let languageSwitching = false;
 
   function cleanupOldPatchState() {
     document.body?.classList.remove("calm-floating", "project-opening");
@@ -19,6 +20,89 @@
         floatingAnimationFrame = null;
       }
     } catch (_) {}
+  }
+
+  function patchFastLanguageApply() {
+    if (typeof applyLanguage !== "function" || applyLanguage.__homeFast) return;
+
+    applyLanguage = function fastApplyLanguage() {
+      const lang = typeof currentLang !== "undefined" ? currentLang : "en";
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      document.documentElement.dataset.language = lang;
+
+      try {
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          node.textContent = t(node.dataset.i18n);
+        });
+      } catch (_) {}
+
+      try {
+        if (typeof lightboxClose !== "undefined" && lightboxClose) {
+          lightboxClose.setAttribute("aria-label", t("close"));
+        }
+      } catch (_) {}
+
+      document.querySelectorAll("[data-lang-choice]").forEach((node) => {
+        node.classList.toggle("is-active", node.dataset.langChoice === lang);
+      });
+
+      try {
+        document.querySelectorAll(".floating-project").forEach((button) => {
+          const project = projectData[button.dataset.project];
+          const label = button.querySelector("span");
+          if (project && label) label.textContent = localize(project.title);
+        });
+      } catch (_) {}
+
+      try {
+        if (typeof updateSoundText === "function") updateSoundText();
+      } catch (_) {}
+
+      try {
+        if (typeof currentProjectKey !== "undefined" && currentProjectKey && typeof renderProjectShell === "function") {
+          renderProjectShell();
+        }
+      } catch (_) {}
+    };
+
+    applyLanguage.__homeFast = true;
+  }
+
+  function patchLanguageToggle() {
+    if (document.documentElement.dataset.fastLanguageGuard === "true") return;
+    document.documentElement.dataset.fastLanguageGuard = "true";
+
+    document.addEventListener("click", (event) => {
+      const toggle = event.target?.closest?.(".language-toggle");
+      if (!toggle) return;
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (languageSwitching) return;
+
+      languageSwitching = true;
+      cleanupOldPatchState();
+      pauseFloatingLoop();
+      document.documentElement.classList.add("language-switching");
+
+      try {
+        currentLang = currentLang === "en" ? "zh" : "en";
+        localStorage.setItem("portfolioLanguage", currentLang);
+      } catch (_) {}
+
+      requestAnimationFrame(() => {
+        try {
+          patchFastLanguageApply();
+          if (typeof applyLanguage === "function") applyLanguage();
+        } catch (_) {}
+
+        window.setTimeout(() => {
+          document.documentElement.classList.remove("language-switching");
+          languageSwitching = false;
+          reviveMotion();
+        }, 160);
+      });
+    }, true);
   }
 
   function patchProjectOpen() {
@@ -76,6 +160,8 @@
 
   function reviveMotion() {
     cleanupOldPatchState();
+    patchFastLanguageApply();
+    patchLanguageToggle();
     patchProjectOpen();
     patchMotionSettings();
 
@@ -85,6 +171,7 @@
 
     try {
       if (
+        !languageSwitching &&
         !reducedMotion?.matches &&
         !document.hidden &&
         !document.body.classList.contains("room-open") &&
