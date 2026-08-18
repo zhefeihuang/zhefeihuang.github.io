@@ -1,44 +1,67 @@
-/* Portfolio home reset: one quiet system for the public entry page. */
+/* Public portfolio home: clean visual system for the IMMANENT entry. */
 :root {
-  --home-paper: #f1ebe2;
-  --home-paper-soft: #f8f4ed;
-  --home-ink: #15141a;
-  --home-muted: rgba(21, 20, 26, 0.62);
-  --home-faint: rgba(21, 20, 26, 0.38);
-  --home-line: rgba(21, 20, 26, 0.15);
-  --home-gold: #a9783d;
-  --home-gutter: clamp(22px, 5vw, 72px);
-  --home-wide: min(1180px, calc(100% - var(--home-gutter) * 2));
+  --home-paper: #f3eee6;
+  --home-paper-2: #ebe2d6;
+  --home-panel: #fbf8f1;
+  --home-ink: #14141a;
+  --home-muted: rgba(20, 20, 26, 0.64);
+  --home-soft: rgba(20, 20, 26, 0.44);
+  --home-line: rgba(20, 20, 26, 0.15);
+  --home-gold: #a77a43;
+  --home-gutter: clamp(20px, 5.1vw, 76px);
+  --home-wide: min(1280px, calc(100% - var(--home-gutter) * 2));
+  --home-mid: min(1040px, calc(100% - var(--home-gutter) * 2));
   --home-serif: "Cormorant Garamond", "Libre Baskerville", Georgia, "Times New Roman", serif;
   --home-sans: "Aptos", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
-  --home-zh: "DengXian Light", "DengXian", "Microsoft YaHei UI Light", "Microsoft YaHei UI", "PingFang SC", "Noto Sans SC", "Source Han Sans SC", sans-serif;
-  --home-zh-serif: "Songti SC", "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", serif;
+  --home-zh-serif: "FangSong", "STFangsong", "Songti SC", "Noto Serif SC", "Source Han Serif SC", "SimSun", serif;
+  --home-zh-sans: "Microsoft YaHei UI", "PingFang SC", "Noto Sans SC", "Source Han Sans SC", Arial, sans-serif;
 }
 
 html,
 body {
+  width: 100%;
   max-width: 100% !important;
   overflow-x: clip !important;
 }
 
 body {
-  background: var(--home-paper) !important;
   color: var(--home-ink) !important;
+  background: var(--home-paper) !important;
   font-family: var(--home-sans) !important;
   cursor: none;
 }
 
 body:not(.room-open)::before,
-body:not(.room-open)::after {
+body:not(.room-open)::after,
+body:not(.room-open) main::before,
+body:not(.room-open) main::after,
+body:not(.room-open) .home::before,
+body:not(.room-open) .home::after,
+body:not(.room-open) .archive::before,
+body:not(.room-open) .archive::after,
+body:not(.room-open) .about::before,
+body:not(.room-open) .about::after,
+body:not(.room-open) .contact::before,
+body:not(.room-open) .contact::after {
   content: none !important;
   display: none !important;
 }
 
 body:not(.room-open) main {
+  position: relative !important;
+  z-index: 1 !important;
+  min-height: 100svh !important;
+  overflow: clip !important;
   background:
-    radial-gradient(860px 520px at 82% 0%, rgba(255, 250, 241, 0.58), transparent 70%),
-    linear-gradient(180deg, var(--home-paper) 0%, #eee6db 100%) !important;
-  isolation: isolate !important;
+    radial-gradient(900px 520px at 72% 2%, rgba(255, 250, 242, 0.7), transparent 68%),
+    linear-gradient(180deg, var(--home-paper) 0%, var(--home-paper-2) 100%) !important;
+}
+
+body:not(.room-open) :is(h1, h2, h3, p, a, button, span) {
+  text-shadow: none !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+  hyphens: none !important;
 }
 
 .preloader {
@@ -50,13 +73,14 @@ body:not(.room-open) main {
   inset: 0 0 auto 0 !important;
   z-index: 120 !important;
   display: grid !important;
-  grid-template-columns: auto 1fr auto !important;
+  grid-template-columns: auto minmax(0, 1fr) auto !important;
   align-items: center !important;
-  gap: clamp(16px, 3vw, 44px) !important;
-  padding: 18px var(--home-gutter) !important;
-  background: rgba(241, 235, 226, 0.9) !important;
-  border-bottom: 1px solid rgba(21, 20, 26, 0.08) !important;
-  backdrop-filter: blur(16px) !important;
+  gap: clamp(16px, 3vw, 46px) !important;
+  min-height: 66px !important;
+  padding: 16px var(--home-gutter) !important;
+  background: rgba(243, 238, 230, 0.92) !important;
+  border-bottom: 1px solid rgba(20, 20, 26, 0.08) !important;
+  backdrop-filter: blur(18px) !important;
 }
 
 .name-link,
@@ -72,7 +96,7 @@ html[lang="zh-CN"] [data-i18n="siteName"] {
 
 .name-link {
   color: var(--home-ink) !important;
-  font-size: clamp(18px, 1.6vw, 24px) !important;
+  font-size: clamp(18px, 1.45vw, 24px) !important;
   line-height: 1 !important;
   white-space: nowrap !important;
 }
@@ -80,7 +104,10 @@ html[lang="zh-CN"] [data-i18n="siteName"] {
 .main-nav {
   justify-self: center !important;
   display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
   gap: clamp(18px, 3vw, 44px) !important;
+  min-width: 0 !important;
 }
 
 .main-nav a,
@@ -96,8 +123,8 @@ html[lang="zh-CN"] [data-i18n="siteName"] {
 
 html[lang="zh-CN"] .main-nav a,
 html[lang="zh-CN"] .language-toggle {
-  font-family: var(--home-zh) !important;
-  font-weight: 300 !important;
+  font-family: var(--home-zh-sans) !important;
+  font-weight: 400 !important;
   letter-spacing: 0.04em !important;
 }
 
@@ -108,83 +135,86 @@ html[lang="zh-CN"] .language-toggle {
 }
 
 .home {
-  min-height: 100svh !important;
+  position: relative !important;
   display: grid !important;
-  grid-template-columns: minmax(260px, 0.42fr) minmax(0, 0.58fr) !important;
+  grid-template-columns: minmax(270px, 0.42fr) minmax(0, 0.58fr) !important;
   align-items: center !important;
-  gap: clamp(34px, 6vw, 96px) !important;
+  gap: clamp(38px, 6vw, 104px) !important;
   width: var(--home-wide) !important;
+  min-height: 100svh !important;
   margin: 0 auto !important;
-  padding: clamp(110px, 14vh, 154px) 0 clamp(56px, 8vh, 90px) !important;
+  padding: clamp(108px, 14vh, 154px) 0 clamp(62px, 8vh, 96px) !important;
   background: transparent !important;
   overflow: visible !important;
-}
-
-.home::before,
-.home::after {
-  content: none !important;
-  display: none !important;
 }
 
 .home-copy {
   position: relative !important;
   inset: auto !important;
-  z-index: 3 !important;
+  z-index: 4 !important;
   width: auto !important;
-  max-width: 470px !important;
+  max-width: 520px !important;
   color: var(--home-ink) !important;
 }
 
-.home-copy .tiny {
-  margin: 0 0 18px !important;
-  color: var(--home-faint) !important;
+.home-copy .tiny,
+.brand-practice > .tiny,
+.archive > .tiny,
+.about > .tiny,
+.contact > .tiny {
+  margin: 0 !important;
+  color: var(--home-soft) !important;
   font-family: var(--home-sans) !important;
   font-size: 13px !important;
   font-weight: 500 !important;
-  letter-spacing: 0.02em !important;
+  letter-spacing: 0.03em !important;
   line-height: 1.4 !important;
   text-transform: none !important;
+}
+
+.home-copy .tiny {
+  margin-bottom: 20px !important;
 }
 
 .home h1 {
   margin: 0 !important;
   max-width: none !important;
   color: var(--home-ink) !important;
-  font-size: clamp(52px, 6.2vw, 94px) !important;
+  font-size: clamp(54px, 6.4vw, 96px) !important;
   line-height: 0.96 !important;
 }
 
 .home .role {
-  margin: clamp(22px, 3vw, 34px) 0 0 !important;
-  max-width: 29em !important;
+  margin: clamp(24px, 3vw, 34px) 0 0 !important;
+  max-width: 30em !important;
   color: var(--home-ink) !important;
   font-family: var(--home-sans) !important;
   font-size: clamp(18px, 1.35vw, 23px) !important;
   font-weight: 400 !important;
   letter-spacing: 0 !important;
-  line-height: 1.45 !important;
+  line-height: 1.48 !important;
 }
 
 .home .line {
-  margin: clamp(18px, 2.4vw, 28px) 0 0 !important;
-  max-width: 30em !important;
+  margin: clamp(18px, 2.5vw, 30px) 0 0 !important;
+  max-width: 31em !important;
   color: var(--home-muted) !important;
   font-family: var(--home-sans) !important;
-  font-size: clamp(15px, 1vw, 17px) !important;
+  font-size: clamp(15px, 1.02vw, 17px) !important;
   font-weight: 400 !important;
   letter-spacing: 0 !important;
   line-height: 1.75 !important;
 }
 
-html[lang="zh-CN"] :is(.home-copy .tiny, .home .role, .home .line, .home-note) {
-  font-family: var(--home-zh) !important;
-  font-weight: 300 !important;
+html[lang="zh-CN"] :is(.home-copy .tiny, .home .role, .home .line) {
+  font-family: var(--home-zh-serif) !important;
+  font-weight: 400 !important;
   letter-spacing: 0.01em !important;
 }
 
 html[lang="zh-CN"] .home .role {
-  font-size: clamp(18px, 1.35vw, 22px) !important;
-  line-height: 1.7 !important;
+  font-size: clamp(19px, 1.38vw, 24px) !important;
+  line-height: 1.72 !important;
 }
 
 html[lang="zh-CN"] .home .line {
@@ -197,20 +227,29 @@ html[lang="zh-CN"] .home .line {
   z-index: 2 !important;
   width: 100% !important;
   min-width: 0 !important;
-  height: min(62svh, 620px) !important;
-  min-height: 420px !important;
+  height: min(61svh, 650px) !important;
+  min-height: 430px !important;
   overflow: hidden !important;
   background:
-    radial-gradient(circle at 48% 48%, rgba(255, 250, 241, 0.72), transparent 58%),
-    linear-gradient(180deg, rgba(248, 244, 237, 0.54), rgba(238, 230, 218, 0.12)) !important;
-  border: 1px solid rgba(21, 20, 26, 0.08) !important;
+    linear-gradient(180deg, rgba(251, 248, 241, 0.9), rgba(239, 231, 220, 0.42)) !important;
+  border: 1px solid rgba(20, 20, 26, 0.1) !important;
+  box-shadow: 0 30px 72px rgba(38, 28, 22, 0.08) !important;
+}
+
+.floating-stage::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: 22px !important;
+  display: block !important;
+  border: 1px solid rgba(167, 122, 67, 0.16) !important;
+  pointer-events: none !important;
 }
 
 .floating-project {
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
-  filter: drop-shadow(0 18px 28px rgba(21, 20, 26, 0.14)) !important;
+  filter: drop-shadow(0 18px 28px rgba(20, 20, 26, 0.14)) !important;
   opacity: 0.92 !important;
 }
 
@@ -225,11 +264,11 @@ html[lang="zh-CN"] .home .line {
   top: calc(100% + 8px) !important;
   transform: translateX(-50%) !important;
   width: max-content !important;
-  max-width: 160px !important;
+  max-width: 170px !important;
   padding: 5px 8px !important;
   color: var(--home-muted) !important;
-  background: rgba(248, 244, 237, 0.86) !important;
-  border: 1px solid rgba(21, 20, 26, 0.08) !important;
+  background: rgba(251, 248, 241, 0.9) !important;
+  border: 1px solid rgba(20, 20, 26, 0.08) !important;
   font-family: var(--home-sans) !important;
   font-size: 11px !important;
   line-height: 1.2 !important;
@@ -245,67 +284,55 @@ html[lang="zh-CN"] .home .line {
 
 .home-note {
   position: absolute !important;
-  left: var(--home-gutter) !important;
-  bottom: clamp(22px, 4vh, 42px) !important;
+  left: 0 !important;
+  bottom: clamp(26px, 4vh, 48px) !important;
   z-index: 3 !important;
   margin: 0 !important;
-  color: var(--home-faint) !important;
+  color: var(--home-soft) !important;
   font-family: var(--home-sans) !important;
   font-size: 12px !important;
-  letter-spacing: 0 !important;
-  text-shadow: none !important;
+  letter-spacing: 0.02em !important;
 }
 
 .brand-practice,
 .archive,
 .about,
 .contact {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: minmax(108px, 160px) minmax(0, 1fr) !important;
+  column-gap: clamp(30px, 5vw, 82px) !important;
   width: var(--home-wide) !important;
   margin: 0 auto !important;
-  display: grid !important;
-  grid-template-columns: minmax(100px, 150px) minmax(0, 1fr) !important;
-  column-gap: clamp(28px, 5vw, 76px) !important;
   background: transparent !important;
   box-shadow: none !important;
 }
 
-.brand-practice > .tiny,
-.archive > .tiny,
-.about > .tiny,
-.contact > .tiny {
-  margin: 0 !important;
-  color: var(--home-ink) !important;
-  font-family: var(--home-sans) !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.02em !important;
-  line-height: 1.35 !important;
-  text-transform: none !important;
+.brand-practice,
+.archive {
+  padding-block: clamp(82px, 11vh, 136px) !important;
 }
 
-html[lang="zh-CN"] :is(.brand-practice > .tiny, .archive > .tiny, .about > .tiny, .contact > .tiny) {
-  font-family: var(--home-zh) !important;
-  font-weight: 300 !important;
-}
-
-.brand-practice {
-  padding-block: clamp(88px, 12vh, 142px) !important;
+.about,
+.contact {
+  padding-block: clamp(74px, 9vh, 118px) !important;
 }
 
 .brand-practice-card {
   grid-column: 2 !important;
   display: grid !important;
-  grid-template-columns: minmax(0, 1.05fr) minmax(310px, 0.72fr) !important;
-  min-height: 0 !important;
+  grid-template-columns: minmax(0, 0.58fr) minmax(330px, 0.42fr) !important;
+  min-width: 0 !important;
   overflow: hidden !important;
   padding: 0 !important;
-  background: var(--home-paper-soft) !important;
-  border: 1px solid rgba(21, 20, 26, 0.12) !important;
+  background: var(--home-panel) !important;
+  border: 1px solid rgba(20, 20, 26, 0.12) !important;
   border-radius: 0 !important;
-  box-shadow: 0 28px 72px rgba(31, 25, 20, 0.08) !important;
+  box-shadow: 0 30px 80px rgba(38, 28, 22, 0.08) !important;
 }
 
-.brand-practice-card::before {
+.brand-practice-card::before,
+.brand-practice-card::after {
   content: none !important;
   display: none !important;
 }
@@ -317,24 +344,20 @@ html[lang="zh-CN"] :is(.brand-practice > .tiny, .archive > .tiny, .about > .tiny
   width: 100% !important;
   min-width: 0 !important;
   height: 100% !important;
-  min-height: clamp(420px, 42vw, 620px) !important;
+  min-height: clamp(470px, 42vw, 650px) !important;
   overflow: hidden !important;
-  background: #eee6db !important;
+  background: #ede3d7 !important;
   border: 0 !important;
   box-shadow: none !important;
-}
-
-.brand-practice-media::after {
-  background: linear-gradient(180deg, rgba(255, 250, 241, 0.04), rgba(255, 250, 241, 0.08)) !important;
 }
 
 .brand-practice-media img {
   width: 100% !important;
   height: 100% !important;
   object-fit: cover !important;
-  object-position: 52% 52% !important;
+  object-position: 48% 52% !important;
   transform: none !important;
-  filter: saturate(0.98) contrast(1.01) !important;
+  filter: saturate(0.96) contrast(1.01) brightness(1.01) !important;
 }
 
 .brand-practice-copy {
@@ -343,103 +366,102 @@ html[lang="zh-CN"] :is(.brand-practice > .tiny, .archive > .tiny, .about > .tiny
   grid-row: 1 !important;
   display: grid !important;
   align-content: center !important;
-  gap: clamp(18px, 2.2vw, 28px) !important;
+  gap: clamp(18px, 2.2vw, 30px) !important;
   width: 100% !important;
+  min-width: 0 !important;
   max-width: none !important;
   margin: 0 !important;
-  padding: clamp(34px, 4.5vw, 66px) !important;
+  padding: clamp(38px, 4.8vw, 70px) !important;
   overflow: visible !important;
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
-  text-shadow: none !important;
 }
 
 .brand-practice-kicker {
   margin: 0 !important;
-  color: var(--home-faint) !important;
+  color: var(--home-soft) !important;
   font-family: var(--home-sans) !important;
   font-size: 12px !important;
   font-weight: 500 !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.05em !important;
   line-height: 1.35 !important;
   text-transform: uppercase !important;
 }
 
-.brand-practice-copy h2 {
+.brand-practice-title {
   display: grid !important;
   gap: 8px !important;
   margin: 0 !important;
   color: var(--home-ink) !important;
-  font-family: var(--home-serif) !important;
-  font-weight: 400 !important;
-  letter-spacing: 0 !important;
   line-height: 0.98 !important;
 }
 
-.brand-practice-copy h2 span:first-child {
+.brand-practice-name {
+  display: block !important;
+  max-width: 100% !important;
+  color: var(--home-ink) !important;
   font-family: var(--home-serif) !important;
-  font-size: clamp(46px, 4.8vw, 72px) !important;
+  font-size: clamp(44px, 4.4vw, 72px) !important;
   font-weight: 400 !important;
   letter-spacing: 0 !important;
+  line-height: 0.98 !important;
   white-space: nowrap !important;
 }
 
-.brand-practice-copy h2 span:last-child {
+.brand-practice-zh {
+  display: block !important;
   color: var(--home-gold) !important;
   font-family: var(--home-zh-serif) !important;
-  font-size: clamp(32px, 2.6vw, 42px) !important;
+  font-size: clamp(32px, 2.7vw, 44px) !important;
   font-weight: 400 !important;
   letter-spacing: 0 !important;
+  line-height: 1 !important;
 }
 
 .brand-practice-intro,
 .brand-practice-note {
   margin: 0 !important;
-  max-width: 31em !important;
+  max-width: 32em !important;
   color: var(--home-muted) !important;
   font-family: var(--home-serif) !important;
-  font-size: clamp(16px, 1.1vw, 19px) !important;
+  font-size: clamp(17px, 1.1vw, 20px) !important;
   font-weight: 400 !important;
   letter-spacing: 0 !important;
-  line-height: 1.7 !important;
+  line-height: 1.66 !important;
 }
 
 .brand-practice-note {
-  color: var(--home-faint) !important;
+  color: var(--home-soft) !important;
 }
 
 .brand-practice-cta {
   width: fit-content !important;
-  margin: clamp(10px, 1vw, 18px) 0 0 !important;
+  margin: clamp(8px, 1vw, 16px) 0 0 !important;
   padding: 0 0 6px !important;
   color: var(--home-ink) !important;
-  border-bottom: 1px solid rgba(21, 20, 26, 0.25) !important;
+  border-bottom: 1px solid rgba(20, 20, 26, 0.26) !important;
   font-family: var(--home-sans) !important;
   font-size: 13px !important;
   font-weight: 500 !important;
-  letter-spacing: 0.04em !important;
+  letter-spacing: 0.05em !important;
   line-height: 1.35 !important;
   text-transform: uppercase !important;
 }
 
 html[lang="zh-CN"] :is(.brand-practice-kicker, .brand-practice-intro, .brand-practice-note, .brand-practice-cta) {
-  font-family: var(--home-zh) !important;
-  font-weight: 300 !important;
+  font-family: var(--home-zh-serif) !important;
+  font-weight: 400 !important;
   letter-spacing: 0.01em !important;
-  line-height: 1.85 !important;
+  line-height: 1.9 !important;
   text-transform: none !important;
-}
-
-.archive {
-  padding-block: clamp(80px, 10vh, 124px) !important;
 }
 
 .archive-row {
   grid-column: 2 !important;
   display: grid !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  gap: clamp(28px, 4.5vw, 64px) !important;
+  gap: clamp(30px, 4.5vw, 70px) !important;
   width: 100% !important;
   max-width: 100% !important;
 }
@@ -456,6 +478,7 @@ html[lang="zh-CN"] :is(.brand-practice-kicker, .brand-practice-intro, .brand-pra
   box-shadow: none !important;
 }
 
+.archive-row .archive-card::before,
 .archive-row .archive-card::after {
   content: none !important;
   display: none !important;
@@ -466,9 +489,9 @@ html[lang="zh-CN"] :is(.brand-practice-kicker, .brand-practice-intro, .brand-pra
   width: 100% !important;
   aspect-ratio: 4 / 3 !important;
   overflow: hidden !important;
-  background: #eee6db !important;
-  border: 1px solid rgba(21, 20, 26, 0.1) !important;
-  box-shadow: 0 22px 58px rgba(31, 25, 20, 0.07) !important;
+  background: #ede3d7 !important;
+  border: 1px solid rgba(20, 20, 26, 0.1) !important;
+  box-shadow: 0 22px 58px rgba(38, 28, 22, 0.07) !important;
 }
 
 .archive-thumb img {
@@ -488,7 +511,7 @@ html[lang="zh-CN"] :is(.brand-practice-kicker, .brand-practice-intro, .brand-pra
 
 .archive-card-kicker,
 .archive-card-note {
-  color: var(--home-faint) !important;
+  color: var(--home-soft) !important;
   font-family: var(--home-sans) !important;
   font-size: 12px !important;
   line-height: 1.45 !important;
@@ -497,35 +520,30 @@ html[lang="zh-CN"] :is(.brand-practice-kicker, .brand-practice-intro, .brand-pra
 .archive-card-title {
   color: var(--home-ink) !important;
   font-family: var(--home-serif) !important;
-  font-size: clamp(28px, 2.4vw, 40px) !important;
+  font-size: clamp(29px, 2.5vw, 42px) !important;
   font-weight: 400 !important;
-  line-height: 1.05 !important;
+  line-height: 1.04 !important;
   letter-spacing: 0 !important;
 }
 
-html[lang="zh-CN"] :is(.archive-card-kicker, .archive-card-note) {
-  font-family: var(--home-zh) !important;
-  font-weight: 300 !important;
+html[lang="zh-CN"] :is(.archive-card-kicker, .archive-card-note, .archive-card-title) {
+  font-family: var(--home-zh-serif) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.01em !important;
 }
 
 html[lang="zh-CN"] .archive-card-title {
-  font-family: var(--home-zh-serif) !important;
-  font-size: clamp(24px, 2vw, 32px) !important;
-  font-weight: 400 !important;
-}
-
-.about,
-.contact {
-  padding-block: clamp(74px, 9vh, 118px) !important;
+  font-size: clamp(25px, 2vw, 34px) !important;
 }
 
 .about-grid {
   grid-column: 2 !important;
   display: grid !important;
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
-  gap: clamp(36px, 6vw, 92px) !important;
+  gap: clamp(38px, 6vw, 96px) !important;
   width: 100% !important;
-  padding: 24px 0 0 !important;
+  min-width: 0 !important;
+  padding: 26px 0 0 !important;
   background: transparent !important;
   border: 0 !important;
   border-top: 1px solid var(--home-line) !important;
@@ -540,9 +558,8 @@ html[lang="zh-CN"] .archive-card-title {
   font-family: var(--home-serif) !important;
   font-size: clamp(18px, 1.35vw, 24px) !important;
   font-weight: 400 !important;
-  line-height: 1.62 !important;
   letter-spacing: 0 !important;
-  text-shadow: none !important;
+  line-height: 1.62 !important;
 }
 
 .about-education {
@@ -551,10 +568,11 @@ html[lang="zh-CN"] .archive-card-title {
 }
 
 html[lang="zh-CN"] :is(.about-grid p, .about-education p) {
-  font-family: var(--home-zh) !important;
-  font-size: clamp(18px, 1.35vw, 23px) !important;
-  font-weight: 300 !important;
-  line-height: 1.9 !important;
+  font-family: var(--home-zh-serif) !important;
+  font-size: clamp(19px, 1.35vw, 24px) !important;
+  font-weight: 400 !important;
+  line-height: 1.92 !important;
+  letter-spacing: 0.01em !important;
 }
 
 .contact > .email-address,
@@ -569,7 +587,7 @@ html[lang="zh-CN"] :is(.about-grid p, .about-education p) {
   display: inline-block !important;
   width: fit-content !important;
   max-width: 100% !important;
-  padding: 24px 0 0 !important;
+  padding: 26px 0 0 !important;
   border-top: 1px solid var(--home-line) !important;
   color: var(--home-ink) !important;
   font-family: var(--home-serif) !important;
@@ -577,7 +595,6 @@ html[lang="zh-CN"] :is(.about-grid p, .about-education p) {
   font-weight: 400 !important;
   line-height: 1.05 !important;
   letter-spacing: 0 !important;
-  text-shadow: none !important;
 }
 
 .contact > .email-links {
@@ -586,7 +603,7 @@ html[lang="zh-CN"] :is(.about-grid p, .about-education p) {
   gap: 10px 22px !important;
   width: fit-content !important;
   max-width: 100% !important;
-  margin-top: 20px !important;
+  margin-top: 22px !important;
   padding: 0 !important;
 }
 
@@ -595,7 +612,7 @@ html[lang="zh-CN"] :is(.about-grid p, .about-education p) {
   color: var(--home-muted) !important;
   background: transparent !important;
   border: 0 !important;
-  border-bottom: 1px solid rgba(21, 20, 26, 0.18) !important;
+  border-bottom: 1px solid rgba(20, 20, 26, 0.18) !important;
   font-family: var(--home-sans) !important;
   font-size: 13px !important;
   font-weight: 500 !important;
@@ -603,29 +620,42 @@ html[lang="zh-CN"] :is(.about-grid p, .about-education p) {
   line-height: 1.35 !important;
 }
 
-html[lang="zh-CN"] .contact > .email-address {
-  font-family: var(--home-serif) !important;
+html[lang="zh-CN"] :is(.contact > .email-links a, .contact > .email-links button) {
+  font-family: var(--home-zh-serif) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.01em !important;
 }
 
-html[lang="zh-CN"] .contact > .email-links :is(a, button) {
-  font-family: var(--home-zh) !important;
-  font-weight: 300 !important;
+@media (max-width: 1180px) {
+  .brand-practice-card {
+    grid-template-columns: minmax(0, 0.55fr) minmax(310px, 0.45fr) !important;
+  }
+
+  .brand-practice-name {
+    font-size: clamp(40px, 4.2vw, 62px) !important;
+  }
 }
 
 @media (max-width: 1020px) {
+  .site-header {
+    min-height: 62px !important;
+  }
+
   .home {
     grid-template-columns: 1fr !important;
     align-content: center !important;
     gap: 34px !important;
+    min-height: auto !important;
+    padding-top: 108px !important;
   }
 
   .home-copy {
-    max-width: 620px !important;
+    max-width: 660px !important;
   }
 
   .floating-stage {
-    height: min(46svh, 420px) !important;
-    min-height: 320px !important;
+    height: min(48svh, 460px) !important;
+    min-height: 330px !important;
   }
 
   .brand-practice,
@@ -659,12 +689,17 @@ html[lang="zh-CN"] .contact > .email-links :is(a, button) {
     aspect-ratio: 16 / 10 !important;
     height: auto !important;
   }
+
+  .brand-practice-copy {
+    max-width: 720px !important;
+  }
 }
 
 @media (max-width: 760px) {
   .site-header {
     grid-template-columns: 1fr auto !important;
-    padding-block: 16px !important;
+    min-height: 58px !important;
+    padding: 15px 20px !important;
   }
 
   .main-nav {
@@ -673,9 +708,8 @@ html[lang="zh-CN"] .contact > .email-links :is(a, button) {
 
   .home {
     width: calc(100% - 40px) !important;
-    min-height: 100svh !important;
-    padding-top: 92px !important;
-    padding-bottom: 42px !important;
+    padding-top: 94px !important;
+    padding-bottom: 44px !important;
   }
 
   .home h1 {
@@ -687,8 +721,12 @@ html[lang="zh-CN"] .contact > .email-links :is(a, button) {
   }
 
   .floating-stage {
-    min-height: 280px !important;
-    height: 38svh !important;
+    min-height: 300px !important;
+    height: 42svh !important;
+  }
+
+  .floating-stage::before {
+    inset: 16px !important;
   }
 
   .floating-project img {
@@ -696,10 +734,7 @@ html[lang="zh-CN"] .contact > .email-links :is(a, button) {
     max-height: clamp(56px, 18vw, 92px) !important;
   }
 
-  .floating-project span {
-    display: none !important;
-  }
-
+  .floating-project span,
   .home-note {
     display: none !important;
   }
@@ -709,11 +744,11 @@ html[lang="zh-CN"] .contact > .email-links :is(a, button) {
   .about,
   .contact {
     width: calc(100% - 40px) !important;
-    padding-block: 58px !important;
+    padding-block: 60px !important;
   }
 
   .brand-practice-card {
-    box-shadow: 0 16px 42px rgba(31, 25, 20, 0.07) !important;
+    box-shadow: 0 16px 42px rgba(38, 28, 22, 0.07) !important;
   }
 
   .brand-practice-media {
@@ -721,32 +756,36 @@ html[lang="zh-CN"] .contact > .email-links :is(a, button) {
   }
 
   .brand-practice-copy {
-    padding: 26px !important;
+    padding: 28px !important;
   }
 
-  .brand-practice-copy h2 span:first-child {
-    font-size: clamp(38px, 11.5vw, 54px) !important;
+  .brand-practice-name {
+    font-size: clamp(36px, 10.8vw, 54px) !important;
   }
 
   .brand-practice-intro,
   .brand-practice-note {
-    font-size: 16px !important;
+    font-size: 17px !important;
     line-height: 1.72 !important;
   }
 
   .archive-row {
     grid-template-columns: 1fr !important;
-    gap: 34px !important;
+    gap: 36px !important;
   }
 
   .about-grid {
     grid-template-columns: 1fr !important;
-    gap: 22px !important;
+    gap: 24px !important;
   }
 
   .about-grid p,
   .about-education p {
     font-size: 18px !important;
+  }
+
+  html[lang="zh-CN"] :is(.about-grid p, .about-education p) {
+    font-size: 19px !important;
   }
 
   .contact > .email-address {
@@ -764,10 +803,10 @@ html[lang="zh-CN"] .contact > .email-links :is(a, button) {
   }
 
   .brand-practice-copy {
-    padding: 22px !important;
+    padding: 24px !important;
   }
 
-  .brand-practice-copy h2 span:first-child {
-    font-size: clamp(34px, 10.5vw, 44px) !important;
+  .brand-practice-name {
+    font-size: clamp(33px, 10vw, 44px) !important;
   }
 }
