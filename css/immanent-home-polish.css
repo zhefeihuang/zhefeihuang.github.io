@@ -15,7 +15,7 @@ body:not(.room-open) main::before {
   background:
     linear-gradient(90deg, rgba(243, 238, 230, 0.42), rgba(243, 238, 230, 0.2)),
     url("../images/background.jpg") center / cover no-repeat !important;
-  opacity: 0.21 !important;
+  opacity: 0.24 !important;
   filter: saturate(0.72) contrast(0.86) brightness(1.06) !important;
   transform: translateZ(0) !important;
 }
@@ -108,7 +108,7 @@ html[lang="zh-CN"] .brand-practice-name {
 
 @media (max-width: 760px) {
   body:not(.room-open) main::before {
-    opacity: 0.16 !important;
+    opacity: 0.18 !important;
     background-position: 48% 50% !important;
   }
 
