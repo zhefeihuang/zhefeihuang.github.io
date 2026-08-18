@@ -1,0 +1,89 @@
+/* Home floating works: slightly larger objects with a wider roaming field. */
+body:not(.room-open) .home {
+  overflow: hidden !important;
+}
+
+body:not(.room-open) .home .floating-stage {
+  position: absolute !important;
+  inset: clamp(72px, 9vh, 118px) clamp(22px, 3.8vw, 74px) clamp(46px, 6.5vh, 92px) clamp(22px, 3.8vw, 74px) !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-width: none !important;
+  justify-self: auto !important;
+}
+
+body:not(.room-open) .floating-stage {
+  background: radial-gradient(circle at 50% 46%, rgba(251, 248, 241, 0.24), transparent 68%) !important;
+}
+
+body:not(.room-open) .floating-project {
+  width: clamp(132px, 13.6vw, 226px) !important;
+  min-height: 132px !important;
+  filter: drop-shadow(0 22px 24px rgba(23, 20, 18, 0.13)) !important;
+}
+
+body:not(.room-open) .floating-project img {
+  max-height: 248px !important;
+}
+
+body:not(.room-open) .sprite-generative {
+  width: clamp(142px, 14vw, 224px) !important;
+}
+
+body:not(.room-open) .sprite-oxidation {
+  width: clamp(172px, 16.8vw, 282px) !important;
+}
+
+body:not(.room-open) .sprite-mossy,
+body:not(.room-open) .sprite-cherries,
+body:not(.room-open) .sprite-trending {
+  width: clamp(136px, 13.2vw, 220px) !important;
+}
+
+@media (max-width: 1020px) {
+  body:not(.room-open) .home .floating-stage {
+    inset: 96px 24px 56px !important;
+  }
+
+  body:not(.room-open) .floating-project {
+    width: clamp(104px, 18vw, 168px) !important;
+    min-height: 104px !important;
+  }
+
+  body:not(.room-open) .sprite-oxidation {
+    width: clamp(132px, 22vw, 210px) !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body:not(.room-open) .home .floating-stage {
+    inset: 92px 16px 58px !important;
+  }
+
+  body:not(.room-open) .floating-project {
+    width: clamp(88px, 23vw, 126px) !important;
+    min-height: 88px !important;
+  }
+
+  body:not(.room-open) .floating-project img {
+    max-height: 142px !important;
+  }
+
+  body:not(.room-open) .sprite-generative,
+  body:not(.room-open) .sprite-mossy,
+  body:not(.room-open) .sprite-cherries,
+  body:not(.room-open) .sprite-trending {
+    width: clamp(92px, 24vw, 132px) !important;
+  }
+
+  body:not(.room-open) .sprite-oxidation {
+    width: clamp(116px, 30vw, 164px) !important;
+  }
+}
+
+@media (max-width: 430px) {
+  body:not(.room-open) .home .floating-stage {
+    inset: 86px 12px 52px !important;
+  }
+}
