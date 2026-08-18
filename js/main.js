@@ -1571,6 +1571,47 @@ Object.entries(finalPreviewCopy.projectData).forEach(([key, value]) => {
     });
 });
 
+Object.assign(uiText.en, {
+    brandPracticeLabel: "Commercial Case",
+    immanentKicker: "Self-Initiated Brand Practice / 2026",
+    immanentIntro: "A botanical brand concept shaped through research, product architecture, identity, packaging and a consumer-facing site.",
+    immanentNote: "A from-zero-to-one practice project that began with my interest in scent, essential oils and botanical materials.",
+    archiveLabel: "Small Works",
+    aboutOne: "My work often begins with a small detail: an object, a texture, a space, or a repeated behaviour."
+});
+
+Object.assign(uiText.zh, {
+    siteName: "Zhefei Huang",
+    navWork: "作品",
+    navAbout: "关于",
+    navEmail: "邮箱",
+    location: "伦敦 / 上海",
+    role: "品牌创意 / 视觉设计 / 数字媒体",
+    homeLine: "作品围绕图像、空间与数字媒介展开。",
+    homeNote: "选择一件移动中的作品，进入项目。",
+    brandPracticeLabel: "商业案例",
+    immanentKicker: "自主品牌练习 / 2026",
+    immanentIntro: "一套植物感官品牌概念，覆盖研究、产品架构、品牌识别、包装与消费者官网。",
+    immanentNote: "项目源于我对香氛、精油与植物材料的兴趣，也是一次从零到一的品牌练习。",
+    immanentCta: "查看案例研究 ↗︎",
+    archiveLabel: "小作品",
+    archiveSmallKicker: "小作品",
+    archiveGreenPepper: "青椒",
+    archiveGreenPepperNote: "关于物品、习惯与日常温度。",
+    archivePhotography: "摄影札记",
+    archivePhotographyNote: "把照片作为柔软的记录。",
+    aboutLabel: "关于",
+    aboutOne: "我的创作常从一个细节开始：一件物品、一种质感、一处空间，或一种被反复看见的行为。",
+    aboutMA: "研究生就读于伦敦大学金史密斯学院 Digital Media，方向为 Image Making。",
+    aboutBA: "本科毕业于上海视觉艺术学院视觉传达设计专业，方向为品牌识别与公共空间。",
+    contactLabel: "联系",
+    emailMail: "邮件",
+    emailGmail: "Gmail",
+    emailOutlook: "Outlook",
+    emailCopy: "复制邮箱",
+    emailCopied: "已复制"
+});
+
 installContentProtection();
 moveCursor();
 applyLanguage();
