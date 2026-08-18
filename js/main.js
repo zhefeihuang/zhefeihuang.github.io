@@ -12,7 +12,7 @@ const uiText = {
         immanentKicker: "Self-Initiated Brand Practice / 2026",
         immanentIntro: "A botanical brand concept developed from research, product architecture, identity, packaging and a consumer-facing site.",
         immanentNote: "A from-zero-to-one practice project that began with my interest in scent, essential oils and botanical materials.",
-        immanentCta: "Open case study ↗",
+        immanentCta: "Open case study ↗︎",
         archiveLabel: "Creative Work",
         archiveSmallKicker: "Small Work",
         archiveGreenPepper: "Green Pepper",
@@ -50,7 +50,7 @@ const uiText = {
         processItem: "Plate"
     },
     zh: {
-        siteName: "黄浙菲",
+        siteName: "Zhefei Huang",
         navWork: "作品",
         navAbout: "关于",
         navEmail: "邮箱",
@@ -62,7 +62,7 @@ const uiText = {
         immanentKicker: "自主品牌练习 / 2026",
         immanentIntro: "一个植物感官品牌概念，从研究、产品架构、品牌识别、包装到消费者官网完整搭建。",
         immanentNote: "项目源于我对香氛、精油与植物材料的兴趣，也是一套从零到一的品牌练习。",
-        immanentCta: "查看案例研究 ↗",
+        immanentCta: "查看案例研究 ↗︎",
         archiveLabel: "创作记录",
         archiveSmallKicker: "小作品",
         archiveGreenPepper: "青椒",
@@ -579,14 +579,22 @@ function getFloatingStageBounds(stage) {
 function getFloatingMotionSettings(bounds = floatingStageBounds) {
     const touchSafe = (window.matchMedia && window.matchMedia("(hover: none), (pointer: coarse)").matches) || window.innerWidth <= 1024;
     const compact = Boolean(bounds && bounds.width < 640);
+    const phone = Boolean(touchSafe && bounds && bounds.width < 520);
     return {
         touchSafe,
-        speedMin: touchSafe ? (compact ? 170 : 150) : 120,
-        speedMax: touchSafe ? (compact ? 280 : 250) : 210,
-        radiusScale: touchSafe ? 0.48 : 0.4,
-        gap: touchSafe ? (compact ? 12 : 18) : 8,
-        edgeBounce: 1,
-        turnForce: touchSafe ? 42 : 28
+        compact,
+        phone,
+        speedMin: phone ? 18 : touchSafe ? (compact ? 42 : 82) : 120,
+        speedMax: phone ? 44 : touchSafe ? (compact ? 78 : 140) : 210,
+        radiusScale: phone ? 0.24 : touchSafe ? (compact ? 0.31 : 0.36) : 0.4,
+        gap: phone ? -10 : touchSafe ? (compact ? 2 : 12) : 8,
+        edgeBounce: phone ? 0.72 : touchSafe ? 0.86 : 1,
+        turnForce: phone ? 4 : touchSafe ? (compact ? 10 : 18) : 28,
+        turnMin: phone ? 1.8 : touchSafe ? 1.1 : 0.45,
+        turnMax: phone ? 3.4 : touchSafe ? 2.3 : 1.25,
+        separationStrength: phone ? 0.16 : touchSafe ? (compact ? 0.26 : 0.36) : 0.52,
+        impulseScale: phone ? 0.18 : touchSafe ? 0.48 : 1.08,
+        kickScale: phone ? 0.12 : touchSafe ? 0.28 : 0.52
     };
 }
 
@@ -658,8 +666,10 @@ function placeFloatingProject(index, count, width, height) {
     const lane = lanes[index % lanes.length];
     const maxX = Math.max(bounds.safePad, bounds.width - width - bounds.safePad);
     const maxY = Math.max(bounds.safePad, bounds.height - height - bounds.safePad);
-    const x = clampNumber(bounds.safePad + (maxX - bounds.safePad) * lane[0] + randomBetween(-32, 32), bounds.safePad, maxX);
-    const y = clampNumber(bounds.safePad + (maxY - bounds.safePad) * lane[1] + randomBetween(-24, 24), bounds.safePad, maxY);
+    const softJitterX = floatingMotionSettings.phone ? 8 : 32;
+    const softJitterY = floatingMotionSettings.phone ? 8 : 24;
+    const x = clampNumber(bounds.safePad + (maxX - bounds.safePad) * lane[0] + randomBetween(-softJitterX, softJitterX), bounds.safePad, maxX);
+    const y = clampNumber(bounds.safePad + (maxY - bounds.safePad) * lane[1] + randomBetween(-softJitterY, softJitterY), bounds.safePad, maxY);
     return { x, y };
 }
 
@@ -670,8 +680,9 @@ function refreshFloatingProjectSizes() {
     floatingMotionSettings = getFloatingMotionSettings(floatingStageBounds);
     floaters.forEach((floater) => {
         const rect = floater.element.getBoundingClientRect();
-        floater.width = Math.max(rect.width || 0, floater.width, 96);
-        floater.height = Math.max(rect.height || 0, floater.height, 96);
+        const minSize = floatingMotionSettings.phone ? 56 : 96;
+        floater.width = Math.max(rect.width || 0, floater.width, minSize);
+        floater.height = Math.max(rect.height || 0, floater.height, minSize);
         bounceFloatingProject(floater);
         keepFloatingSpeed(floater);
     });
@@ -686,8 +697,9 @@ function setupFloatingProjects() {
 
     floaters = items.map((element, index) => {
         const rect = element.getBoundingClientRect();
-        const width = Math.max(rect.width || 0, 96);
-        const height = Math.max(rect.height || 0, 96);
+        const minSize = floatingMotionSettings.phone ? 56 : 96;
+        const width = Math.max(rect.width || 0, minSize);
+        const height = Math.max(rect.height || 0, minSize);
         const position = placeFloatingProject(index, items.length, width, height);
         const angle = randomBetween(0, Math.PI * 2);
         const speed = randomBetween(floatingMotionSettings.speedMin, floatingMotionSettings.speedMax);
@@ -728,7 +740,7 @@ function animateFloatingProjects(timestamp = performance.now()) {
             floater.vx += Math.cos(angle) * floatingMotionSettings.turnForce;
             floater.vy += Math.sin(angle) * floatingMotionSettings.turnForce;
             floater.vr += randomBetween(-4, 4);
-            floater.turnTimer = randomBetween(0.45, 1.25);
+            floater.turnTimer = randomBetween(floatingMotionSettings.turnMin, floatingMotionSettings.turnMax);
         }
         keepFloatingSpeed(floater);
         floater.x += floater.vx * dt;
@@ -767,20 +779,21 @@ function separateFloatingProjects() {
             const nx = dx / distance;
             const ny = dy / distance;
             const overlap = minDistance - distance;
-            a.x -= nx * overlap * 0.52;
-            a.y -= ny * overlap * 0.52;
-            b.x += nx * overlap * 0.52;
-            b.y += ny * overlap * 0.52;
+            const separateBy = floatingMotionSettings.separationStrength;
+            a.x -= nx * overlap * separateBy;
+            a.y -= ny * overlap * separateBy;
+            b.x += nx * overlap * separateBy;
+            b.y += ny * overlap * separateBy;
 
             const relativeVelocity = (b.vx - a.vx) * nx + (b.vy - a.vy) * ny;
             if (relativeVelocity < 0) {
-                const impulse = -relativeVelocity * 1.08;
+                const impulse = -relativeVelocity * floatingMotionSettings.impulseScale;
                 a.vx -= nx * impulse;
                 a.vy -= ny * impulse;
                 b.vx += nx * impulse;
                 b.vy += ny * impulse;
             } else {
-                const kick = floatingMotionSettings.turnForce * 0.52;
+                const kick = floatingMotionSettings.turnForce * floatingMotionSettings.kickScale;
                 a.vx -= nx * kick;
                 a.vy -= ny * kick;
                 b.vx += nx * kick;
@@ -1178,7 +1191,7 @@ const refinedCopy = {
             processItem: "Image"
         },
         zh: {
-            siteName: "黄浙菲",
+            siteName: "Zhefei Huang",
             navWork: "作品",
             navAbout: "关于",
             navEmail: "邮箱",
@@ -1302,7 +1315,7 @@ Object.entries(refinedCopy.projectData).forEach(([key, value]) => {
 const polishedCopy = {
     uiText: {
         zh: {
-            siteName: "黄浙菲",
+            siteName: "Zhefei Huang",
             navWork: "作品",
             navAbout: "关于",
             navEmail: "邮箱",

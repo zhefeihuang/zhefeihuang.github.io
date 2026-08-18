@@ -44,10 +44,13 @@ body.content-protection-active::after,
 @media (hover: none), (pointer: coarse) {
   .cursor,
   .trail-image,
-  .touch-burst,
-  .cursor-fx-trail,
-  .cursor-fx-pop {
+  .cursor-fx-trail {
     animation: none !important;
     display: none !important;
+  }
+
+  .touch-burst,
+  .cursor-fx-pop {
+    display: block !important;
   }
 }

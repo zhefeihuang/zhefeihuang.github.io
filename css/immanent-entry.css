@@ -575,3 +575,246 @@ html[lang="zh-CN"] .archive-card-note {
     font-size: clamp(27px, 8vw, 34px);
   }
 }
+
+/* Home refinement pass 2: cleaner plates, softer mobile motion, stable bilingual name. */
+:root {
+  --home-gutter-refined: clamp(36px, 6.2vw, 132px);
+  --home-english-name: var(--type-font-en, "Cormorant Garamond", "Libre Baskerville", Georgia, serif);
+  --home-zh-refined: "PingFang SC", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei UI", sans-serif;
+}
+
+.name-link,
+.home-copy h1,
+html[lang="zh-CN"] .name-link,
+html[lang="zh-CN"] .home-copy h1 {
+  font-family: var(--home-english-name) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+}
+
+html[lang="zh-CN"] .home-copy h1 {
+  font-size: var(--type-size-home-title, clamp(30px, 3vw, 46px)) !important;
+  line-height: 1.08 !important;
+  max-width: 13em !important;
+}
+
+html[lang="zh-CN"] :is(.main-nav a, .language-toggle, .home-copy .tiny, .home-copy .role, .home-copy .line, .home-note, .archive-card-kicker, .archive-card-note, .about-grid p, .about-education p, .email-links a, .email-links button) {
+  font-family: var(--home-zh-refined) !important;
+  font-weight: 380 !important;
+  letter-spacing: 0.01em !important;
+}
+
+html[lang="zh-CN"] .home-copy .role,
+html[lang="zh-CN"] .home-copy .line {
+  color: rgba(18, 18, 16, 0.76) !important;
+  line-height: 1.78 !important;
+}
+
+.brand-practice,
+.archive,
+.about,
+.contact {
+  width: min(1320px, calc(100% - var(--home-gutter-refined) * 2)) !important;
+}
+
+@media (min-width: 901px) {
+  .brand-practice {
+    grid-template-columns: minmax(116px, 160px) minmax(0, 1fr) !important;
+    gap: clamp(38px, 5vw, 92px) !important;
+  }
+
+  .brand-practice-card {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    min-height: clamp(540px, 48vw, 690px) !important;
+    padding: clamp(18px, 1.8vw, 30px) !important;
+    overflow: hidden !important;
+    background: rgba(248, 243, 236, 0.5) !important;
+    border-color: rgba(39, 32, 27, 0.1) !important;
+    box-shadow: 0 36px 86px rgba(32, 26, 22, 0.075) !important;
+  }
+
+  .brand-practice-card::before {
+    inset: clamp(18px, 1.8vw, 30px) !important;
+    border-color: rgba(252, 248, 241, 0.54) !important;
+    z-index: 3 !important;
+  }
+
+  .brand-practice-media {
+    grid-area: 1 / 1 !important;
+    height: 100% !important;
+    min-height: 0 !important;
+    aspect-ratio: 16 / 9 !important;
+    border: 1px solid rgba(252, 248, 241, 0.5) !important;
+    background: rgba(248, 242, 235, 0.35) !important;
+  }
+
+  .brand-practice-media::after {
+    background:
+      linear-gradient(90deg, rgba(38, 30, 22, 0.14), transparent 38%),
+      linear-gradient(180deg, transparent 60%, rgba(248, 244, 237, 0.12)) !important;
+  }
+
+  .brand-practice-media img {
+    height: 100% !important;
+    object-position: 58% 52% !important;
+    transform: scale(1.015) !important;
+  }
+
+  .brand-practice-copy {
+    grid-area: 1 / 1 !important;
+    align-self: center !important;
+    justify-self: start !important;
+    width: min(430px, 42%) !important;
+    margin-left: clamp(26px, 4vw, 66px) !important;
+    padding: clamp(34px, 3.8vw, 58px) clamp(32px, 3.6vw, 52px) !important;
+    background:
+      linear-gradient(180deg, rgba(254, 251, 246, 0.9), rgba(247, 241, 232, 0.82)) !important;
+    border: 1px solid rgba(251, 246, 238, 0.66) !important;
+    box-shadow: 0 28px 68px rgba(31, 26, 22, 0.1) !important;
+    backdrop-filter: blur(2px) !important;
+  }
+
+  .brand-practice-copy h2 {
+    font-size: clamp(35px, 2.75vw, 52px) !important;
+    line-height: 1 !important;
+  }
+
+  .brand-practice-intro,
+  .brand-practice-note {
+    max-width: 27em !important;
+    font-size: clamp(14.5px, 0.9vw, 16.5px) !important;
+    line-height: 1.78 !important;
+  }
+
+  html[lang="zh-CN"] .brand-practice-copy h2 span:first-child {
+    font-size: clamp(20px, 1.45vw, 27px) !important;
+  }
+
+  html[lang="zh-CN"] .brand-practice-copy h2 span:last-child {
+    font-size: clamp(54px, 5.2vw, 82px) !important;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1180px) {
+  .brand-practice-copy {
+    width: min(390px, 47%) !important;
+    margin-left: clamp(18px, 2.8vw, 38px) !important;
+  }
+
+  .brand-practice-copy h2 {
+    font-size: clamp(33px, 3.1vw, 44px) !important;
+  }
+}
+
+.about,
+.contact {
+  position: relative !important;
+  padding-block: clamp(80px, 11vh, 136px) !important;
+}
+
+.about-grid,
+.contact > .email-address,
+.contact > .email-links {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+.about-grid {
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+  gap: clamp(42px, 7vw, 110px) !important;
+  padding: clamp(22px, 2vw, 30px) 0 0 !important;
+  border-top: 1px solid rgba(28, 24, 21, 0.16) !important;
+}
+
+.about-grid p,
+.about-education p,
+.contact > .email-address,
+.email-links a,
+.email-links button {
+  color: rgba(15, 14, 20, 0.86) !important;
+  text-shadow: 0 1px 18px rgba(252, 248, 242, 0.42) !important;
+}
+
+.contact > .email-address {
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  font-size: clamp(22px, 1.9vw, 34px) !important;
+  line-height: 1.14 !important;
+}
+
+.contact > .email-links {
+  display: flex !important;
+  gap: 10px 22px !important;
+  width: fit-content !important;
+  max-width: 100% !important;
+  margin-top: 18px !important;
+  padding: 14px 0 0 !important;
+  background: transparent !important;
+  border-top: 1px solid rgba(28, 24, 21, 0.16) !important;
+}
+
+.contact > .email-links :is(a, button) {
+  padding: 0 0 5px !important;
+  border-bottom: 1px solid rgba(28, 24, 21, 0.16) !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .touch-burst,
+  .cursor-fx-pop {
+    display: block !important;
+    filter: drop-shadow(0 12px 18px rgba(28, 24, 21, 0.18)) !important;
+    height: clamp(28px, 8vw, 42px) !important;
+    opacity: 0;
+    width: clamp(28px, 8vw, 42px) !important;
+  }
+
+  .floating-stage {
+    inset: 44svh 16px 8svh 16px !important;
+    overflow: hidden !important;
+  }
+
+  .floating-project {
+    max-width: clamp(72px, 23vw, 112px) !important;
+    padding: 7px !important;
+  }
+
+  .floating-project img {
+    max-height: clamp(58px, 19vw, 104px) !important;
+  }
+
+  .floating-project span {
+    font-size: 11.5px !important;
+    line-height: 1.35 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .about-grid,
+  .contact > .email-address,
+  .contact > .email-links {
+    padding-inline: 0 !important;
+  }
+
+  .about-grid {
+    gap: 20px !important;
+    padding-top: 18px !important;
+  }
+
+  .contact > .email-links {
+    gap: 10px 16px !important;
+  }
+}
+
+@media (max-width: 430px) {
+  html[lang="zh-CN"] .home-copy h1 {
+    font-size: clamp(29px, 8vw, 38px) !important;
+  }
+
+  .floating-stage {
+    inset: 45svh 18px 9svh 18px !important;
+  }
+}
