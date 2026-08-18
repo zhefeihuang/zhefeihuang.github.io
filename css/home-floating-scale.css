@@ -118,12 +118,21 @@ body:not(.room-open) .sprite-generative img {
   transform: scale(1.06) !important;
 }
 
-body:not(.room-open) .sprite-oxidation {
-  width: clamp(164px, 14.8vw, 272px) !important;
+body:not(.room-open) .floating-project.sprite-oxidation {
+  width: clamp(138px, 12vw, 228px) !important;
+  min-height: clamp(104px, 9.4vw, 178px) !important;
 }
 
-body:not(.room-open) .sprite-oxidation img {
-  transform: scale(0.86) !important;
+body:not(.room-open) .floating-project.sprite-oxidation img,
+body:not(.room-open) .floating-project.sprite-oxidation:hover img,
+body:not(.room-open) .floating-project.sprite-oxidation:focus-visible img,
+body:not(.room-open) .floating-project.sprite-oxidation:active img {
+  display: block !important;
+  width: 92% !important;
+  max-width: 92% !important;
+  margin: 0 auto !important;
+  transform: scale(0.76) !important;
+  transform-origin: center !important;
 }
 
 body:not(.room-open) .sprite-mossy,
@@ -156,8 +165,9 @@ body:not(.room-open) .email-links {
     min-height: 112px !important;
   }
 
-  body:not(.room-open) .sprite-oxidation {
-    width: clamp(132px, 21vw, 200px) !important;
+  body:not(.room-open) .floating-project.sprite-oxidation {
+    width: clamp(112px, 17.5vw, 170px) !important;
+    min-height: 92px !important;
   }
 
   body:not(.room-open) .sprite-mossy,
@@ -195,8 +205,18 @@ body:not(.room-open) .email-links {
     width: clamp(104px, 27vw, 142px) !important;
   }
 
-  body:not(.room-open) .sprite-oxidation {
-    width: clamp(108px, 29vw, 150px) !important;
+  body:not(.room-open) .floating-project.sprite-oxidation {
+    width: clamp(92px, 23vw, 124px) !important;
+    min-height: 78px !important;
+  }
+
+  body:not(.room-open) .floating-project.sprite-oxidation img,
+  body:not(.room-open) .floating-project.sprite-oxidation:hover img,
+  body:not(.room-open) .floating-project.sprite-oxidation:focus-visible img,
+  body:not(.room-open) .floating-project.sprite-oxidation:active img {
+    width: 90% !important;
+    max-width: 90% !important;
+    transform: scale(0.72) !important;
   }
 }
 
