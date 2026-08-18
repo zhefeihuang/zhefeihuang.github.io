@@ -1,7 +1,10 @@
 /* Final home polish: keep atmosphere without returning to visual clutter. */
 body:not(.room-open) main {
+  position: relative !important;
+  isolation: isolate !important;
   background:
-    radial-gradient(940px 560px at 74% 2%, rgba(255, 250, 242, 0.74), transparent 68%),
+    radial-gradient(980px 580px at 72% 2%, rgba(255, 250, 242, 0.78), transparent 68%),
+    radial-gradient(760px 520px at 14% 86%, rgba(214, 184, 160, 0.18), transparent 70%),
     linear-gradient(180deg, rgba(243, 238, 230, 0.96) 0%, rgba(235, 226, 214, 0.96) 100%) !important;
 }
 
@@ -13,11 +16,25 @@ body:not(.room-open) main::before {
   display: block !important;
   pointer-events: none !important;
   background:
-    linear-gradient(90deg, rgba(243, 238, 230, 0.42), rgba(243, 238, 230, 0.2)),
+    linear-gradient(90deg, rgba(243, 238, 230, 0.34), rgba(243, 238, 230, 0.14)),
     url("../images/background.jpg") center / cover no-repeat !important;
-  opacity: 0.24 !important;
-  filter: saturate(0.72) contrast(0.86) brightness(1.06) !important;
+  opacity: 0.31 !important;
+  filter: saturate(0.78) contrast(0.9) brightness(1.045) !important;
   transform: translateZ(0) !important;
+}
+
+body:not(.room-open) main::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  background:
+    radial-gradient(780px 520px at 68% 18%, rgba(255, 250, 242, 0.44), transparent 68%),
+    radial-gradient(880px 560px at 18% 82%, rgba(118, 83, 68, 0.12), transparent 72%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(75, 55, 47, 0.055)) !important;
+  opacity: 0.46 !important;
 }
 
 body:not(.room-open) main > * {
@@ -70,7 +87,7 @@ body:not(.room-open) main > * {
 .brand-practice-media {
   min-height: clamp(460px, 40vw, 620px) !important;
   padding: clamp(10px, 1.2vw, 18px) !important;
-  background: linear-gradient(180deg, #f8f3eb, #eadfD1) !important;
+  background: linear-gradient(180deg, #f8f3eb, #eadfd1) !important;
 }
 
 .brand-practice-media img {
@@ -98,6 +115,16 @@ html[lang="zh-CN"] .brand-practice-name {
   white-space: nowrap !important;
   word-break: keep-all !important;
   overflow-wrap: normal !important;
+}
+
+.about-grid {
+  grid-template-columns: minmax(0, min(100%, 680px)) !important;
+  justify-content: start !important;
+  gap: 0 !important;
+}
+
+.about-grid > p {
+  max-width: 34em !important;
 }
 
 @media (max-width: 1180px) {
@@ -134,8 +161,12 @@ html[lang="zh-CN"] .brand-practice-name {
 
 @media (max-width: 760px) {
   body:not(.room-open) main::before {
-    opacity: 0.18 !important;
+    opacity: 0.23 !important;
     background-position: 48% 50% !important;
+  }
+
+  body:not(.room-open) main::after {
+    opacity: 0.38 !important;
   }
 
   .home {
