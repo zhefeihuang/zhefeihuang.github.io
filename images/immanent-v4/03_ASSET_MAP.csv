@@ -1,0 +1,22 @@
+asset,category,status,primary_use_case,case_site_slot,brand_site_slot,fit_rule,notes
+IMMANENT_05_PEEL_front_main.png,PEEL,LOCKED,master packshot,Product/PEEL main,PEEL main,contain,final PEEL master
+IMMANENT_02_PEEL_front_angled.png,PEEL,LOCKED,angled/window detail,PEEL detail gallery,PEEL carousel 4,cover,do not alter product geometry
+IMMANENT_03_PEEL_open_action_rollerball.png,PEEL,LOCKED,open action,PEEL detail gallery,PEEL carousel 3,cover,roller-ball open state
+IMMANENT_04_PEEL_cap_detail.png,PEEL,LOCKED,cap detail,PEEL detail gallery,PEEL carousel alt,cover,secondary if supplemental tactile hero is stronger
+IMMANENT_15_PEEL_front_main_variant.png,PEEL,LOCKED,secondary PEEL editorial,Product/Identity secondary,About/PEEL secondary,cover,avoid duplicate use near main packshot
+IMMANENT_07_PULP_front_main.png,PULP,LOCKED,master packshot,Product/PULP main,PULP main,contain,final PULP master 250mL
+IMMANENT_08_PULP_measuring_cap_detail.png,PULP,LOCKED,measuring cap detail,PULP detail gallery,PULP carousel 2,cover,marks must only read 10/15/20/25mL
+IMMANENT_01_PULP_open_action.png,PULP,LOCKED,open state,PULP detail gallery,PULP carousel 3,cover,final product unchanged
+IMMANENT_06_PULP_usage_pouring.png,PULP,LOCKED,usage/pour,PULP detail gallery,PULP ritual backup,cover,secondary to supplemental ritual if needed
+IMMANENT_09_PULP_front_alt.png,PULP,LOCKED,secondary packshot,PULP detail/secondary,PULP secondary,cover,do not repeat beside main
+IMMANENT_10_DUO_pair_front_clean.png,DUO,LOCKED,clean dual packshot,Identity/product relationship,Duo secondary,cover,clean relationship image
+IMMANENT_14_DUO_pair_styled_pomelo.png,DUO,LOCKED,hero/source still life,Overview hero/secondary,Brand hero,cover,preferred hero if focal crop works
+IMMANENT_16_DUO_pair_styled_luxe.png,DUO,LOCKED,portrait atmosphere,Campaign/atmosphere,About mood,cover,use as secondary mood only
+IMMANENT_12_PULP_still_life_pomelo.png,PULP,LOCKED,source still life,Source/harvest,Harvest/PULP secondary,cover,editorial source image
+IMMANENT_13_PACKAGING_gift_box.png,PACKAGING,LOCKED,gift box,Packaging/Delivery,Duo/Gift,cover,preferred gift box hero
+IMMANENT_11_BRAND_retail_display_hero.png,BRAND,LOCKED,retail display,Experience/Delivery,Retail backup,cover,secondary to supplemental refined retail if better
+01_PEEL_exploded_view_final.png,DIAGRAM,FINAL_SUPPLEMENTAL,PEEL exploded final,PEEL exploded placeholder replacement,PEEL structure detail,contain,proposed architecture not finalized engineering
+02_PULP_ritual_measured_pour_hero.png,PULP,FINAL_SUPPLEMENTAL,ritual/measured pour,PULP usage hero,PULP carousel 4 / ritual hero,cover,25mL measured-pour focus
+03_PEEL_tactile_detail_hero.png,PEEL,FINAL_SUPPLEMENTAL,tactile macro,PEEL tactile/material hero,PEEL carousel 2 / detail hero,cover,do not describe as luxury in copy
+04_Duo_luxury_mood_source_still_life.png,DUO,FINAL_SUPPLEMENTAL,source mood,Overview/source relationship,Harvest/About mood,cover,editorial source relationship
+05_Retail_counter_display_refined_scene.png,RETAIL,FINAL_SUPPLEMENTAL,retail/counter,Experience & Delivery,Retail/About,cover,refined counter display

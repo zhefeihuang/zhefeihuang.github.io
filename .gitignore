@@ -1,4 +1,10 @@
 work/
+!work/
+work/*
+!work/immanent-case-v4/
+!work/immanent-case-v4/**
+!work/immanent-brand-v4/
+!work/immanent-brand-v4/**
 dist/
 node_modules/
 work-bg-sheet.jpg

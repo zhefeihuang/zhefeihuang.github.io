@@ -1,0 +1,17 @@
+seq,filename,category,slug,width_px,height_px,orientation,file_size_kb,source_context_file,status
+01,IMMANENT_01_PULP_open_action.png,PULP,open_action,1122,1402,portrait,2544,37f0e5cb-ad43-5404-a989-f9f462306966.png,LOCKED
+02,IMMANENT_02_PEEL_front_angled.png,PEEL,front_angled,1086,1448,portrait,2520,1900d39f-820d-5646-95a8-d159f0e7317d.png,LOCKED
+03,IMMANENT_03_PEEL_open_action_rollerball.png,PEEL,open_action_rollerball,1086,1448,portrait,2668,5abb70e1-1ca7-58b1-abfb-cc845e7384d9.png,LOCKED
+04,IMMANENT_04_PEEL_cap_detail.png,PEEL,cap_detail,1086,1448,portrait,2524,a79994fd-3354-517e-a8ad-425857a84791.png,LOCKED
+05,IMMANENT_05_PEEL_front_main.png,PEEL,front_main,1086,1448,portrait,2404,bfe07494-865c-50ec-9fa2-aed647927042.png,LOCKED
+06,IMMANENT_06_PULP_usage_pouring.png,PULP,usage_pouring,1086,1448,portrait,3084,a6d263f1-bc43-5c4d-87c2-0c6c2b531edd.png,LOCKED
+07,IMMANENT_07_PULP_front_main.png,PULP,front_main,1086,1448,portrait,2644,4c0a9e93-4107-5ba9-a919-e4fb2ba21380.png,LOCKED
+08,IMMANENT_08_PULP_measuring_cap_detail.png,PULP,measuring_cap_detail,1086,1448,portrait,2784,f0feebb0-5904-53c3-a467-09d999547598.png,LOCKED
+09,IMMANENT_09_PULP_front_alt.png,PULP,front_alt,1086,1448,portrait,2536,d0a22f20-3f7d-5c09-8696-8a5ed7a915e5.png,LOCKED
+10,IMMANENT_10_DUO_pair_front_clean.png,DUO,pair_front_clean,1448,1086,landscape,2652,0fdc4504-5fc0-5767-8706-13f839de54a5.png,LOCKED
+11,IMMANENT_11_BRAND_retail_display_hero.png,BRAND,retail_display_hero,1448,1086,landscape,2996,175cf865-f302-53f5-a4d3-6e8f78552ff6.png,LOCKED
+12,IMMANENT_12_PULP_still_life_pomelo.png,PULP,still_life_pomelo,1448,1086,landscape,2996,7db39fbc-0dd3-5dfb-be43-f1818d429773.png,LOCKED
+13,IMMANENT_13_PACKAGING_gift_box.png,PACKAGING,gift_box,1448,1086,landscape,2940,bbecf9ea-723c-5f0f-8f08-bb1f592e8f5b.png,LOCKED
+14,IMMANENT_14_DUO_pair_styled_pomelo.png,DUO,pair_styled_pomelo,1448,1086,landscape,2804,8581c1f4-da14-59a2-b805-2443354c7f47.png,LOCKED
+15,IMMANENT_15_PEEL_front_main_variant.png,PEEL,front_main_variant,1448,1086,landscape,2940,8c711906-f501-5975-80ed-cc433c4165bb.png,LOCKED
+16,IMMANENT_16_DUO_pair_styled_luxe.png,DUO,pair_styled_luxe,1122,1402,portrait,2484,eafdc980-ef18-50fa-bdcc-c4a59d5503e1.png,LOCKED
