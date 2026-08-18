@@ -1,0 +1,266 @@
+/* V4.9 spatial polish: visible pomelo flesh, gold linework, and air around hero composition. */
+:root {
+  --v49-pomelo: rgba(235, 178, 160, 0.34);
+  --v49-pomelo-soft: rgba(235, 178, 160, 0.2);
+  --v49-gold: rgba(184, 145, 78, 0.42);
+  --v49-gold-soft: rgba(184, 145, 78, 0.16);
+  --v49-ivory-glow: rgba(255, 250, 242, 0.72);
+}
+
+body {
+  background:
+    radial-gradient(900px 520px at 72% 7%, rgba(236, 184, 164, 0.28), transparent 70%),
+    radial-gradient(1180px 620px at 28% 16%, rgba(255, 250, 242, 0.78), transparent 72%),
+    linear-gradient(180deg, #f7eee4 0%, #f2e7d9 100%) !important;
+}
+
+#app::before {
+  background:
+    radial-gradient(620px 420px at 76% 18%, var(--v49-pomelo), transparent 66%),
+    radial-gradient(760px 460px at 26% 78%, rgba(255, 250, 242, 0.58), transparent 72%),
+    repeating-conic-gradient(from -12deg at 78% 18%, rgba(184, 145, 78, 0.085) 0deg 0.9deg, transparent 1deg 30deg),
+    repeating-linear-gradient(112deg, transparent 0 44px, rgba(184, 145, 78, 0.035) 44px 45px, transparent 45px 88px) !important;
+  opacity: 0.82 !important;
+  mask-image: radial-gradient(ellipse at 50% 30%, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.62) 68%, transparent 100%) !important;
+}
+
+#app::after {
+  background:
+    radial-gradient(520px 320px at 18% 24%, rgba(255, 250, 242, 0.6), transparent 72%),
+    linear-gradient(90deg, rgba(255, 250, 242, 0.12), rgba(255, 250, 242, 0.58) 46%, rgba(255, 250, 242, 0.08)),
+    radial-gradient(700px 280px at 84% 72%, rgba(184, 145, 78, 0.12), transparent 74%) !important;
+  opacity: 0.78 !important;
+}
+
+.brand-hero {
+  grid-template-columns: minmax(360px, 0.68fr) minmax(420px, 0.92fr) !important;
+  gap: clamp(84px, 10vw, 184px) !important;
+  padding-top: clamp(72px, 8vw, 126px) !important;
+  padding-bottom: clamp(88px, 9vw, 152px) !important;
+  align-items: center !important;
+}
+
+.brand-hero::before {
+  inset: clamp(36px, 5vw, 80px) calc(var(--page-gutter) * -0.7) clamp(42px, 6vw, 96px) !important;
+  background:
+    radial-gradient(480px 320px at 22% 30%, rgba(255, 250, 242, 0.8), transparent 72%),
+    radial-gradient(660px 430px at 76% 40%, rgba(235, 178, 160, 0.28), transparent 70%),
+    linear-gradient(105deg, rgba(255, 250, 242, 0.24), rgba(184, 145, 78, 0.035) 52%, rgba(235, 178, 160, 0.09)) !important;
+  border-color: rgba(184, 145, 78, 0.14) !important;
+  opacity: 1 !important;
+}
+
+.brand-hero::after {
+  content: "";
+  position: absolute;
+  right: clamp(360px, 34vw, 620px);
+  top: clamp(92px, 12vw, 190px);
+  z-index: -1;
+  width: clamp(240px, 23vw, 430px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, transparent 0 34%, rgba(235, 178, 160, 0.22) 34.5% 45%, transparent 45.5% 53%, rgba(184, 145, 78, 0.22) 53.4% 54.2%, transparent 55%),
+    repeating-conic-gradient(from 5deg, transparent 0deg 27.5deg, rgba(184, 145, 78, 0.16) 27.8deg 28.4deg, rgba(255, 250, 242, 0.58) 28.4deg 28.9deg, transparent 29deg 45deg);
+  opacity: 0.45;
+  filter: drop-shadow(0 22px 64px rgba(184, 145, 78, 0.08));
+}
+
+.hero-copy {
+  position: relative !important;
+  max-width: min(100%, 680px) !important;
+  gap: clamp(22px, 2.5vw, 34px) !important;
+}
+
+.hero-copy::before {
+  content: "";
+  width: min(340px, 62%);
+  height: 1px;
+  display: block;
+  margin-bottom: clamp(4px, 1vw, 10px);
+  background: linear-gradient(90deg, var(--v49-gold), transparent);
+  box-shadow: 0 1px 0 rgba(255, 250, 242, 0.74);
+}
+
+.hero-copy h1 {
+  max-width: 100% !important;
+  font-size: clamp(46px, 4.12vw, 80px) !important;
+  line-height: 0.96 !important;
+  letter-spacing: 0 !important;
+}
+
+.hero-copy h1 .title-line {
+  white-space: nowrap !important;
+  overflow-wrap: normal !important;
+  word-break: normal !important;
+}
+
+.hero-copy h1 .title-line:nth-child(2) {
+  margin-left: clamp(8px, 1.2vw, 22px) !important;
+}
+
+.hero-copy h1 .title-line:nth-child(3) {
+  margin-left: clamp(20px, 3vw, 58px) !important;
+}
+
+.hero-copy .copy-lines {
+  max-width: 39ch !important;
+  color: rgba(28, 30, 26, 0.5) !important;
+  font-size: clamp(17px, 1.08vw, 20px) !important;
+  line-height: 1.56 !important;
+}
+
+.hero-image {
+  justify-self: end !important;
+  width: min(100%, 660px) !important;
+  height: clamp(560px, 68vh, 790px) !important;
+  box-shadow:
+    0 44px 118px rgba(45, 34, 24, 0.1),
+    -28px 32px 86px rgba(235, 178, 160, 0.16),
+    0 0 0 1px rgba(184, 145, 78, 0.14) inset !important;
+}
+
+.hero-image::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  border: 1px solid rgba(184, 145, 78, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(255, 250, 242, 0.28);
+}
+
+.product-pair-grid {
+  border-top-color: rgba(184, 145, 78, 0.24) !important;
+}
+
+.product-card-image,
+.feature-image,
+.origin-image,
+.ritual-detail,
+.duo-image,
+.about-image,
+.pdp-image,
+.story-image {
+  box-shadow:
+    0 30px 92px rgba(35, 28, 21, 0.07),
+    0 0 0 1px rgba(184, 145, 78, 0.1) inset !important;
+}
+
+.shop-section,
+.origin-section,
+.feature-product,
+.ritual-section,
+.duo-section,
+.about-section {
+  position: relative;
+}
+
+.shop-section::before,
+.origin-section::before,
+.feature-product::before,
+.duo-section::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--page-gutter) * -0.28);
+  right: calc(var(--page-gutter) * -0.28);
+  top: calc(var(--section-space) * 0.55);
+  height: 1px;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(184, 145, 78, 0.18), rgba(235, 178, 160, 0.16), transparent);
+}
+
+.hero-actions .primary-button,
+.hero-actions .secondary-button,
+.product-card .secondary-button,
+.feature-copy .secondary-button,
+.duo-copy .secondary-button {
+  border-bottom-color: rgba(184, 145, 78, 0.66) !important;
+  color: rgba(28, 30, 26, 0.88) !important;
+}
+
+@media (max-width: 1180px) {
+  .brand-hero {
+    grid-template-columns: minmax(320px, 0.72fr) minmax(360px, 0.9fr) !important;
+    gap: clamp(58px, 7vw, 118px) !important;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(43px, 4.4vw, 64px) !important;
+  }
+
+  .hero-image {
+    width: min(100%, 560px) !important;
+    height: clamp(500px, 60vh, 690px) !important;
+  }
+}
+
+@media (max-width: 899px) {
+  .brand-hero {
+    grid-template-columns: 1fr !important;
+    gap: clamp(34px, 7vw, 58px) !important;
+    padding-top: 56px !important;
+  }
+
+  .brand-hero::after {
+    right: 8vw;
+    top: 92px;
+    width: clamp(180px, 44vw, 320px);
+    opacity: 0.28;
+  }
+
+  .hero-copy {
+    max-width: min(100%, 720px) !important;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(42px, 8.8vw, 66px) !important;
+  }
+
+  .hero-copy h1 .title-line:nth-child(2),
+  .hero-copy h1 .title-line:nth-child(3) {
+    margin-left: 0 !important;
+  }
+
+  .hero-copy .copy-lines {
+    max-width: 44ch !important;
+  }
+
+  .hero-image {
+    justify-self: stretch !important;
+    width: 100% !important;
+    height: clamp(430px, 82vw, 620px) !important;
+  }
+}
+
+@media (max-width: 640px) {
+  body {
+    background:
+      radial-gradient(520px 340px at 78% 4%, rgba(235, 178, 160, 0.23), transparent 70%),
+      linear-gradient(180deg, #f8efe5 0%, #f2e7d9 100%) !important;
+  }
+
+  .brand-hero {
+    padding-top: 42px !important;
+    padding-bottom: 64px !important;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(34px, 9.2vw, 45px) !important;
+    line-height: 1 !important;
+  }
+
+  .hero-copy h1 .title-line {
+    white-space: normal !important;
+  }
+
+  .hero-copy .copy-lines {
+    max-width: 30ch !important;
+    font-size: 16px !important;
+  }
+
+  .hero-image {
+    height: clamp(380px, 92vw, 520px) !important;
+  }
+}
