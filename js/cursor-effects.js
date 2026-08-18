@@ -48,9 +48,6 @@
     let pointerY = window.innerHeight / 2;
     let cursorX = pointerX;
     let cursorY = pointerY;
-    let lastTrailX = pointerX;
-    let lastTrailY = pointerY;
-    let lastTrailAt = 0;
     let idleSwapAt = 0;
     let idleIndex = 1;
     let raf = 0;
@@ -71,10 +68,10 @@
             applyKey(normalizeKey(fallbackKey) || pageKey || "oxidation");
         },
         trail(x, y, projectKey) {
-            spawnTrail(x, y, normalizeKey(projectKey) || currentKey);
+            spawnBurst(x, y, normalizeKey(projectKey) || currentKey, 2);
         },
         burst(x, y, projectKey) {
-            spawnBurst(x, y, normalizeKey(projectKey) || currentKey, 7);
+            spawnBurst(x, y, normalizeKey(projectKey) || currentKey, 4);
         }
     };
 
@@ -165,15 +162,7 @@
 
         if (finePointer.matches && !reducedMotion.matches) {
             cursor.root.classList.add("is-visible");
-            const now = performance.now();
-            maybeSwapIdleCursor(now);
-            const gap = hoverKey ? 42 : 58;
-            if (now - lastTrailAt > 68 && distance(pointerX, pointerY, lastTrailX, lastTrailY) > gap) {
-                spawnTrail(pointerX, pointerY, hoverKey || currentKey || randomKey());
-                lastTrailX = pointerX;
-                lastTrailY = pointerY;
-                lastTrailAt = now;
-            }
+            maybeSwapIdleCursor(performance.now());
         }
     }
 
@@ -184,10 +173,10 @@
         applyKey(key);
 
         cursor.root.classList.add("is-pressed");
-        window.setTimeout(() => cursor.root.classList.remove("is-pressed"), 260);
+        window.setTimeout(() => cursor.root.classList.remove("is-pressed"), 220);
 
         const isTouchLike = event.pointerType === "touch" || event.pointerType === "pen" || !finePointer.matches;
-        spawnBurst(event.clientX, event.clientY, key, isTouchLike ? 8 : 5);
+        spawnBurst(event.clientX, event.clientY, key, isTouchLike ? 4 : 3);
     }
 
     function handlePointerOver(event) {
@@ -207,13 +196,12 @@
     function animateCursor() {
         const dx = pointerX - cursorX;
         const dy = pointerY - cursorY;
-        cursorX += dx * 0.32;
-        cursorY += dy * 0.32;
+        cursorX += dx * 0.28;
+        cursorY += dy * 0.28;
 
-        const speed = Math.min(32, Math.hypot(dx, dy));
-        const drift = Math.sin(performance.now() * 0.006) * 5;
-        const tilt = clamp(dx * 0.11, -17, 17) + drift;
-        const scale = 1 + speed * 0.006;
+        const speed = Math.min(24, Math.hypot(dx, dy));
+        const tilt = clamp(dx * 0.08, -12, 12);
+        const scale = 1 + speed * 0.003;
         cursor.root.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%) rotate(${tilt.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
 
         raf = window.requestAnimationFrame(animateCursor);
@@ -223,21 +211,7 @@
         if (hoverKey || pageKey || now < idleSwapAt) return;
         idleIndex = (idleIndex + 1 + Math.floor(Math.random() * 2)) % keys.length;
         applyKey(keys[idleIndex]);
-        idleSwapAt = now + 950 + Math.random() * 850;
-    }
-
-    function spawnTrail(x, y, key) {
-        if (reducedMotion.matches) return;
-        const image = makeEffectImage("trail-image cursor-fx-trail", key);
-        const spreadX = Math.round((Math.random() - 0.5) * 82);
-        const spreadY = Math.round(-18 - Math.random() * 62);
-        image.style.left = `${x}px`;
-        image.style.top = `${y}px`;
-        image.style.setProperty("--dx", `${spreadX}px`);
-        image.style.setProperty("--dy", `${spreadY}px`);
-        image.style.setProperty("--rot", `${Math.round((Math.random() - 0.5) * 76)}deg`);
-        image.style.setProperty("--scale", String((0.58 + Math.random() * 0.48).toFixed(2)));
-        appendEffect(image, 22);
+        idleSwapAt = now + 1600 + Math.random() * 1200;
     }
 
     function spawnBurst(x, y, key, count) {
@@ -245,15 +219,15 @@
         for (let index = 0; index < count; index += 1) {
             const burstKey = index % 3 === 0 ? randomKey() : key;
             const image = makeEffectImage("touch-burst cursor-fx-pop", burstKey);
-            const angle = (Math.PI * 2 * index) / count + Math.random() * 0.45;
-            const distancePx = 34 + Math.random() * 58;
+            const angle = (Math.PI * 2 * index) / count + Math.random() * 0.3;
+            const distancePx = 24 + Math.random() * 34;
             image.style.left = `${x}px`;
             image.style.top = `${y}px`;
             image.style.setProperty("--dx", `${Math.cos(angle) * distancePx}px`);
             image.style.setProperty("--dy", `${Math.sin(angle) * distancePx}px`);
-            image.style.setProperty("--rot", `${Math.round((Math.random() - 0.5) * 150)}deg`);
-            image.style.setProperty("--scale", String((0.7 + Math.random() * 0.48).toFixed(2)));
-            window.setTimeout(() => appendEffect(image, 34), index * 22);
+            image.style.setProperty("--rot", `${Math.round((Math.random() - 0.5) * 90)}deg`);
+            image.style.setProperty("--scale", String((0.58 + Math.random() * 0.3).toFixed(2)));
+            window.setTimeout(() => appendEffect(image, 12), index * 18);
         }
     }
 
@@ -274,15 +248,11 @@
         const overflow = nodes.length - limit;
         for (let index = 0; index < overflow; index += 1) nodes[index].remove();
         image.addEventListener("animationend", () => image.remove(), { once: true });
-        window.setTimeout(() => image.remove(), 1200);
+        window.setTimeout(() => image.remove(), 850);
     }
 
     function randomKey() {
         return keys[Math.floor(Math.random() * keys.length)];
-    }
-
-    function distance(x1, y1, x2, y2) {
-        return Math.hypot(x1 - x2, y1 - y2);
     }
 
     function clamp(value, min, max) {
