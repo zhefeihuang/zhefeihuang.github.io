@@ -1,0 +1,115 @@
+/* Final home polish: keep atmosphere without returning to visual clutter. */
+body:not(.room-open) main {
+  background:
+    radial-gradient(940px 560px at 74% 2%, rgba(255, 250, 242, 0.74), transparent 68%),
+    linear-gradient(180deg, rgba(243, 238, 230, 0.96) 0%, rgba(235, 226, 214, 0.96) 100%) !important;
+}
+
+body:not(.room-open) main::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  background:
+    linear-gradient(90deg, rgba(243, 238, 230, 0.42), rgba(243, 238, 230, 0.2)),
+    url("../images/background.jpg") center / cover no-repeat !important;
+  opacity: 0.18 !important;
+  filter: saturate(0.72) contrast(0.86) brightness(1.06) !important;
+  transform: translateZ(0) !important;
+}
+
+body:not(.room-open) main > * {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.floating-stage {
+  overflow: visible !important;
+  background: radial-gradient(circle at 48% 44%, rgba(251, 248, 241, 0.38), transparent 62%) !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.floating-stage::before,
+.floating-stage::after {
+  content: none !important;
+  display: none !important;
+}
+
+.floating-project {
+  background: transparent !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+}
+
+.brand-practice-card {
+  grid-template-columns: minmax(380px, 0.56fr) minmax(360px, 0.44fr) !important;
+  overflow: hidden !important;
+  background: rgba(251, 248, 241, 0.96) !important;
+  box-shadow: 0 34px 90px rgba(38, 28, 22, 0.1) !important;
+}
+
+.brand-practice-media {
+  min-height: clamp(460px, 40vw, 620px) !important;
+  padding: clamp(10px, 1.2vw, 18px) !important;
+  background: linear-gradient(180deg, #f8f3eb, #eadfD1) !important;
+}
+
+.brand-practice-media img {
+  object-fit: contain !important;
+  object-position: center center !important;
+}
+
+.brand-practice-copy {
+  padding: clamp(40px, 4.4vw, 68px) !important;
+}
+
+.brand-practice-name {
+  font-size: clamp(38px, 3.65vw, 66px) !important;
+}
+
+@media (max-width: 1180px) {
+  .brand-practice-card {
+    grid-template-columns: minmax(340px, 0.52fr) minmax(320px, 0.48fr) !important;
+  }
+
+  .brand-practice-name {
+    font-size: clamp(36px, 3.7vw, 56px) !important;
+  }
+}
+
+@media (max-width: 1020px) {
+  .brand-practice-card {
+    grid-template-columns: 1fr !important;
+  }
+
+  .brand-practice-media {
+    aspect-ratio: 16 / 9 !important;
+    min-height: 0 !important;
+  }
+}
+
+@media (max-width: 760px) {
+  body:not(.room-open) main::before {
+    opacity: 0.14 !important;
+    background-position: 48% 50% !important;
+  }
+
+  .brand-practice-media {
+    aspect-ratio: 1 / 1 !important;
+    padding: 8px !important;
+  }
+
+  .brand-practice-name {
+    font-size: clamp(34px, 9.5vw, 50px) !important;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-practice-name {
+    font-size: clamp(31px, 9.2vw, 42px) !important;
+  }
+}
