@@ -12,6 +12,39 @@
     });
   }
 
+  function pauseFloatingLoop() {
+    try {
+      if (typeof floatingAnimationFrame !== "undefined" && floatingAnimationFrame) {
+        cancelAnimationFrame(floatingAnimationFrame);
+        floatingAnimationFrame = null;
+      }
+    } catch (_) {}
+  }
+
+  function patchProjectOpen() {
+    if (typeof openProject !== "function" || openProject.__homeFloatGuarded) return;
+
+    const originalOpenProject = openProject;
+    let opening = false;
+
+    openProject = function guardedOpenProject(key) {
+      if (opening) return;
+      opening = true;
+      cleanupOldPatchState();
+      pauseFloatingLoop();
+
+      try {
+        return originalOpenProject(key);
+      } finally {
+        window.setTimeout(() => {
+          opening = false;
+        }, 520);
+      }
+    };
+
+    openProject.__homeFloatGuarded = true;
+  }
+
   function patchMotionSettings() {
     if (typeof getFloatingMotionSettings !== "function" || getFloatingMotionSettings.__homeFloatTuned) return;
 
@@ -43,6 +76,7 @@
 
   function reviveMotion() {
     cleanupOldPatchState();
+    patchProjectOpen();
     patchMotionSettings();
 
     try {
