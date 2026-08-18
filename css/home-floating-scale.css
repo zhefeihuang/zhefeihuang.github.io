@@ -1,22 +1,67 @@
-/* Home floating works: larger roaming field plus engraved silver inlay details. */
+/* Home floating works: larger roaming field plus visible engraved silver inlay details. */
 body:not(.room-open) .home {
   overflow: hidden !important;
   position: relative !important;
   isolation: isolate !important;
 }
 
+body:not(.room-open) .home::before,
+body:not(.room-open) .home::after {
+  content: "" !important;
+  position: absolute !important;
+  display: block !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+body:not(.room-open) .home::before {
+  right: clamp(28px, 8vw, 154px) !important;
+  top: clamp(96px, 17vh, 190px) !important;
+  width: clamp(210px, 27vw, 420px) !important;
+  height: clamp(118px, 14vw, 218px) !important;
+  border: 1px solid rgba(121, 119, 110, 0.34) !important;
+  border-radius: 54% 46% 51% 49% / 44% 56% 48% 52% !important;
+  background:
+    linear-gradient(132deg, rgba(255, 255, 248, 0.7) 0%, rgba(184, 181, 168, 0.24) 28%, rgba(105, 104, 96, 0.15) 48%, rgba(236, 234, 224, 0.46) 72%, rgba(255, 255, 250, 0.3) 100%),
+    radial-gradient(ellipse at 28% 22%, rgba(255, 255, 250, 0.58), transparent 48%),
+    radial-gradient(ellipse at 74% 74%, rgba(77, 76, 70, 0.16), transparent 56%) !important;
+  box-shadow:
+    inset 10px 10px 22px rgba(255, 255, 250, 0.46),
+    inset -18px -16px 30px rgba(76, 74, 68, 0.14),
+    0 34px 86px rgba(42, 38, 34, 0.12) !important;
+  filter: saturate(0.72) contrast(1.04) !important;
+  opacity: 0.56 !important;
+  transform: rotate(-12deg) !important;
+  mix-blend-mode: multiply !important;
+}
+
+body:not(.room-open) .home::after {
+  left: clamp(34px, 7vw, 128px) !important;
+  bottom: clamp(70px, 12vh, 158px) !important;
+  width: clamp(240px, 32vw, 510px) !important;
+  height: clamp(92px, 12vw, 190px) !important;
+  border-left: 1px solid rgba(112, 110, 102, 0.34) !important;
+  border-top: 1px solid rgba(112, 110, 102, 0.28) !important;
+  border-radius: 0 0 0 58px !important;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 250, 0.24), transparent 38%),
+    linear-gradient(90deg, rgba(142, 139, 128, 0.12), transparent 64%) !important;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 250, 0.84),
+    -20px -22px 52px rgba(255, 252, 244, 0.22) !important;
+  opacity: 0.5 !important;
+}
+
 body:not(.room-open) .home .floating-stage {
   position: absolute !important;
-  inset: clamp(42px, 5.5vh, 84px) clamp(2px, 0.8vw, 18px) clamp(20px, 3.2vh, 54px) clamp(2px, 0.8vw, 18px) !important;
+  inset: clamp(34px, 4.4vh, 70px) clamp(0px, 0.7vw, 14px) clamp(16px, 2.6vh, 46px) clamp(0px, 0.7vw, 14px) !important;
   width: auto !important;
   height: auto !important;
   min-height: 0 !important;
   max-width: none !important;
   justify-self: auto !important;
-}
-
-body:not(.room-open) .floating-stage {
-  background: radial-gradient(circle at 50% 46%, rgba(251, 248, 241, 0.18), transparent 66%) !important;
+  background: radial-gradient(circle at 50% 46%, rgba(251, 248, 241, 0.2), transparent 68%) !important;
+  z-index: 1 !important;
 }
 
 body:not(.room-open) .floating-stage::before,
@@ -29,119 +74,154 @@ body:not(.room-open) .floating-stage::after {
 }
 
 body:not(.room-open) .floating-stage::before {
-  right: clamp(16px, 5vw, 96px) !important;
-  top: clamp(24px, 8vh, 92px) !important;
-  width: clamp(220px, 28vw, 440px) !important;
+  right: clamp(18px, 10vw, 180px) !important;
+  top: clamp(22px, 6vh, 82px) !important;
+  width: clamp(78px, 8vw, 136px) !important;
   aspect-ratio: 1 !important;
   border-radius: 50% !important;
   background:
-    radial-gradient(circle, transparent 0 34%, rgba(126, 121, 109, 0.3) 34.5% 35.2%, transparent 35.8% 53%, rgba(228, 224, 211, 0.55) 53.5% 54.1%, rgba(104, 98, 88, 0.22) 54.4% 55%, transparent 55.5%),
-    repeating-conic-gradient(from 4deg, transparent 0deg 27deg, rgba(126, 121, 109, 0.22) 27.4deg 28.15deg, rgba(245, 242, 231, 0.45) 28.15deg 28.65deg, transparent 29deg 45deg) !important;
-  filter: drop-shadow(0 1px 0 rgba(255, 255, 248, 0.65)) drop-shadow(0 18px 42px rgba(55, 50, 44, 0.06)) !important;
-  opacity: 0.48 !important;
-  transform: rotate(-10deg) !important;
-  mask-image: radial-gradient(circle, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.42) 62%, transparent 78%) !important;
+    radial-gradient(circle, transparent 0 38%, rgba(95, 92, 84, 0.38) 38.5% 39.4%, rgba(255, 255, 248, 0.58) 39.5% 40.2%, transparent 40.8% 55%, rgba(116, 112, 101, 0.3) 55.5% 56.8%, transparent 57.4%),
+    repeating-conic-gradient(from 18deg, transparent 0deg 38deg, rgba(102, 99, 90, 0.36) 38.4deg 39.6deg, rgba(255, 255, 248, 0.64) 39.6deg 40.1deg, transparent 40.6deg 45deg) !important;
+  filter: drop-shadow(0 1px 0 rgba(255, 255, 248, 0.78)) drop-shadow(0 14px 28px rgba(44, 40, 35, 0.12)) !important;
+  opacity: 0.62 !important;
+  transform: rotate(-8deg) !important;
 }
 
 body:not(.room-open) .floating-stage::after {
-  left: clamp(14px, 4vw, 82px) !important;
-  bottom: clamp(28px, 7vh, 90px) !important;
-  width: clamp(180px, 25vw, 390px) !important;
-  height: clamp(112px, 14vw, 220px) !important;
-  border-left: 1px solid rgba(116, 110, 98, 0.24) !important;
-  border-top: 1px solid rgba(116, 110, 98, 0.2) !important;
-  border-radius: 0 0 0 42px !important;
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 248, 0.72),
-    -18px -18px 38px rgba(255, 252, 245, 0.18) !important;
-  opacity: 0.38 !important;
+  right: clamp(120px, 18vw, 360px) !important;
+  bottom: clamp(42px, 8vh, 132px) !important;
+  width: clamp(130px, 13vw, 230px) !important;
+  height: 1px !important;
+  background: linear-gradient(90deg, transparent, rgba(111, 108, 99, 0.42), rgba(255, 255, 250, 0.62), transparent) !important;
+  box-shadow: 0 1px 0 rgba(255, 255, 250, 0.58), 0 14px 24px rgba(42, 38, 34, 0.06) !important;
+  opacity: 0.58 !important;
+  transform: rotate(-18deg) !important;
 }
 
 body:not(.room-open) .floating-project {
-  width: clamp(174px, 16.8vw, 302px) !important;
-  min-height: 174px !important;
-  z-index: 1 !important;
-  filter: drop-shadow(0 27px 30px rgba(23, 20, 18, 0.14)) !important;
+  width: clamp(220px, 20vw, 360px) !important;
+  min-height: clamp(180px, 16vw, 300px) !important;
+  z-index: 2 !important;
+  overflow: visible !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  filter: drop-shadow(0 30px 34px rgba(23, 20, 18, 0.15)) !important;
 }
 
 body:not(.room-open) .floating-project img {
-  max-height: 322px !important;
+  width: 100% !important;
+  height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+  object-fit: contain !important;
+  overflow: visible !important;
+  transform: scale(1.18) !important;
+  transform-origin: center !important;
 }
 
 body:not(.room-open) .sprite-generative {
-  width: clamp(184px, 17.5vw, 300px) !important;
+  width: clamp(230px, 20.5vw, 370px) !important;
+}
+
+body:not(.room-open) .sprite-generative img {
+  transform: scale(1.24) !important;
 }
 
 body:not(.room-open) .sprite-oxidation {
-  width: clamp(238px, 22.5vw, 390px) !important;
+  width: clamp(276px, 24.5vw, 450px) !important;
+}
+
+body:not(.room-open) .sprite-oxidation img {
+  transform: scale(1.1) !important;
 }
 
 body:not(.room-open) .sprite-mossy,
 body:not(.room-open) .sprite-cherries,
 body:not(.room-open) .sprite-trending {
-  width: clamp(178px, 16.8vw, 292px) !important;
+  width: clamp(232px, 21vw, 372px) !important;
+}
+
+body:not(.room-open) .sprite-mossy img,
+body:not(.room-open) .sprite-cherries img,
+body:not(.room-open) .sprite-trending img {
+  transform: scale(1.3) !important;
 }
 
 @media (max-width: 1020px) {
   body:not(.room-open) .home .floating-stage {
-    inset: 78px 10px 42px !important;
+    inset: 72px 4px 38px !important;
   }
 
-  body:not(.room-open) .floating-stage::before {
+  body:not(.room-open) .home::before {
     width: clamp(180px, 34vw, 320px) !important;
-    right: 14px !important;
-    top: 24px !important;
+    right: 24px !important;
+    top: 112px !important;
+    opacity: 0.46 !important;
   }
 
   body:not(.room-open) .floating-project {
-    width: clamp(130px, 22vw, 204px) !important;
-    min-height: 130px !important;
+    width: clamp(154px, 25vw, 236px) !important;
+    min-height: 140px !important;
   }
 
   body:not(.room-open) .sprite-oxidation {
-    width: clamp(168px, 28vw, 258px) !important;
+    width: clamp(188px, 31vw, 296px) !important;
+  }
+
+  body:not(.room-open) .sprite-mossy,
+  body:not(.room-open) .sprite-cherries,
+  body:not(.room-open) .sprite-trending,
+  body:not(.room-open) .sprite-generative {
+    width: clamp(164px, 27vw, 252px) !important;
   }
 }
 
 @media (max-width: 760px) {
   body:not(.room-open) .home .floating-stage {
-    inset: 76px 6px 42px !important;
+    inset: 74px 0 40px !important;
   }
 
-  body:not(.room-open) .floating-stage::before {
-    width: clamp(156px, 50vw, 240px) !important;
+  body:not(.room-open) .home::before {
+    right: -36px !important;
+    top: 112px !important;
+    width: clamp(190px, 58vw, 280px) !important;
+    height: clamp(112px, 34vw, 166px) !important;
     opacity: 0.32 !important;
   }
 
-  body:not(.room-open) .floating-stage::after {
-    width: 46vw !important;
-    height: 24vw !important;
-    opacity: 0.26 !important;
+  body:not(.room-open) .home::after {
+    left: 18px !important;
+    bottom: 80px !important;
+    width: 58vw !important;
+    height: 22vw !important;
+    opacity: 0.32 !important;
+  }
+
+  body:not(.room-open) .floating-stage::before {
+    width: clamp(62px, 18vw, 98px) !important;
+    opacity: 0.46 !important;
   }
 
   body:not(.room-open) .floating-project {
-    width: clamp(108px, 28vw, 150px) !important;
-    min-height: 108px !important;
-  }
-
-  body:not(.room-open) .floating-project img {
-    max-height: 166px !important;
+    width: clamp(128px, 34vw, 176px) !important;
+    min-height: 110px !important;
   }
 
   body:not(.room-open) .sprite-generative,
   body:not(.room-open) .sprite-mossy,
   body:not(.room-open) .sprite-cherries,
   body:not(.room-open) .sprite-trending {
-    width: clamp(112px, 29vw, 154px) !important;
+    width: clamp(132px, 35vw, 184px) !important;
   }
 
   body:not(.room-open) .sprite-oxidation {
-    width: clamp(140px, 37vw, 198px) !important;
+    width: clamp(164px, 43vw, 228px) !important;
   }
 }
 
 @media (max-width: 430px) {
   body:not(.room-open) .home .floating-stage {
-    inset: 72px 4px 38px !important;
+    inset: 70px 0 36px !important;
   }
 }
