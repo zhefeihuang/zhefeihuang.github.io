@@ -139,7 +139,7 @@ body {
   content: "";
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: 0;
   pointer-events: none;
 }
 
@@ -154,7 +154,6 @@ body {
 }
 
 #app::after {
-  z-index: -1;
   background:
     linear-gradient(90deg, transparent 0%, rgba(255, 250, 242, 0.44) 47%, transparent 100%),
     radial-gradient(420px 220px at 46% 16%, rgba(255, 250, 244, 0.54), transparent 72%),
@@ -162,12 +161,19 @@ body {
   opacity: 0.64;
 }
 
-main {
+main,
+.site-header,
+.bag-drawer,
+.checkout-modal,
+.lightbox,
+.custom-cursor,
+.tap-feedback {
   position: relative;
   z-index: 1;
 }
 
 .site-header {
+  z-index: 60;
   background: rgba(244, 235, 223, 0.76) !important;
   border-bottom-color: rgba(185, 151, 97, 0.16) !important;
   box-shadow: 0 1px 0 rgba(255, 250, 242, 0.45) inset;
@@ -201,6 +207,10 @@ main {
   font-size: clamp(50px, 5.05vw, 94px) !important;
   line-height: 0.91 !important;
   letter-spacing: -0.005em !important;
+}
+
+.hero-copy h1 .title-line {
+  white-space: nowrap !important;
 }
 
 .hero-copy h1 .title-line:nth-child(2) {
