@@ -1,11 +1,11 @@
-/* Home floating works: slightly larger objects with a wider roaming field. */
+/* Home floating works: larger objects, wider roaming field, and a soft oxidised-silver edge. */
 body:not(.room-open) .home {
   overflow: hidden !important;
 }
 
 body:not(.room-open) .home .floating-stage {
   position: absolute !important;
-  inset: clamp(72px, 9vh, 118px) clamp(22px, 3.8vw, 74px) clamp(46px, 6.5vh, 92px) clamp(22px, 3.8vw, 74px) !important;
+  inset: clamp(58px, 7.4vh, 104px) clamp(12px, 2.8vw, 52px) clamp(34px, 5.2vh, 78px) clamp(12px, 2.8vw, 52px) !important;
   width: auto !important;
   height: auto !important;
   min-height: 0 !important;
@@ -14,76 +14,89 @@ body:not(.room-open) .home .floating-stage {
 }
 
 body:not(.room-open) .floating-stage {
-  background: radial-gradient(circle at 50% 46%, rgba(251, 248, 241, 0.24), transparent 68%) !important;
+  background:
+    radial-gradient(circle at 50% 46%, rgba(251, 248, 241, 0.28), transparent 68%),
+    radial-gradient(520px 320px at 68% 34%, rgba(199, 195, 182, 0.18), transparent 72%) !important;
+}
+
+body:not(.room-open) main::after {
+  background:
+    radial-gradient(820px 520px at 68% 18%, rgba(255, 250, 242, 0.28), transparent 68%),
+    radial-gradient(880px 560px at 18% 82%, rgba(118, 83, 68, 0.1), transparent 72%),
+    radial-gradient(560px 360px at 78% 62%, rgba(199, 195, 182, 0.16), transparent 72%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(75, 55, 47, 0.035)) !important;
+  opacity: 0.36 !important;
 }
 
 body:not(.room-open) .floating-project {
-  width: clamp(132px, 13.6vw, 226px) !important;
-  min-height: 132px !important;
-  filter: drop-shadow(0 22px 24px rgba(23, 20, 18, 0.13)) !important;
+  width: clamp(150px, 15vw, 260px) !important;
+  min-height: 150px !important;
+  filter:
+    drop-shadow(0 24px 28px rgba(23, 20, 18, 0.13))
+    drop-shadow(0 1px 0 rgba(232, 229, 216, 0.72)) !important;
 }
 
 body:not(.room-open) .floating-project img {
-  max-height: 248px !important;
+  max-height: 286px !important;
 }
 
 body:not(.room-open) .sprite-generative {
-  width: clamp(142px, 14vw, 224px) !important;
+  width: clamp(158px, 15.4vw, 258px) !important;
 }
 
 body:not(.room-open) .sprite-oxidation {
-  width: clamp(172px, 16.8vw, 282px) !important;
+  width: clamp(198px, 18.8vw, 328px) !important;
 }
 
 body:not(.room-open) .sprite-mossy,
 body:not(.room-open) .sprite-cherries,
 body:not(.room-open) .sprite-trending {
-  width: clamp(136px, 13.2vw, 220px) !important;
+  width: clamp(152px, 14.6vw, 252px) !important;
 }
 
 @media (max-width: 1020px) {
   body:not(.room-open) .home .floating-stage {
-    inset: 96px 24px 56px !important;
+    inset: 86px 18px 48px !important;
   }
 
   body:not(.room-open) .floating-project {
-    width: clamp(104px, 18vw, 168px) !important;
-    min-height: 104px !important;
+    width: clamp(116px, 19.5vw, 184px) !important;
+    min-height: 116px !important;
   }
 
   body:not(.room-open) .sprite-oxidation {
-    width: clamp(132px, 22vw, 210px) !important;
+    width: clamp(148px, 24vw, 230px) !important;
   }
 }
 
 @media (max-width: 760px) {
   body:not(.room-open) .home .floating-stage {
-    inset: 92px 16px 58px !important;
+    inset: 82px 10px 48px !important;
   }
 
   body:not(.room-open) .floating-project {
-    width: clamp(88px, 23vw, 126px) !important;
-    min-height: 88px !important;
+    width: clamp(94px, 25vw, 136px) !important;
+    min-height: 94px !important;
   }
 
   body:not(.room-open) .floating-project img {
-    max-height: 142px !important;
+    max-height: 150px !important;
   }
 
   body:not(.room-open) .sprite-generative,
   body:not(.room-open) .sprite-mossy,
   body:not(.room-open) .sprite-cherries,
   body:not(.room-open) .sprite-trending {
-    width: clamp(92px, 24vw, 132px) !important;
+    width: clamp(98px, 25.5vw, 140px) !important;
   }
 
   body:not(.room-open) .sprite-oxidation {
-    width: clamp(116px, 30vw, 164px) !important;
+    width: clamp(124px, 32vw, 176px) !important;
   }
 }
 
 @media (max-width: 430px) {
   body:not(.room-open) .home .floating-stage {
-    inset: 86px 12px 52px !important;
+    inset: 78px 8px 44px !important;
   }
 }
