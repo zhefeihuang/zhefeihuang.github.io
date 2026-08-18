@@ -110,3 +110,267 @@
     font-size: 32px !important;
   }
 }
+
+/* V4.8 sensory depth: pomelo flesh light, gold linework, and segment-cut texture. */
+:root {
+  --pomelo-light: rgba(232, 183, 165, 0.24);
+  --pomelo-trace: rgba(232, 183, 165, 0.16);
+  --gold-line: rgba(185, 151, 97, 0.36);
+  --gold-soft: rgba(185, 151, 97, 0.13);
+  --old-silver: rgba(194, 190, 178, 0.2);
+}
+
+body {
+  background:
+    radial-gradient(1180px 620px at 78% -4%, rgba(251, 242, 229, 0.78), transparent 70%),
+    radial-gradient(760px 460px at 16% 24%, var(--old-silver), transparent 72%),
+    radial-gradient(860px 540px at 80% 55%, var(--pomelo-trace), transparent 72%),
+    var(--warm-ivory) !important;
+}
+
+#app {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+}
+
+#app::before,
+#app::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+}
+
+#app::before {
+  background:
+    radial-gradient(820px 480px at 78% 16%, var(--pomelo-light), transparent 68%),
+    radial-gradient(540px 340px at 16% 68%, rgba(201, 196, 183, 0.17), transparent 70%),
+    repeating-conic-gradient(from -14deg at 78% 18%, rgba(185, 151, 97, 0.055) 0deg 1.15deg, transparent 1.15deg 30deg),
+    repeating-linear-gradient(112deg, transparent 0 28px, rgba(185, 151, 97, 0.028) 28px 29px, transparent 29px 58px);
+  opacity: 0.62;
+  mask-image: radial-gradient(ellipse at 50% 30%, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.18) 74%, transparent 100%);
+}
+
+#app::after {
+  z-index: -1;
+  background:
+    linear-gradient(90deg, transparent 0%, rgba(255, 250, 242, 0.44) 47%, transparent 100%),
+    radial-gradient(420px 220px at 46% 16%, rgba(255, 250, 244, 0.54), transparent 72%),
+    radial-gradient(620px 260px at 70% 82%, rgba(185, 151, 97, 0.07), transparent 72%);
+  opacity: 0.64;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.site-header {
+  background: rgba(244, 235, 223, 0.76) !important;
+  border-bottom-color: rgba(185, 151, 97, 0.16) !important;
+  box-shadow: 0 1px 0 rgba(255, 250, 242, 0.45) inset;
+}
+
+.brand-hero {
+  position: relative;
+  isolation: isolate;
+  grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr) !important;
+  gap: clamp(42px, 6.5vw, 126px) !important;
+}
+
+.brand-hero::before {
+  content: "";
+  position: absolute;
+  inset: clamp(18px, 2.6vw, 44px) calc(var(--page-gutter) * -0.56) clamp(24px, 4vw, 70px);
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(420px 260px at 26% 22%, rgba(255, 250, 242, 0.72), transparent 72%),
+    radial-gradient(620px 420px at 76% 46%, rgba(232, 183, 165, 0.2), transparent 72%),
+    repeating-conic-gradient(from -8deg at 82% 36%, rgba(185, 151, 97, 0.07) 0deg 1deg, transparent 1deg 30deg);
+  border-top: 1px solid rgba(185, 151, 97, 0.09);
+  border-bottom: 1px solid rgba(185, 151, 97, 0.07);
+  opacity: 0.86;
+  mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.74) 12%, rgba(0, 0, 0, 0.8) 88%, transparent 100%);
+}
+
+.hero-copy h1 {
+  max-width: min(100%, 15.8ch) !important;
+  font-size: clamp(50px, 5.05vw, 94px) !important;
+  line-height: 0.91 !important;
+  letter-spacing: -0.005em !important;
+}
+
+.hero-copy h1 .title-line:nth-child(2) {
+  margin-left: clamp(12px, 1.7vw, 28px);
+}
+
+.hero-copy h1 .title-line:nth-child(3) {
+  margin-left: clamp(42px, 5.2vw, 94px);
+}
+
+html[data-language="zh"] .hero-copy h1 {
+  max-width: 8em !important;
+  font-size: clamp(42px, 4.6vw, 76px) !important;
+  line-height: 1.1 !important;
+  letter-spacing: 0 !important;
+}
+
+html[data-language="zh"] .hero-copy h1 .title-line {
+  margin-left: 0 !important;
+}
+
+.asset-frame {
+  border: 1px solid rgba(185, 151, 97, 0.12);
+  box-shadow:
+    0 34px 96px rgba(28, 30, 26, 0.065),
+    0 0 0 1px rgba(255, 250, 242, 0.34) inset !important;
+}
+
+.asset-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255, 250, 242, 0.32), transparent 36%),
+    radial-gradient(420px 280px at 76% 20%, rgba(185, 151, 97, 0.12), transparent 72%);
+  mix-blend-mode: screen;
+  opacity: 0.42;
+}
+
+.product-pair-grid,
+.source-note,
+.pdp-accordion,
+.related-link,
+.brand-footer {
+  border-color: rgba(185, 151, 97, 0.18) !important;
+}
+
+.hero-actions {
+  gap: clamp(20px, 2.6vw, 36px) !important;
+}
+
+.hero-actions .primary-button,
+.hero-actions .secondary-button,
+.product-card .secondary-button,
+.feature-copy .secondary-button,
+.duo-copy .secondary-button {
+  min-height: 0 !important;
+  padding: 0 0 8px !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(185, 151, 97, 0.54) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--ink) !important;
+  box-shadow: none !important;
+  letter-spacing: 0.14em !important;
+  line-height: 1.1 !important;
+  text-align: left !important;
+  width: fit-content !important;
+}
+
+.hero-actions .primary-button::after,
+.hero-actions .secondary-button::after,
+.product-card .secondary-button::after,
+.feature-copy .secondary-button::after,
+.duo-copy .secondary-button::after {
+  color: var(--brass);
+  margin-left: 2px !important;
+  transform: translateX(0);
+}
+
+.hero-actions .primary-button:hover,
+.hero-actions .secondary-button:hover,
+.product-card .secondary-button:hover,
+.feature-copy .secondary-button:hover,
+.duo-copy .secondary-button:hover {
+  color: var(--brass) !important;
+  border-bottom-color: rgba(185, 151, 97, 0.78) !important;
+  transform: translateY(-1px) !important;
+}
+
+.pdp-info .primary-button,
+.bag-foot .primary-button,
+.checkout-modal .secondary-button {
+  min-height: 44px !important;
+  padding: 12px 21px !important;
+  border: 1px solid var(--ink) !important;
+  border-radius: 999px !important;
+  background: var(--ink) !important;
+  color: var(--ivory-soft) !important;
+  box-shadow: 0 14px 34px rgba(28, 30, 26, 0.13) !important;
+  text-align: center !important;
+}
+
+@media (max-width: 1180px) {
+  .brand-hero {
+    grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr) !important;
+    gap: clamp(32px, 5vw, 74px) !important;
+  }
+
+  .hero-copy h1 {
+    max-width: 14.8ch !important;
+    font-size: clamp(48px, 5.1vw, 74px) !important;
+  }
+}
+
+@media (max-width: 899px) {
+  #app::before {
+    opacity: 0.5;
+  }
+
+  .brand-hero {
+    grid-template-columns: 1fr !important;
+  }
+
+  .brand-hero::before {
+    inset: 0 calc(var(--page-gutter) * -0.72) 18px;
+  }
+
+  .hero-copy h1 {
+    max-width: min(100%, 15ch) !important;
+    font-size: clamp(44px, 8.4vw, 68px) !important;
+  }
+
+  .hero-copy h1 .title-line:nth-child(2),
+  .hero-copy h1 .title-line:nth-child(3) {
+    margin-left: 0 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  #app::before {
+    background:
+      radial-gradient(460px 300px at 74% 12%, rgba(232, 183, 165, 0.18), transparent 70%),
+      radial-gradient(380px 260px at 12% 70%, rgba(201, 196, 183, 0.13), transparent 72%),
+      repeating-conic-gradient(from -14deg at 82% 20%, rgba(185, 151, 97, 0.042) 0deg 1deg, transparent 1deg 30deg);
+  }
+
+  .hero-copy h1 {
+    max-width: 12.4ch !important;
+    font-size: clamp(35px, 10.4vw, 48px) !important;
+    line-height: 0.96 !important;
+  }
+
+  html[data-language="zh"] .hero-copy h1 {
+    max-width: 7em !important;
+    font-size: clamp(34px, 9.4vw, 46px) !important;
+    line-height: 1.12 !important;
+  }
+
+  .hero-actions {
+    gap: 18px !important;
+  }
+
+  .hero-actions .primary-button,
+  .hero-actions .secondary-button,
+  .product-card .secondary-button,
+  .feature-copy .secondary-button,
+  .duo-copy .secondary-button {
+    width: fit-content !important;
+    padding-inline: 0 !important;
+  }
+}
