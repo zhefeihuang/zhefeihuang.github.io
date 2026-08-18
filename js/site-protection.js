@@ -28,8 +28,8 @@
     : "Images, copy and concepts are protected.";
 
   const rightsText = () => isZh()
-    ? "\u00a9 Zhefei Huang\u3002\u672c\u7ad9\u6240\u6709\u6982\u5ff5\u3001\u6587\u5b57\u3001\u89c6\u89c9\u3001\u8bbe\u8ba1\u4e0e IMMANENT \u54c1\u724c\u7ec3\u4e60\u5747\u4e3a\u4e2a\u4eba\u539f\u521b\u4f5c\u54c1\u3002\u672a\u7ecf\u8bb8\u53ef\uff0c\u8bf7\u52ff\u4fdd\u5b58\u3001\u590d\u5236\u3001\u8f6c\u8f7d\u6216\u7528\u4e8e\u5546\u4e1a\u7528\u9014\u3002"
-    : "\u00a9 Zhefei Huang. All concepts, copy, visuals, design and IMMANENT brand practice work are original. Please do not save, copy, reproduce or use commercially without permission.";
+    ? "\u00a9 Zhefei Huang\u3002\u672c\u7ad9\u6240\u6709\u9879\u76ee\u6982\u5ff5\u3001\u6587\u5b57\u3001\u89c6\u89c9\u3001\u8bbe\u8ba1\u4e0e\u54c1\u724c\u7ec3\u4e60\u5747\u4e3a\u4e2a\u4eba\u539f\u521b\u4f5c\u54c1\u3002\u672a\u7ecf\u8bb8\u53ef\uff0c\u8bf7\u52ff\u4fdd\u5b58\u3001\u590d\u5236\u3001\u8f6c\u8f7d\u6216\u7528\u4e8e\u5546\u4e1a\u7528\u9014\u3002"
+    : "\u00a9 Zhefei Huang. All project concepts, copy, visuals, design and brand practice work on this site are original. Please do not save, copy, reproduce or use commercially without permission.";
 
   const isEditable = (target) => {
     if (!target || target === document) return false;
