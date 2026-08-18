@@ -119,11 +119,11 @@ body:not(.room-open) .sprite-generative img {
 }
 
 body:not(.room-open) .sprite-oxidation {
-  width: clamp(198px, 17.8vw, 326px) !important;
+  width: clamp(164px, 14.8vw, 272px) !important;
 }
 
 body:not(.room-open) .sprite-oxidation img {
-  transform: scale(1) !important;
+  transform: scale(0.86) !important;
 }
 
 body:not(.room-open) .sprite-mossy,
@@ -157,7 +157,7 @@ body:not(.room-open) .email-links {
   }
 
   body:not(.room-open) .sprite-oxidation {
-    width: clamp(154px, 25vw, 236px) !important;
+    width: clamp(132px, 21vw, 200px) !important;
   }
 
   body:not(.room-open) .sprite-mossy,
@@ -196,7 +196,7 @@ body:not(.room-open) .email-links {
   }
 
   body:not(.room-open) .sprite-oxidation {
-    width: clamp(126px, 34vw, 178px) !important;
+    width: clamp(108px, 29vw, 150px) !important;
   }
 }
 
