@@ -1,0 +1,108 @@
+/* V4.10 material finish: tactile gold seal, pomelo-pink depth, and calmer hero spacing. */
+.brand-hero {
+  gap: clamp(126px, 13vw, 238px) !important;
+}
+
+.brand-hero::after {
+  left: calc(50% + clamp(24px, 4vw, 76px)) !important;
+  top: clamp(110px, 14vw, 188px) !important;
+  width: clamp(78px, 6.6vw, 118px) !important;
+  z-index: 1 !important;
+  opacity: 0.78 !important;
+  background:
+    radial-gradient(circle, transparent 0 42%, rgba(94, 67, 26, 0.36) 42.6% 44%, rgba(255, 252, 242, 0.82) 44.2% 45%, transparent 45.6% 58%, rgba(176, 132, 62, 0.5) 58.6% 60%, rgba(255, 252, 242, 0.55) 60.2% 61%, transparent 61.8%),
+    repeating-conic-gradient(from 18deg, transparent 0deg 38deg, rgba(112, 83, 34, 0.46) 38.4deg 39.35deg, rgba(255, 252, 242, 0.78) 39.35deg 40deg, transparent 40.45deg 45deg),
+    radial-gradient(circle at 34% 26%, rgba(255, 252, 242, 0.82), transparent 52%) !important;
+  box-shadow:
+    inset 3px 4px 8px rgba(255, 252, 242, 0.54),
+    inset -5px -6px 12px rgba(94, 67, 26, 0.16),
+    0 1px 0 rgba(255, 252, 242, 0.78),
+    0 24px 50px rgba(116, 82, 34, 0.16) !important;
+  filter: saturate(0.9) contrast(1.08) !important;
+  mix-blend-mode: multiply !important;
+}
+
+.hero-copy {
+  max-width: min(100%, 560px) !important;
+}
+
+.hero-copy h1 {
+  font-size: clamp(42px, 3.55vw, 68px) !important;
+}
+
+.hero-copy h1 .title-line:nth-child(3) {
+  margin-left: clamp(4px, 0.8vw, 16px) !important;
+}
+
+.hero-copy .copy-lines {
+  max-width: 34ch !important;
+}
+
+.hero-image {
+  width: min(100%, 600px) !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.hero-image img,
+.hero-image picture,
+.hero-image video {
+  border-radius: inherit !important;
+}
+
+.hero-image::after {
+  content: "";
+  position: absolute;
+  left: clamp(-52px, -3.6vw, -30px);
+  bottom: clamp(38px, 6vw, 86px);
+  width: clamp(58px, 5vw, 92px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  background:
+    radial-gradient(circle, transparent 0 40%, rgba(94, 67, 26, 0.34) 40.7% 42.2%, rgba(255, 252, 242, 0.78) 42.3% 43.1%, transparent 43.8% 57%, rgba(176, 132, 62, 0.44) 57.4% 59.2%, transparent 60%),
+    repeating-conic-gradient(from 17deg, transparent 0deg 38deg, rgba(112, 83, 34, 0.4) 38.4deg 39.2deg, rgba(255, 252, 242, 0.78) 39.2deg 39.8deg, transparent 40.2deg 45deg) !important;
+  box-shadow:
+    inset 2px 3px 7px rgba(255, 252, 242, 0.52),
+    inset -4px -5px 10px rgba(94, 67, 26, 0.16),
+    0 1px 0 rgba(255, 252, 242, 0.78),
+    0 22px 42px rgba(116, 82, 34, 0.12) !important;
+  opacity: 0.72;
+  mix-blend-mode: multiply;
+}
+
+@media (max-width: 1180px) {
+  .brand-hero {
+    gap: clamp(84px, 9vw, 148px) !important;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(39px, 4vw, 60px) !important;
+  }
+}
+
+@media (max-width: 899px) {
+  .brand-hero::after {
+    left: auto !important;
+    right: 8vw !important;
+    width: clamp(64px, 18vw, 94px) !important;
+    opacity: 0.52 !important;
+  }
+
+  .hero-image::after {
+    left: auto;
+    right: clamp(18px, 8vw, 64px);
+    bottom: clamp(-22px, -4vw, -12px);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-copy h1 {
+    font-size: clamp(34px, 8.6vw, 43px) !important;
+  }
+
+  .hero-copy .copy-lines {
+    max-width: 31ch !important;
+  }
+}
