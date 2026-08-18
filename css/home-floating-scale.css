@@ -1,4 +1,62 @@
-/* Home floating works: larger roaming field plus visible engraved silver inlay details. */
+/* Home refinement: no silver ornaments, calmer floating scale, cleaner atmospheric depth. */
+body:not(.room-open) {
+  background: #f7efe5 !important;
+}
+
+body:not(.room-open) .site-header {
+  background:
+    linear-gradient(180deg, rgba(255, 251, 244, 0.9), rgba(250, 242, 232, 0.62)) !important;
+  border-bottom: 1px solid rgba(46, 38, 30, 0.08) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 250, 0.8) inset,
+    0 18px 46px rgba(42, 32, 25, 0.045) !important;
+  backdrop-filter: blur(18px) saturate(1.08) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.08) !important;
+}
+
+body:not(.room-open) .site-header a,
+body:not(.room-open) .site-header button,
+body:not(.room-open) .name-link {
+  color: rgba(19, 17, 27, 0.88) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 250, 0.45) !important;
+}
+
+body:not(.room-open) .main-nav a,
+body:not(.room-open) .language-toggle {
+  color: rgba(19, 17, 27, 0.66) !important;
+}
+
+body:not(.room-open) .main-nav a:hover,
+body:not(.room-open) .language-toggle:hover {
+  color: rgba(19, 17, 27, 0.92) !important;
+}
+
+body:not(.room-open) main {
+  position: relative !important;
+  isolation: isolate !important;
+  background:
+    radial-gradient(1120px 660px at 62% -8%, rgba(255, 252, 244, 0.86), transparent 68%),
+    radial-gradient(860px 560px at 18% 88%, rgba(222, 185, 166, 0.18), transparent 72%),
+    radial-gradient(760px 460px at 82% 72%, rgba(255, 244, 231, 0.2), transparent 72%),
+    linear-gradient(180deg, rgba(248, 241, 232, 0.96) 0%, rgba(238, 225, 213, 0.88) 100%) !important;
+}
+
+body:not(.room-open) main::before {
+  background:
+    linear-gradient(90deg, rgba(255, 251, 243, 0.12), rgba(255, 251, 243, 0.02)),
+    url("../images/background.jpg") center / cover no-repeat !important;
+  opacity: 0.5 !important;
+  filter: saturate(1.03) contrast(1.04) brightness(1.035) !important;
+}
+
+body:not(.room-open) main::after {
+  background:
+    radial-gradient(780px 520px at 70% 12%, rgba(255, 250, 242, 0.34), transparent 68%),
+    radial-gradient(840px 560px at 16% 82%, rgba(226, 190, 171, 0.1), transparent 72%),
+    linear-gradient(180deg, rgba(255, 255, 250, 0.05), rgba(255, 244, 232, 0.02)) !important;
+  opacity: 0.24 !important;
+}
+
 body:not(.room-open) .home {
   overflow: hidden !important;
   position: relative !important;
@@ -6,107 +64,39 @@ body:not(.room-open) .home {
 }
 
 body:not(.room-open) .home::before,
-body:not(.room-open) .home::after {
-  content: "" !important;
-  position: absolute !important;
-  display: block !important;
-  pointer-events: none !important;
-  z-index: 0 !important;
-}
-
-body:not(.room-open) .home::before {
-  right: clamp(28px, 8vw, 154px) !important;
-  top: clamp(96px, 17vh, 190px) !important;
-  width: clamp(210px, 27vw, 420px) !important;
-  height: clamp(118px, 14vw, 218px) !important;
-  border: 1px solid rgba(121, 119, 110, 0.34) !important;
-  border-radius: 54% 46% 51% 49% / 44% 56% 48% 52% !important;
-  background:
-    linear-gradient(132deg, rgba(255, 255, 248, 0.7) 0%, rgba(184, 181, 168, 0.24) 28%, rgba(105, 104, 96, 0.15) 48%, rgba(236, 234, 224, 0.46) 72%, rgba(255, 255, 250, 0.3) 100%),
-    radial-gradient(ellipse at 28% 22%, rgba(255, 255, 250, 0.58), transparent 48%),
-    radial-gradient(ellipse at 74% 74%, rgba(77, 76, 70, 0.16), transparent 56%) !important;
-  box-shadow:
-    inset 10px 10px 22px rgba(255, 255, 250, 0.46),
-    inset -18px -16px 30px rgba(76, 74, 68, 0.14),
-    0 34px 86px rgba(42, 38, 34, 0.12) !important;
-  filter: saturate(0.72) contrast(1.04) !important;
-  opacity: 0.56 !important;
-  transform: rotate(-12deg) !important;
-  mix-blend-mode: multiply !important;
-}
-
-body:not(.room-open) .home::after {
-  left: clamp(34px, 7vw, 128px) !important;
-  bottom: clamp(70px, 12vh, 158px) !important;
-  width: clamp(240px, 32vw, 510px) !important;
-  height: clamp(92px, 12vw, 190px) !important;
-  border-left: 1px solid rgba(112, 110, 102, 0.34) !important;
-  border-top: 1px solid rgba(112, 110, 102, 0.28) !important;
-  border-radius: 0 0 0 58px !important;
-  background:
-    linear-gradient(135deg, rgba(255, 255, 250, 0.24), transparent 38%),
-    linear-gradient(90deg, rgba(142, 139, 128, 0.12), transparent 64%) !important;
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 250, 0.84),
-    -20px -22px 52px rgba(255, 252, 244, 0.22) !important;
-  opacity: 0.5 !important;
+body:not(.room-open) .home::after,
+body:not(.room-open) .floating-stage::before,
+body:not(.room-open) .floating-stage::after {
+  content: none !important;
+  display: none !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
 }
 
 body:not(.room-open) .home .floating-stage {
   position: absolute !important;
-  inset: clamp(34px, 4.4vh, 70px) clamp(0px, 0.7vw, 14px) clamp(16px, 2.6vh, 46px) clamp(0px, 0.7vw, 14px) !important;
+  inset: clamp(42px, 5vh, 78px) clamp(12px, 2vw, 42px) clamp(24px, 3vh, 54px) clamp(12px, 2vw, 42px) !important;
   width: auto !important;
   height: auto !important;
   min-height: 0 !important;
   max-width: none !important;
   justify-self: auto !important;
-  background: radial-gradient(circle at 50% 46%, rgba(251, 248, 241, 0.2), transparent 68%) !important;
+  background:
+    radial-gradient(circle at 46% 42%, rgba(255, 251, 243, 0.22), transparent 62%),
+    radial-gradient(ellipse at 64% 70%, rgba(235, 207, 190, 0.1), transparent 58%) !important;
   z-index: 1 !important;
 }
 
-body:not(.room-open) .floating-stage::before,
-body:not(.room-open) .floating-stage::after {
-  content: "" !important;
-  position: absolute !important;
-  display: block !important;
-  pointer-events: none !important;
-  z-index: 0 !important;
-}
-
-body:not(.room-open) .floating-stage::before {
-  right: clamp(18px, 10vw, 180px) !important;
-  top: clamp(22px, 6vh, 82px) !important;
-  width: clamp(78px, 8vw, 136px) !important;
-  aspect-ratio: 1 !important;
-  border-radius: 50% !important;
-  background:
-    radial-gradient(circle, transparent 0 38%, rgba(95, 92, 84, 0.38) 38.5% 39.4%, rgba(255, 255, 248, 0.58) 39.5% 40.2%, transparent 40.8% 55%, rgba(116, 112, 101, 0.3) 55.5% 56.8%, transparent 57.4%),
-    repeating-conic-gradient(from 18deg, transparent 0deg 38deg, rgba(102, 99, 90, 0.36) 38.4deg 39.6deg, rgba(255, 255, 248, 0.64) 39.6deg 40.1deg, transparent 40.6deg 45deg) !important;
-  filter: drop-shadow(0 1px 0 rgba(255, 255, 248, 0.78)) drop-shadow(0 14px 28px rgba(44, 40, 35, 0.12)) !important;
-  opacity: 0.62 !important;
-  transform: rotate(-8deg) !important;
-}
-
-body:not(.room-open) .floating-stage::after {
-  right: clamp(120px, 18vw, 360px) !important;
-  bottom: clamp(42px, 8vh, 132px) !important;
-  width: clamp(130px, 13vw, 230px) !important;
-  height: 1px !important;
-  background: linear-gradient(90deg, transparent, rgba(111, 108, 99, 0.42), rgba(255, 255, 250, 0.62), transparent) !important;
-  box-shadow: 0 1px 0 rgba(255, 255, 250, 0.58), 0 14px 24px rgba(42, 38, 34, 0.06) !important;
-  opacity: 0.58 !important;
-  transform: rotate(-18deg) !important;
-}
-
 body:not(.room-open) .floating-project {
-  width: clamp(220px, 20vw, 360px) !important;
-  min-height: clamp(180px, 16vw, 300px) !important;
+  width: clamp(162px, 14.4vw, 268px) !important;
+  min-height: clamp(136px, 12vw, 224px) !important;
   z-index: 2 !important;
   overflow: visible !important;
   background: transparent !important;
   border: 0 !important;
   box-shadow: none !important;
-  filter: drop-shadow(0 30px 34px rgba(23, 20, 18, 0.15)) !important;
+  filter: drop-shadow(0 23px 28px rgba(23, 20, 18, 0.13)) !important;
 }
 
 body:not(.room-open) .floating-project img {
@@ -116,112 +106,102 @@ body:not(.room-open) .floating-project img {
   max-height: none !important;
   object-fit: contain !important;
   overflow: visible !important;
-  transform: scale(1.18) !important;
+  transform: scale(1.02) !important;
   transform-origin: center !important;
 }
 
 body:not(.room-open) .sprite-generative {
-  width: clamp(230px, 20.5vw, 370px) !important;
+  width: clamp(166px, 14.8vw, 276px) !important;
 }
 
 body:not(.room-open) .sprite-generative img {
-  transform: scale(1.24) !important;
+  transform: scale(1.06) !important;
 }
 
 body:not(.room-open) .sprite-oxidation {
-  width: clamp(276px, 24.5vw, 450px) !important;
+  width: clamp(198px, 17.8vw, 326px) !important;
 }
 
 body:not(.room-open) .sprite-oxidation img {
-  transform: scale(1.1) !important;
+  transform: scale(1) !important;
 }
 
 body:not(.room-open) .sprite-mossy,
 body:not(.room-open) .sprite-cherries,
 body:not(.room-open) .sprite-trending {
-  width: clamp(232px, 21vw, 372px) !important;
+  width: clamp(166px, 15vw, 280px) !important;
 }
 
 body:not(.room-open) .sprite-mossy img,
 body:not(.room-open) .sprite-cherries img,
 body:not(.room-open) .sprite-trending img {
-  transform: scale(1.3) !important;
+  transform: scale(1.08) !important;
+}
+
+body:not(.room-open) .brand-practice-card,
+body:not(.room-open) .archive-card,
+body:not(.room-open) .about-grid,
+body:not(.room-open) .email-address,
+body:not(.room-open) .email-links {
+  box-shadow: 0 28px 86px rgba(44, 32, 24, 0.07) !important;
 }
 
 @media (max-width: 1020px) {
   body:not(.room-open) .home .floating-stage {
-    inset: 72px 4px 38px !important;
-  }
-
-  body:not(.room-open) .home::before {
-    width: clamp(180px, 34vw, 320px) !important;
-    right: 24px !important;
-    top: 112px !important;
-    opacity: 0.46 !important;
+    inset: 76px 10px 42px !important;
   }
 
   body:not(.room-open) .floating-project {
-    width: clamp(154px, 25vw, 236px) !important;
-    min-height: 140px !important;
+    width: clamp(126px, 20vw, 188px) !important;
+    min-height: 112px !important;
   }
 
   body:not(.room-open) .sprite-oxidation {
-    width: clamp(188px, 31vw, 296px) !important;
+    width: clamp(154px, 25vw, 236px) !important;
   }
 
   body:not(.room-open) .sprite-mossy,
   body:not(.room-open) .sprite-cherries,
   body:not(.room-open) .sprite-trending,
   body:not(.room-open) .sprite-generative {
-    width: clamp(164px, 27vw, 252px) !important;
+    width: clamp(132px, 21.5vw, 198px) !important;
   }
 }
 
 @media (max-width: 760px) {
+  body:not(.room-open) main::before {
+    opacity: 0.42 !important;
+    filter: saturate(1.04) contrast(1.03) brightness(1.04) !important;
+  }
+
+  body:not(.room-open) main::after {
+    opacity: 0.2 !important;
+  }
+
   body:not(.room-open) .home .floating-stage {
-    inset: 74px 0 40px !important;
-  }
-
-  body:not(.room-open) .home::before {
-    right: -36px !important;
-    top: 112px !important;
-    width: clamp(190px, 58vw, 280px) !important;
-    height: clamp(112px, 34vw, 166px) !important;
-    opacity: 0.32 !important;
-  }
-
-  body:not(.room-open) .home::after {
-    left: 18px !important;
-    bottom: 80px !important;
-    width: 58vw !important;
-    height: 22vw !important;
-    opacity: 0.32 !important;
-  }
-
-  body:not(.room-open) .floating-stage::before {
-    width: clamp(62px, 18vw, 98px) !important;
-    opacity: 0.46 !important;
+    inset: 76px 4px 42px !important;
   }
 
   body:not(.room-open) .floating-project {
-    width: clamp(128px, 34vw, 176px) !important;
-    min-height: 110px !important;
+    width: clamp(98px, 26vw, 136px) !important;
+    min-height: 96px !important;
+    filter: drop-shadow(0 18px 22px rgba(23, 20, 18, 0.12)) !important;
   }
 
   body:not(.room-open) .sprite-generative,
   body:not(.room-open) .sprite-mossy,
   body:not(.room-open) .sprite-cherries,
   body:not(.room-open) .sprite-trending {
-    width: clamp(132px, 35vw, 184px) !important;
+    width: clamp(104px, 27vw, 142px) !important;
   }
 
   body:not(.room-open) .sprite-oxidation {
-    width: clamp(164px, 43vw, 228px) !important;
+    width: clamp(126px, 34vw, 178px) !important;
   }
 }
 
 @media (max-width: 430px) {
   body:not(.room-open) .home .floating-stage {
-    inset: 70px 0 36px !important;
+    inset: 72px 2px 38px !important;
   }
 }
