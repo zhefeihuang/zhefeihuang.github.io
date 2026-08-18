@@ -1,0 +1,48 @@
+/* Current home fix: soften the header veil and keep the home motion clean. */
+body:not(.room-open) .site-header {
+  background:
+    linear-gradient(180deg, rgba(255, 251, 244, 0.56), rgba(255, 251, 244, 0.18)) !important;
+  border-bottom-color: rgba(38, 32, 26, 0.035) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 250, 0.38) inset,
+    0 12px 34px rgba(42, 32, 25, 0.018) !important;
+  backdrop-filter: blur(10px) saturate(1.02) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.02) !important;
+}
+
+body:not(.room-open) .site-header a,
+body:not(.room-open) .site-header button,
+body:not(.room-open) .name-link {
+  color: rgba(18, 16, 27, 0.82) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 250, 0.22) !important;
+}
+
+body:not(.room-open) .main-nav a,
+body:not(.room-open) .language-toggle {
+  color: rgba(18, 16, 27, 0.58) !important;
+}
+
+body:not(.room-open) .language-toggle {
+  background: rgba(255, 251, 244, 0.18) !important;
+  border-color: rgba(38, 32, 26, 0.09) !important;
+  box-shadow: none !important;
+}
+
+body:not(.room-open) .main-nav a:hover,
+body:not(.room-open) .language-toggle:hover {
+  color: rgba(18, 16, 27, 0.9) !important;
+}
+
+body:not(.room-open) .floating-project {
+  pointer-events: auto !important;
+  animation: none !important;
+}
+
+@media (max-width: 760px) {
+  body:not(.room-open) .site-header {
+    background:
+      linear-gradient(180deg, rgba(255, 251, 244, 0.64), rgba(255, 251, 244, 0.28)) !important;
+    backdrop-filter: blur(8px) saturate(1.02) !important;
+    -webkit-backdrop-filter: blur(8px) saturate(1.02) !important;
+  }
+}
