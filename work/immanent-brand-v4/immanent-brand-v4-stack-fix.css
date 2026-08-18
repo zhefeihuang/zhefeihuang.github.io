@@ -1,0 +1,51 @@
+/* Keeps visual depth layers behind the experience without touching interaction positioning. */
+main {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+#app::before,
+#app::after {
+  z-index: 0 !important;
+}
+
+.site-header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 60 !important;
+}
+
+.bag-drawer,
+.checkout-modal,
+.lightbox,
+.custom-cursor,
+.tap-feedback {
+  position: fixed !important;
+}
+
+.bag-drawer,
+.checkout-modal,
+.lightbox {
+  inset: 0 !important;
+}
+
+.bag-drawer {
+  z-index: 80 !important;
+}
+
+.checkout-modal,
+.lightbox {
+  z-index: 100 !important;
+}
+
+.custom-cursor {
+  left: 0 !important;
+  top: 0 !important;
+  z-index: 180 !important;
+}
+
+.tap-feedback {
+  left: 0 !important;
+  top: 0 !important;
+  z-index: 190 !important;
+}
