@@ -90,7 +90,15 @@
   document.addEventListener("click", (event) => {
     const trigger = event.target?.closest?.("[data-project]");
     if (!trigger) return;
+    const projectKey = trigger.dataset.project;
     document.body.classList.add("project-opening");
     window.setTimeout(() => document.body.classList.remove("project-opening"), 700);
+
+    requestAnimationFrame(() => {
+      if (!projectKey || document.body.classList.contains("room-open")) return;
+      try {
+        if (typeof openProject === "function") openProject(projectKey);
+      } catch (_) {}
+    });
   }, true);
 })();
