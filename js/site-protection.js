@@ -17,6 +17,7 @@
 
   const shortcutKeys = new Set(["s", "u", "p", "i", "j", "c"]);
   let toastTimer = 0;
+  let protectTimer = 0;
 
   const isZh = () => {
     const html = document.documentElement;
@@ -65,12 +66,20 @@
     showToast();
   };
 
+  const protectNode = (node) => {
+    if (!node || node.closest?.(skipSelector)) return;
+    node.setAttribute("draggable", "false");
+    node.dataset.protectedAsset = "true";
+  };
+
   const protectMedia = (root = document) => {
-    root.querySelectorAll(protectedSelector).forEach((node) => {
-      if (node.closest(skipSelector)) return;
-      node.setAttribute("draggable", "false");
-      node.dataset.protectedAsset = "true";
-    });
+    if (root instanceof Element && root.matches(protectedSelector)) protectNode(root);
+    root.querySelectorAll?.(protectedSelector).forEach(protectNode);
+  };
+
+  const scheduleProtectMedia = () => {
+    window.clearTimeout(protectTimer);
+    protectTimer = window.setTimeout(() => protectMedia(), 180);
   };
 
   const addRightsNote = () => {
@@ -85,16 +94,18 @@
 
   const installObserver = () => {
     const observer = new MutationObserver((mutations) => {
+      let hasMediaChange = false;
+
       mutations.forEach((mutation) => {
         mutation.addedNodes.forEach((node) => {
           if (!(node instanceof Element)) return;
-          if (node.matches(protectedSelector)) {
-            protectMedia(node.parentElement || document);
-          } else {
-            protectMedia(node);
+          if (node.matches(protectedSelector) || node.querySelector?.(protectedSelector)) {
+            hasMediaChange = true;
           }
         });
       });
+
+      if (hasMediaChange) scheduleProtectMedia();
     });
 
     observer.observe(document.body, { childList: true, subtree: true });
