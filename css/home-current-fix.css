@@ -39,14 +39,16 @@ body:not(.room-open) .floating-project {
 }
 
 body:not(.room-open) {
-  background: #eee8dc !important;
+  background:
+    linear-gradient(90deg, rgba(238, 230, 218, 0.12), rgba(238, 230, 218, 0.04) 46%, rgba(238, 230, 218, 0.1)),
+    url("../images/background.jpg") center center / cover fixed !important;
 }
 
 body:not(.room-open) main {
   position: relative !important;
   isolation: isolate !important;
   overflow: hidden !important;
-  background: #eee8dc !important;
+  background: transparent !important;
 }
 
 body:not(.room-open) main::before {
@@ -60,8 +62,8 @@ body:not(.room-open) main::before {
   background-repeat: no-repeat !important;
   background-size: auto 100% !important;
   background-position: center top !important;
-  opacity: 0.86 !important;
-  filter: brightness(1.18) contrast(1.03) saturate(1.04) !important;
+  opacity: 0.62 !important;
+  filter: none !important;
   transform: translateZ(0) !important;
 }
 
@@ -72,18 +74,11 @@ body:not(.room-open) main::after {
   opacity: 0 !important;
 }
 
-@media (min-width: 1440px) {
-  body:not(.room-open) main::before {
-    background-size: auto 100% !important;
-    background-position: center top !important;
-  }
-}
-
 @media (max-width: 1020px) {
   body:not(.room-open) main::before {
     background-size: auto 100% !important;
     background-position: center top !important;
-    opacity: 0.84 !important;
+    opacity: 0.58 !important;
   }
 }
 
@@ -95,10 +90,16 @@ body:not(.room-open) main::after {
     -webkit-backdrop-filter: blur(8px) saturate(1.02) !important;
   }
 
+  body:not(.room-open) {
+    background:
+      linear-gradient(180deg, rgba(238, 230, 218, 0.1), rgba(238, 230, 218, 0.04)),
+      url("../images/background.jpg") center center / cover fixed !important;
+  }
+
   body:not(.room-open) main::before {
     background-size: auto 100% !important;
     background-position: center top !important;
-    opacity: 0.82 !important;
-    filter: brightness(1.2) contrast(1.03) saturate(1.04) !important;
+    opacity: 0.54 !important;
+    filter: none !important;
   }
 }
