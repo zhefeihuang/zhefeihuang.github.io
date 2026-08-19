@@ -39,9 +39,7 @@ body:not(.room-open) .floating-project {
 }
 
 body:not(.room-open) {
-  background:
-    linear-gradient(90deg, rgba(238, 230, 218, 0.12), rgba(238, 230, 218, 0.04) 46%, rgba(238, 230, 218, 0.1)),
-    url("../images/background.jpg") center center / cover fixed !important;
+  background: #1f2224 !important;
 }
 
 body:not(.room-open) main {
@@ -60,9 +58,9 @@ body:not(.room-open) main::before {
   pointer-events: none !important;
   background-image: url("../images/oxidation-supplement/oxidation-outcome-detail-01-vertical.svg") !important;
   background-repeat: no-repeat !important;
-  background-size: auto 100% !important;
+  background-size: 100% 100% !important;
   background-position: center top !important;
-  opacity: 0.62 !important;
+  opacity: 1 !important;
   filter: none !important;
   transform: translateZ(0) !important;
 }
@@ -74,14 +72,6 @@ body:not(.room-open) main::after {
   opacity: 0 !important;
 }
 
-@media (max-width: 1020px) {
-  body:not(.room-open) main::before {
-    background-size: auto 100% !important;
-    background-position: center top !important;
-    opacity: 0.58 !important;
-  }
-}
-
 @media (max-width: 760px) {
   body:not(.room-open) .site-header {
     background:
@@ -90,16 +80,10 @@ body:not(.room-open) main::after {
     -webkit-backdrop-filter: blur(8px) saturate(1.02) !important;
   }
 
-  body:not(.room-open) {
-    background:
-      linear-gradient(180deg, rgba(238, 230, 218, 0.1), rgba(238, 230, 218, 0.04)),
-      url("../images/background.jpg") center center / cover fixed !important;
-  }
-
   body:not(.room-open) main::before {
-    background-size: auto 100% !important;
+    background-size: 100% 100% !important;
     background-position: center top !important;
-    opacity: 0.54 !important;
+    opacity: 1 !important;
     filter: none !important;
   }
 }
