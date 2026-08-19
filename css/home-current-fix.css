@@ -39,14 +39,14 @@ body:not(.room-open) .floating-project {
 }
 
 body:not(.room-open) {
-  background: #111213 !important;
+  background: #eee8dc !important;
 }
 
 body:not(.room-open) main {
   position: relative !important;
   isolation: isolate !important;
   overflow: hidden !important;
-  background: transparent !important;
+  background: #eee8dc !important;
 }
 
 body:not(.room-open) main::before {
@@ -58,10 +58,10 @@ body:not(.room-open) main::before {
   pointer-events: none !important;
   background-image: url("../images/oxidation-supplement/oxidation-outcome-detail-01-vertical.svg") !important;
   background-repeat: no-repeat !important;
-  background-size: 100% 100% !important;
+  background-size: auto 100% !important;
   background-position: center top !important;
-  opacity: 1 !important;
-  filter: none !important;
+  opacity: 0.86 !important;
+  filter: brightness(1.18) contrast(1.03) saturate(1.04) !important;
   transform: translateZ(0) !important;
 }
 
@@ -70,6 +70,21 @@ body:not(.room-open) main::after {
   display: none !important;
   background: none !important;
   opacity: 0 !important;
+}
+
+@media (min-width: 1440px) {
+  body:not(.room-open) main::before {
+    background-size: auto 100% !important;
+    background-position: center top !important;
+  }
+}
+
+@media (max-width: 1020px) {
+  body:not(.room-open) main::before {
+    background-size: auto 100% !important;
+    background-position: center top !important;
+    opacity: 0.84 !important;
+  }
 }
 
 @media (max-width: 760px) {
@@ -81,9 +96,9 @@ body:not(.room-open) main::after {
   }
 
   body:not(.room-open) main::before {
-    background-size: 100% 100% !important;
+    background-size: auto 100% !important;
     background-position: center top !important;
-    opacity: 1 !important;
-    filter: none !important;
+    opacity: 0.82 !important;
+    filter: brightness(1.2) contrast(1.03) saturate(1.04) !important;
   }
 }
