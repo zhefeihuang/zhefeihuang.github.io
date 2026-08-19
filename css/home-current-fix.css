@@ -38,11 +38,63 @@ body:not(.room-open) .floating-project {
   animation: none !important;
 }
 
+body:not(.room-open) {
+  background: #f1ede5 !important;
+}
+
+body:not(.room-open) main {
+  background:
+    radial-gradient(960px 620px at 22% 12%, rgba(255, 252, 246, 0.64), transparent 70%),
+    radial-gradient(1100px 720px at 72% 68%, rgba(238, 229, 218, 0.42), transparent 74%),
+    linear-gradient(180deg, rgba(242, 237, 229, 0.9), rgba(230, 222, 212, 0.86)) !important;
+}
+
+body:not(.room-open) main::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  background:
+    url("../images/oxidation-supplement/oxidation-outcome-detail-01.jpg") center center / cover no-repeat !important;
+  opacity: 0.66 !important;
+  filter: saturate(0.82) contrast(1.05) brightness(1.1) !important;
+  transform: translateZ(0) !important;
+}
+
+body:not(.room-open) main::after {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  background:
+    radial-gradient(980px 640px at 30% 8%, rgba(255, 253, 248, 0.5), transparent 68%),
+    radial-gradient(860px 560px at 74% 72%, rgba(245, 238, 229, 0.42), transparent 72%),
+    linear-gradient(90deg, rgba(247, 242, 234, 0.48), rgba(247, 242, 234, 0.22) 44%, rgba(247, 242, 234, 0.52)) !important;
+  opacity: 0.86 !important;
+}
+
 @media (max-width: 760px) {
   body:not(.room-open) .site-header {
     background:
       linear-gradient(180deg, rgba(255, 251, 244, 0.64), rgba(255, 251, 244, 0.28)) !important;
     backdrop-filter: blur(8px) saturate(1.02) !important;
     -webkit-backdrop-filter: blur(8px) saturate(1.02) !important;
+  }
+
+  body:not(.room-open) main::before {
+    background-position: center center !important;
+    opacity: 0.58 !important;
+    filter: saturate(0.86) contrast(1.04) brightness(1.16) !important;
+  }
+
+  body:not(.room-open) main::after {
+    background:
+      radial-gradient(720px 520px at 42% 10%, rgba(255, 253, 248, 0.56), transparent 70%),
+      linear-gradient(180deg, rgba(247, 242, 234, 0.48), rgba(247, 242, 234, 0.36)) !important;
+    opacity: 0.88 !important;
   }
 }
