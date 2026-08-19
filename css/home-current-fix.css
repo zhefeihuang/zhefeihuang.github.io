@@ -1,4 +1,4 @@
-/* Current home fix: soften the header veil and keep the home motion clean. */
+/* Current home fix: fixed artwork background and clean home motion. */
 body:not(.room-open) .site-header {
   background:
     linear-gradient(180deg, rgba(255, 251, 244, 0.46), rgba(255, 251, 244, 0.12)) !important;
@@ -39,17 +39,32 @@ body:not(.room-open) .floating-project {
 }
 
 body:not(.room-open) {
-  background: #262a2c !important;
+  background: #8b8c88 !important;
 }
 
 body:not(.room-open) main {
   position: relative !important;
   isolation: isolate !important;
   overflow: hidden !important;
-  background: #262a2c !important;
+  background: transparent !important;
 }
 
-body:not(.room-open) main::before,
+body:not(.room-open) main::before {
+  content: "" !important;
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 0 !important;
+  display: block !important;
+  pointer-events: none !important;
+  background-image: url("../images/oxidation-supplement/oxidation-outcome-detail-01.jpg") !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+  background-position: left center !important;
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+}
+
 body:not(.room-open) main::after {
   content: none !important;
   display: none !important;
@@ -57,26 +72,8 @@ body:not(.room-open) main::after {
   opacity: 0 !important;
 }
 
-.home-vertical-bg-image {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  z-index: 0 !important;
-  display: block !important;
-  max-width: none !important;
-  max-height: none !important;
-  object-fit: fill !important;
-  object-position: center center !important;
-  transform-origin: top left !important;
-  pointer-events: none !important;
-  user-select: none !important;
-  opacity: 1 !important;
-  filter: none !important;
-  will-change: transform !important;
-}
-
 .home-vertical-bg-canvas,
-body.room-open .home-vertical-bg-image {
+.home-vertical-bg-image {
   display: none !important;
 }
 
@@ -91,5 +88,10 @@ body:not(.room-open) main > section {
       linear-gradient(180deg, rgba(255, 251, 244, 0.52), rgba(255, 251, 244, 0.18)) !important;
     backdrop-filter: blur(7px) saturate(1.01) !important;
     -webkit-backdrop-filter: blur(7px) saturate(1.01) !important;
+  }
+
+  body:not(.room-open) main::before {
+    background-size: cover !important;
+    background-position: 30% center !important;
   }
 }
