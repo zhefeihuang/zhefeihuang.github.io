@@ -1,36 +1,36 @@
 /* Current home fix: fixed artwork background and clean home motion. */
 body:not(.room-open) .site-header {
   background:
-    linear-gradient(180deg, rgba(255, 251, 244, 0.46), rgba(255, 251, 244, 0.12)) !important;
-  border-bottom-color: rgba(38, 32, 26, 0.03) !important;
+    linear-gradient(180deg, rgba(247, 244, 237, 0.18), rgba(247, 244, 237, 0.04)) !important;
+  border-bottom-color: rgba(246, 240, 229, 0.12) !important;
   box-shadow:
-    0 1px 0 rgba(255, 255, 250, 0.28) inset,
-    0 10px 28px rgba(20, 18, 16, 0.025) !important;
-  backdrop-filter: blur(8px) saturate(1.01) !important;
-  -webkit-backdrop-filter: blur(8px) saturate(1.01) !important;
+    0 1px 0 rgba(255, 255, 250, 0.16) inset,
+    0 8px 22px rgba(12, 12, 12, 0.035) !important;
+  backdrop-filter: blur(5px) saturate(1.02) !important;
+  -webkit-backdrop-filter: blur(5px) saturate(1.02) !important;
 }
 
 body:not(.room-open) .site-header a,
 body:not(.room-open) .site-header button,
 body:not(.room-open) .name-link {
-  color: rgba(18, 16, 27, 0.82) !important;
-  text-shadow: 0 1px 0 rgba(255, 255, 250, 0.16) !important;
+  color: rgba(249, 246, 238, 0.94) !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.36) !important;
 }
 
 body:not(.room-open) .main-nav a,
 body:not(.room-open) .language-toggle {
-  color: rgba(18, 16, 27, 0.58) !important;
+  color: rgba(249, 246, 238, 0.78) !important;
 }
 
 body:not(.room-open) .language-toggle {
-  background: rgba(255, 251, 244, 0.16) !important;
-  border-color: rgba(38, 32, 26, 0.08) !important;
+  background: rgba(247, 244, 237, 0.08) !important;
+  border-color: rgba(247, 244, 237, 0.18) !important;
   box-shadow: none !important;
 }
 
 body:not(.room-open) .main-nav a:hover,
 body:not(.room-open) .language-toggle:hover {
-  color: rgba(18, 16, 27, 0.9) !important;
+  color: rgba(255, 252, 245, 0.98) !important;
 }
 
 body:not(.room-open) .floating-project {
@@ -82,12 +82,42 @@ body:not(.room-open) main > section {
   z-index: 1 !important;
 }
 
+body:not(.room-open) main,
+body:not(.room-open) .tiny,
+body:not(.room-open) .home-note,
+body:not(.room-open) .about,
+body:not(.room-open) .contact {
+  color: rgba(249, 246, 238, 0.92) !important;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.3) !important;
+}
+
+body:not(.room-open) .brand-practice-card,
+body:not(.room-open) .brand-practice-card *,
+body:not(.room-open) .archive-card,
+body:not(.room-open) .archive-card *,
+body:not(.room-open) .about-grid,
+body:not(.room-open) .about-grid *,
+body:not(.room-open) .email-address,
+body:not(.room-open) .email-links,
+body:not(.room-open) .email-links * {
+  color: rgba(18, 16, 27, 0.94) !important;
+  text-shadow: none !important;
+}
+
+body:not(.room-open) .archive-card .archive-card-kicker,
+body:not(.room-open) .archive-card .archive-card-note,
+body:not(.room-open) .brand-practice-kicker,
+body:not(.room-open) .brand-practice-intro,
+body:not(.room-open) .brand-practice-note {
+  color: rgba(18, 16, 27, 0.72) !important;
+}
+
 @media (max-width: 760px) {
   body:not(.room-open) .site-header {
     background:
-      linear-gradient(180deg, rgba(255, 251, 244, 0.52), rgba(255, 251, 244, 0.18)) !important;
-    backdrop-filter: blur(7px) saturate(1.01) !important;
-    -webkit-backdrop-filter: blur(7px) saturate(1.01) !important;
+      linear-gradient(180deg, rgba(247, 244, 237, 0.22), rgba(247, 244, 237, 0.06)) !important;
+    backdrop-filter: blur(5px) saturate(1.02) !important;
+    -webkit-backdrop-filter: blur(5px) saturate(1.02) !important;
   }
 
   body:not(.room-open) main::before {
