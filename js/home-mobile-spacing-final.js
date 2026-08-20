@@ -27,6 +27,7 @@
     };
 
     getFloatingMotionSettings.__homeMobileSpacingFinal = true;
+    getFloatingMotionSettings.__homeFloatTuned = true;
   }
 
   function refreshSpacing() {
