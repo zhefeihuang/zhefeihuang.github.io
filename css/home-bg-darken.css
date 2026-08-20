@@ -1,0 +1,4 @@
+/* Homepage background brightness adjustment. */
+html body.portfolio-clean-home:not(.room-open) main::before {
+  filter: brightness(0.9) !important;
+}
