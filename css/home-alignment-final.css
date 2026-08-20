@@ -1,6 +1,19 @@
 /* Final homepage alignment pass: section labels, small-work edges, mobile artwork spacing. */
+html body.portfolio-clean-home:not(.room-open) {
+  --home-section-label-left: calc(max(0px, calc((100vw - 1320px) / 2)) + var(--page-gutter, clamp(28px, 6vw, 116px)));
+}
+
 html body.portfolio-clean-home:not(.room-open) .home-work-title {
-  left: calc(var(--page-gutter, clamp(28px, 6vw, 116px)) - clamp(10px, 1vw, 18px)) !important;
+  left: var(--home-section-label-left) !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation {
+  min-height: clamp(104px, 7.4vw, 144px) !important;
+  width: clamp(116px, 8.8vw, 166px) !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-mossy img {
+  clip-path: polygon(2% 6%, 88% 0, 100% 13%, 98% 89%, 90% 100%, 8% 96%, 0 86%, 0 10%);
 }
 
 html body.portfolio-clean-home:not(.room-open) .archive-card,
@@ -36,7 +49,7 @@ html body.portfolio-clean-home:not(.room-open) .archive-thumb img {
 
 @media (max-width: 820px) {
   html body.portfolio-clean-home:not(.room-open) .home-work-title {
-    left: calc(var(--page-gutter, 24px) - 8px) !important;
+    left: var(--page-gutter, 24px) !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .home .floating-stage {
@@ -54,14 +67,14 @@ html body.portfolio-clean-home:not(.room-open) .archive-thumb img {
   }
 
   html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation {
-    min-height: 90px !important;
-    width: clamp(94px, 24vw, 124px) !important;
+    min-height: 104px !important;
+    width: clamp(112px, 29vw, 150px) !important;
   }
 }
 
 @media (max-width: 430px) {
   html body.portfolio-clean-home:not(.room-open) .home-work-title {
-    left: 18px !important;
+    left: var(--page-gutter, 20px) !important;
     right: 20px !important;
   }
 
@@ -79,6 +92,7 @@ html body.portfolio-clean-home:not(.room-open) .archive-thumb img {
   }
 
   html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation {
-    width: clamp(88px, 25vw, 116px) !important;
+    min-height: 100px !important;
+    width: clamp(108px, 31vw, 140px) !important;
   }
 }
