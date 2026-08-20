@@ -1,10 +1,10 @@
 /* Final readability layer for the personal homepage. Color and header transparency only. */
 html body.portfolio-clean-home:not(.room-open) .site-header {
-  background: linear-gradient(180deg, rgba(8, 9, 9, 0.075), rgba(8, 9, 9, 0.01)) !important;
-  border-bottom-color: rgba(255, 252, 244, 0.09) !important;
-  box-shadow: 0 1px 0 rgba(255, 255, 250, 0.08) inset !important;
-  backdrop-filter: blur(1.5px) saturate(1.01) !important;
-  -webkit-backdrop-filter: blur(1.5px) saturate(1.01) !important;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.006)) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset !important;
+  backdrop-filter: blur(1px) saturate(1.01) !important;
+  -webkit-backdrop-filter: blur(1px) saturate(1.01) !important;
 }
 
 html body.portfolio-clean-home:not(.room-open) .site-header::before,
@@ -13,56 +13,43 @@ html body.portfolio-clean-home:not(.room-open) .site-header::after {
   display: none !important;
 }
 
+html body.portfolio-clean-home:not(.room-open),
 html body.portfolio-clean-home:not(.room-open) .site-header,
-html body.portfolio-clean-home:not(.room-open) .site-header a,
-html body.portfolio-clean-home:not(.room-open) .site-header button,
-html body.portfolio-clean-home:not(.room-open) .site-header span,
-html body.portfolio-clean-home:not(.room-open) .name-link,
-html body.portfolio-clean-home:not(.room-open) .main-nav a,
-html body.portfolio-clean-home:not(.room-open) .language-toggle {
-  color: rgba(255, 252, 244, 0.98) !important;
-  text-shadow: 0 1px 9px rgba(0, 0, 0, 0.48) !important;
+html body.portfolio-clean-home:not(.room-open) .site-header *,
+html body.portfolio-clean-home:not(.room-open) main,
+html body.portfolio-clean-home:not(.room-open) main *,
+html body.portfolio-clean-home:not(.room-open) footer,
+html body.portfolio-clean-home:not(.room-open) footer *,
+html body.portfolio-clean-home:not(.room-open) a,
+html body.portfolio-clean-home:not(.room-open) a:link,
+html body.portfolio-clean-home:not(.room-open) a:visited,
+html body.portfolio-clean-home:not(.room-open) button,
+html body.portfolio-clean-home:not(.room-open) span,
+html body.portfolio-clean-home:not(.room-open) p,
+html body.portfolio-clean-home:not(.room-open) h1,
+html body.portfolio-clean-home:not(.room-open) h2,
+html body.portfolio-clean-home:not(.room-open) h3 {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow:
+    0 1px 7px rgba(0, 0, 0, 0.92),
+    0 0 18px rgba(0, 0, 0, 0.62) !important;
 }
 
 html body.portfolio-clean-home:not(.room-open) .language-toggle {
-  background: rgba(255, 252, 244, 0.045) !important;
-  border-color: rgba(255, 252, 244, 0.14) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
   box-shadow: none !important;
 }
 
-html body.portfolio-clean-home:not(.room-open) main,
-html body.portfolio-clean-home:not(.room-open) main .tiny,
-html body.portfolio-clean-home:not(.room-open) main .home-note,
-html body.portfolio-clean-home:not(.room-open) main .floating-project span,
-html body.portfolio-clean-home:not(.room-open) main > section > .tiny,
-html body.portfolio-clean-home:not(.room-open) main .about,
-html body.portfolio-clean-home:not(.room-open) main .contact {
-  color: rgba(255, 252, 244, 0.95) !important;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.46) !important;
+html body.portfolio-clean-home:not(.room-open) .language-toggle,
+html body.portfolio-clean-home:not(.room-open) .language-toggle * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
 }
 
-html body.portfolio-clean-home:not(.room-open) main .home-note,
-html body.portfolio-clean-home:not(.room-open) main .floating-project span {
-  color: rgba(255, 252, 244, 0.88) !important;
-}
-
-html body.portfolio-clean-home:not(.room-open) .brand-practice-card,
-html body.portfolio-clean-home:not(.room-open) .brand-practice-card *,
-html body.portfolio-clean-home:not(.room-open) .archive-card,
-html body.portfolio-clean-home:not(.room-open) .archive-card *,
-html body.portfolio-clean-home:not(.room-open) .about-grid,
-html body.portfolio-clean-home:not(.room-open) .about-grid *,
-html body.portfolio-clean-home:not(.room-open) .email-address,
-html body.portfolio-clean-home:not(.room-open) .email-links,
-html body.portfolio-clean-home:not(.room-open) .email-links * {
-  color: rgba(18, 16, 27, 0.96) !important;
-  text-shadow: none !important;
-}
-
-html body.portfolio-clean-home:not(.room-open) .archive-card .archive-card-kicker,
-html body.portfolio-clean-home:not(.room-open) .archive-card .archive-card-note,
-html body.portfolio-clean-home:not(.room-open) .brand-practice-kicker,
-html body.portfolio-clean-home:not(.room-open) .brand-practice-intro,
-html body.portfolio-clean-home:not(.room-open) .brand-practice-note {
-  color: rgba(18, 16, 27, 0.76) !important;
+html body.portfolio-clean-home:not(.room-open) svg,
+html body.portfolio-clean-home:not(.room-open) path {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
 }
