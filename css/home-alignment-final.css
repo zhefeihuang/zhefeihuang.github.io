@@ -4,6 +4,7 @@ html body.portfolio-clean-home:not(.room-open) {
     var(--page-x, var(--page-gutter, 24px)),
     calc((100vw - var(--content-max, 1320px)) / 2)
   );
+  --home-section-label-nudge: clamp(8px, 1vw, 18px);
 }
 
 html body.portfolio-clean-home:not(.room-open) .home {
@@ -13,7 +14,7 @@ html body.portfolio-clean-home:not(.room-open) .home {
 html body.portfolio-clean-home:not(.room-open) .home-work-title {
   position: absolute !important;
   top: clamp(122px, 16svh, 168px) !important;
-  left: var(--home-section-label-left) !important;
+  left: max(18px, calc(var(--home-section-label-left) - var(--home-section-label-nudge))) !important;
   z-index: 5 !important;
   margin: 0 !important;
   color: rgba(255, 255, 255, 0.96) !important;
@@ -31,13 +32,13 @@ html[data-language="zh"] .home-work-title-en {
 }
 
 html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation {
-  min-height: clamp(116px, 8.3vw, 162px) !important;
-  width: clamp(128px, 9.6vw, 184px) !important;
+  min-height: clamp(132px, 9.6vw, 190px) !important;
+  width: clamp(146px, 11vw, 214px) !important;
 }
 
 html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation img {
-  max-width: clamp(124px, 10.8vw, 186px) !important;
-  max-height: clamp(124px, 10.8vw, 186px) !important;
+  max-width: clamp(142px, 12.2vw, 214px) !important;
+  max-height: clamp(142px, 12.2vw, 214px) !important;
 }
 
 html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-mossy {
@@ -80,9 +81,13 @@ html body.portfolio-clean-home:not(.room-open) .archive-thumb img {
 }
 
 @media (max-width: 820px) {
+  html body.portfolio-clean-home:not(.room-open) {
+    --home-section-label-nudge: 6px;
+  }
+
   html body.portfolio-clean-home:not(.room-open) .home-work-title {
     top: clamp(118px, 13svh, 154px) !important;
-    left: var(--home-section-label-left) !important;
+    left: max(18px, calc(var(--home-section-label-left) - var(--home-section-label-nudge))) !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .home .floating-stage {
@@ -100,20 +105,24 @@ html body.portfolio-clean-home:not(.room-open) .archive-thumb img {
   }
 
   html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation {
-    min-height: 118px !important;
-    width: clamp(124px, 34vw, 166px) !important;
+    min-height: 132px !important;
+    width: clamp(138px, 38vw, 188px) !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation img {
-    max-width: clamp(120px, 36vw, 164px) !important;
-    max-height: clamp(120px, 36vw, 164px) !important;
+    max-width: clamp(134px, 40vw, 186px) !important;
+    max-height: clamp(134px, 40vw, 186px) !important;
   }
 }
 
 @media (max-width: 430px) {
+  html body.portfolio-clean-home:not(.room-open) {
+    --home-section-label-nudge: 8px;
+  }
+
   html body.portfolio-clean-home:not(.room-open) .home-work-title {
     top: 146px !important;
-    left: var(--home-section-label-left) !important;
+    left: max(18px, calc(var(--home-section-label-left) - var(--home-section-label-nudge))) !important;
     right: 20px !important;
   }
 
@@ -131,12 +140,12 @@ html body.portfolio-clean-home:not(.room-open) .archive-thumb img {
   }
 
   html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation {
-    min-height: 114px !important;
-    width: clamp(120px, 36vw, 158px) !important;
+    min-height: 128px !important;
+    width: clamp(132px, 42vw, 178px) !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation img {
-    max-width: clamp(118px, 38vw, 156px) !important;
-    max-height: clamp(118px, 38vw, 156px) !important;
+    max-width: clamp(128px, 44vw, 174px) !important;
+    max-height: clamp(128px, 44vw, 174px) !important;
   }
 }
