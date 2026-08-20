@@ -1,0 +1,19 @@
+/* 2026-08-20: remove only the two decorative hero segment circles. */
+.brand-hero::before,
+.brand-hero::after,
+.brand-hero > .hero-copy::before,
+.brand-hero > .hero-copy::after,
+.brand-hero > .hero-image::before,
+.brand-hero > .hero-image::after {
+  content: none !important;
+  display: none !important;
+  opacity: 0 !important;
+  background: none !important;
+  border: 0 !important;
+}
+
+.brand-hero [class*="ornament"],
+.brand-hero [class*="segment"],
+.brand-hero [class*="circle"] {
+  display: none !important;
+}
