@@ -1,13 +1,11 @@
 /* Current home fix: fixed artwork background and clean home motion. */
 body:not(.room-open) .site-header {
   background:
-    linear-gradient(180deg, rgba(12, 13, 13, 0.10), rgba(12, 13, 13, 0.015)) !important;
-  border-bottom-color: rgba(248, 244, 235, 0.10) !important;
-  box-shadow:
-    0 1px 0 rgba(255, 255, 250, 0.10) inset,
-    0 6px 18px rgba(8, 8, 8, 0.025) !important;
-  backdrop-filter: blur(2px) saturate(1.02) !important;
-  -webkit-backdrop-filter: blur(2px) saturate(1.02) !important;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.006)) !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.07) inset !important;
+  backdrop-filter: blur(1px) saturate(1.01) !important;
+  -webkit-backdrop-filter: blur(1px) saturate(1.01) !important;
 }
 
 body:not(.room-open) .site-header::before,
@@ -16,25 +14,44 @@ body:not(.room-open) .site-header::after {
   display: none !important;
 }
 
-body:not(.room-open) .site-header a,
-body:not(.room-open) .site-header button,
-body:not(.room-open) .name-link,
-body:not(.room-open) .main-nav a,
-body:not(.room-open) .language-toggle,
-body:not(.room-open) .language-toggle span {
-  color: rgba(255, 252, 244, 0.96) !important;
-  text-shadow: 0 1px 9px rgba(0, 0, 0, 0.42) !important;
-}
-
-body:not(.room-open) .main-nav a:hover,
-body:not(.room-open) .language-toggle:hover,
-body:not(.room-open) .language-toggle:hover span {
-  color: rgba(255, 255, 250, 1) !important;
+body:not(.room-open),
+body:not(.room-open) .site-header,
+body:not(.room-open) .site-header *,
+body:not(.room-open) main,
+body:not(.room-open) main *,
+body:not(.room-open) footer,
+body:not(.room-open) footer *,
+body:not(.room-open) a,
+body:not(.room-open) a:link,
+body:not(.room-open) a:visited,
+body:not(.room-open) button,
+body:not(.room-open) span,
+body:not(.room-open) p,
+body:not(.room-open) h1,
+body:not(.room-open) h2,
+body:not(.room-open) h3,
+body:not(.room-open) .tiny,
+body:not(.room-open) .home-note,
+body:not(.room-open) .floating-project span,
+body:not(.room-open) .brand-practice-card,
+body:not(.room-open) .brand-practice-card *,
+body:not(.room-open) .archive-card,
+body:not(.room-open) .archive-card *,
+body:not(.room-open) .about-grid,
+body:not(.room-open) .about-grid *,
+body:not(.room-open) .email-address,
+body:not(.room-open) .email-links,
+body:not(.room-open) .email-links * {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  text-shadow:
+    0 1px 7px rgba(0, 0, 0, 0.92),
+    0 0 18px rgba(0, 0, 0, 0.62) !important;
 }
 
 body:not(.room-open) .language-toggle {
-  background: rgba(247, 244, 237, 0.055) !important;
-  border-color: rgba(247, 244, 237, 0.14) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
   box-shadow: none !important;
 }
 
@@ -87,51 +104,12 @@ body:not(.room-open) main > section {
   z-index: 1 !important;
 }
 
-body:not(.room-open) main,
-body:not(.room-open) .tiny,
-body:not(.room-open) .home-note,
-body:not(.room-open) .about,
-body:not(.room-open) .contact,
-body:not(.room-open) .floating-project span,
-body:not(.room-open) .archive > .tiny,
-body:not(.room-open) .about > .tiny,
-body:not(.room-open) .contact > .tiny,
-body:not(.room-open) .brand-practice > .tiny {
-  color: rgba(255, 252, 244, 0.94) !important;
-  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.42) !important;
-}
-
-body:not(.room-open) .home-note {
-  color: rgba(255, 252, 244, 0.86) !important;
-}
-
-body:not(.room-open) .brand-practice-card,
-body:not(.room-open) .brand-practice-card *,
-body:not(.room-open) .archive-card,
-body:not(.room-open) .archive-card *,
-body:not(.room-open) .about-grid,
-body:not(.room-open) .about-grid *,
-body:not(.room-open) .email-address,
-body:not(.room-open) .email-links,
-body:not(.room-open) .email-links * {
-  color: rgba(18, 16, 27, 0.95) !important;
-  text-shadow: none !important;
-}
-
-body:not(.room-open) .archive-card .archive-card-kicker,
-body:not(.room-open) .archive-card .archive-card-note,
-body:not(.room-open) .brand-practice-kicker,
-body:not(.room-open) .brand-practice-intro,
-body:not(.room-open) .brand-practice-note {
-  color: rgba(18, 16, 27, 0.74) !important;
-}
-
 @media (max-width: 760px) {
   body:not(.room-open) .site-header {
     background:
-      linear-gradient(180deg, rgba(12, 13, 13, 0.12), rgba(12, 13, 13, 0.02)) !important;
-    backdrop-filter: blur(2px) saturate(1.02) !important;
-    -webkit-backdrop-filter: blur(2px) saturate(1.02) !important;
+      linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.006)) !important;
+    backdrop-filter: blur(1px) saturate(1.01) !important;
+    -webkit-backdrop-filter: blur(1px) saturate(1.01) !important;
   }
 
   body:not(.room-open) main::before {
