@@ -1,4 +1,12 @@
-/* Homepage information tuning: labels, affordance note, mobile nav and scale. */
+/* Homepage hierarchy tuning: labels, content scale, commercial card, mobile work field. */
+html body.portfolio-clean-home:not(.room-open) {
+  --home-section-label-size: 14px;
+  --home-body-size: clamp(17px, 1.18vw, 21px);
+  --home-small-size: clamp(13px, 0.86vw, 15px);
+  --home-label-shadow: 0 1px 8px rgba(0, 0, 0, 0.9), 0 0 18px rgba(0, 0, 0, 0.58);
+  --home-text-shadow: 0 1px 10px rgba(0, 0, 0, 0.92), 0 0 22px rgba(0, 0, 0, 0.64);
+}
+
 html body.portfolio-clean-home:not(.room-open) .site-header .name-link {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
@@ -6,7 +14,7 @@ html body.portfolio-clean-home:not(.room-open) .site-header .name-link {
   font-size: clamp(14px, 0.85vw, 16px) !important;
   font-weight: 400 !important;
   line-height: 1.15 !important;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.88), 0 0 18px rgba(0, 0, 0, 0.52) !important;
+  text-shadow: var(--home-label-shadow) !important;
   white-space: nowrap !important;
 }
 
@@ -14,25 +22,24 @@ html[lang="zh-CN"] body.portfolio-clean-home:not(.room-open) .site-header .name-
   font-family: var(--body-serif, "Palatino Linotype", Georgia, serif) !important;
 }
 
-html body.portfolio-clean-home:not(.room-open) .home-work-title {
+html body.portfolio-clean-home:not(.room-open) :is(.home-work-title, .brand-practice > .tiny, .archive > .tiny, .about > .tiny, .contact > .tiny) {
   align-items: center !important;
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   display: inline-flex !important;
   font-family: var(--body-serif, "Palatino Linotype", Georgia, serif) !important;
-  font-size: 14px !important;
+  font-size: var(--home-section-label-size) !important;
+  font-weight: 400 !important;
   gap: 12px !important;
-  left: var(--page-gutter, clamp(28px, 6vw, 116px)) !important;
   letter-spacing: 0.01em !important;
   line-height: 1.25 !important;
   margin: 0 !important;
-  position: absolute !important;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.88), 0 0 18px rgba(0, 0, 0, 0.54) !important;
-  top: clamp(126px, 15vh, 168px) !important;
-  z-index: 5 !important;
+  text-shadow: var(--home-label-shadow) !important;
+  text-transform: none !important;
+  white-space: nowrap !important;
 }
 
-html body.portfolio-clean-home:not(.room-open) .home-work-title::after {
+html body.portfolio-clean-home:not(.room-open) :is(.home-work-title, .brand-practice > .tiny, .archive > .tiny, .about > .tiny, .contact > .tiny)::after {
   background: rgba(255, 255, 255, 0.58) !important;
   content: "" !important;
   display: block !important;
@@ -40,10 +47,23 @@ html body.portfolio-clean-home:not(.room-open) .home-work-title::after {
   width: clamp(34px, 4vw, 68px) !important;
 }
 
-html:not([lang="zh-CN"]) body.portfolio-clean-home:not(.room-open) .home-work-title-zh,
-html[lang="zh-CN"] body.portfolio-clean-home:not(.room-open) .home-work-title-en,
-html:not([lang="zh-CN"]) body.portfolio-clean-home:not(.room-open) .home-note-zh,
-html[lang="zh-CN"] body.portfolio-clean-home:not(.room-open) .home-note-en {
+html body.portfolio-clean-home:not(.room-open) .home-work-title {
+  left: var(--page-gutter, clamp(28px, 6vw, 116px)) !important;
+  position: absolute !important;
+  top: clamp(126px, 15vh, 168px) !important;
+  z-index: 5 !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) :is(.brand-practice > .tiny, .archive > .tiny, .about > .tiny, .contact > .tiny) {
+  align-self: start !important;
+  grid-column: 1 !important;
+  left: auto !important;
+  position: relative !important;
+  top: auto !important;
+}
+
+html:not([lang="zh-CN"]) body.portfolio-clean-home:not(.room-open) :is(.home-work-title-zh, .home-note-zh, .section-label-zh),
+html[lang="zh-CN"] body.portfolio-clean-home:not(.room-open) :is(.home-work-title-en, .home-note-en, .section-label-en) {
   display: none !important;
 }
 
@@ -54,43 +74,200 @@ html body.portfolio-clean-home:not(.room-open) .home-note {
   -webkit-text-fill-color: #ffffff !important;
   display: inline-flex !important;
   font-family: var(--body-serif, "Palatino Linotype", Georgia, serif) !important;
-  font-size: clamp(15px, 1vw, 18px) !important;
+  font-size: var(--home-body-size) !important;
+  font-weight: 400 !important;
   gap: 13px !important;
   left: var(--page-gutter, clamp(28px, 6vw, 116px)) !important;
-  line-height: 1.35 !important;
-  max-width: min(520px, calc(100vw - var(--page-gutter, 48px) * 2)) !important;
+  line-height: 1.42 !important;
+  max-width: min(560px, calc(100vw - var(--page-gutter, 48px) * 2)) !important;
   opacity: 1 !important;
   position: absolute !important;
   right: auto !important;
-  text-shadow: 0 1px 9px rgba(0, 0, 0, 0.92), 0 0 22px rgba(0, 0, 0, 0.66) !important;
+  text-shadow: var(--home-text-shadow) !important;
   z-index: 5 !important;
 }
 
 html body.portfolio-clean-home:not(.room-open) .home-note::before {
-  background: rgba(255, 255, 255, 0.68) !important;
+  background: rgba(255, 255, 255, 0.7) !important;
   content: "" !important;
   display: block !important;
-  flex: 0 0 clamp(36px, 4.5vw, 76px) !important;
+  flex: 0 0 clamp(38px, 5vw, 86px) !important;
   height: 1px !important;
 }
 
-html body.portfolio-clean-home:not(.room-open) .email-address {
+html body.portfolio-clean-home:not(.room-open) :is(.brand-practice, .archive, .about, .contact) {
+  column-gap: clamp(34px, 5vw, 86px) !important;
+  display: grid !important;
+  grid-template-columns: minmax(104px, 154px) minmax(0, 1fr) !important;
+  margin-inline: auto !important;
+  padding-inline: var(--page-gutter, clamp(28px, 6vw, 116px)) !important;
+  width: min(1320px, 100%) !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice {
+  padding-block: clamp(52px, 7vw, 82px) !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice-card {
+  background: rgba(248, 244, 235, 0.94) !important;
+  box-shadow: 0 18px 52px rgba(0, 0, 0, 0.2) !important;
+  color: #17131b !important;
+  display: grid !important;
+  grid-column: 2 !important;
+  grid-template-columns: minmax(0, 0.54fr) minmax(0, 0.46fr) !important;
+  max-width: min(1040px, 100%) !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  padding: 10px !important;
+  text-decoration: none !important;
+  width: 100% !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice-card,
+html body.portfolio-clean-home:not(.room-open) .brand-practice-card * {
+  color: #17131b !important;
+  -webkit-text-fill-color: #17131b !important;
+  text-shadow: none !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice-copy {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: clamp(12px, 1.35vw, 18px) !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  padding: clamp(26px, 3.4vw, 46px) !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice-media {
+  aspect-ratio: 16 / 10 !important;
+  background: rgba(232, 222, 206, 0.56) !important;
+  height: auto !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice-media img {
+  display: block !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  width: 100% !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice-kicker,
+html body.portfolio-clean-home:not(.room-open) .brand-practice-cta {
+  font-family: var(--body-serif, "Palatino Linotype", Georgia, serif) !important;
+  font-size: var(--home-small-size) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.01em !important;
+  line-height: 1.4 !important;
+  text-transform: none !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice-name {
+  font-size: clamp(32px, 3vw, 48px) !important;
+  letter-spacing: 0 !important;
+  line-height: 0.98 !important;
+  white-space: nowrap !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice-zh {
+  font-size: clamp(22px, 2vw, 32px) !important;
+  line-height: 1.1 !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .brand-practice-intro,
+html body.portfolio-clean-home:not(.room-open) .brand-practice-note {
+  font-family: var(--body-serif, "Palatino Linotype", Georgia, serif) !important;
+  font-size: clamp(15px, 1vw, 17px) !important;
+  font-weight: 400 !important;
+  line-height: 1.65 !important;
+  max-width: 33em !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .archive-row,
+html body.portfolio-clean-home:not(.room-open) .about-grid,
+html body.portfolio-clean-home:not(.room-open) .contact > :not(.tiny) {
+  grid-column: 2 !important;
+  min-width: 0 !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .archive {
+  padding-block: clamp(50px, 7vw, 78px) !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .archive-row {
+  column-gap: clamp(40px, 7vw, 116px) !important;
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  row-gap: 30px !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .archive-card {
+  min-width: 0 !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) :is(.archive-card-title, .about-grid p, .email-address) {
   color: #ffffff !important;
   -webkit-text-fill-color: #ffffff !important;
   font-family: var(--body-serif, "Palatino Linotype", Georgia, serif) !important;
-  font-size: clamp(28px, 3.1vw, 46px) !important;
-  line-height: 1.08 !important;
-  max-width: min(920px, calc(100vw - var(--page-gutter, 48px) * 2)) !important;
+  font-size: var(--home-body-size) !important;
+  font-weight: 400 !important;
+  line-height: 1.62 !important;
+  text-shadow: var(--home-text-shadow) !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .archive-card-title {
+  display: block !important;
+  letter-spacing: 0 !important;
+  margin: 0 0 6px !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .archive-card-kicker,
+html body.portfolio-clean-home:not(.room-open) .archive-card-note,
+html body.portfolio-clean-home:not(.room-open) .email-links :is(a, button) {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+  font-family: var(--body-serif, "Palatino Linotype", Georgia, serif) !important;
+  font-size: var(--home-small-size) !important;
+  font-weight: 400 !important;
+  line-height: 1.5 !important;
+  text-shadow: var(--home-label-shadow) !important;
+}
+
+html body.portfolio-clean-home:not(.room-open) .email-address {
+  display: inline-block !important;
+  max-width: min(720px, 100%) !important;
   overflow-wrap: anywhere !important;
-  text-shadow: 0 1px 9px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.62) !important;
   word-break: normal !important;
 }
 
-html[lang="zh-CN"] body.portfolio-clean-home:not(.room-open) .email-address {
-  font-family: var(--body-serif, "Palatino Linotype", Georgia, serif) !important;
+@media (max-width: 980px) {
+  html body.portfolio-clean-home:not(.room-open) :is(.brand-practice, .archive, .about, .contact) {
+    grid-template-columns: minmax(92px, 132px) minmax(0, 1fr) !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .brand-practice-card {
+    grid-template-columns: minmax(0, 1fr) !important;
+    max-width: min(720px, 100%) !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .brand-practice-media {
+    aspect-ratio: 16 / 9 !important;
+    order: -1 !important;
+  }
 }
 
 @media (max-width: 820px) {
+  html body.portfolio-clean-home:not(.room-open) {
+    --home-section-label-size: 14px;
+    --home-body-size: 16px;
+    --home-small-size: 13px;
+  }
+
   html body.portfolio-clean-home:not(.room-open) .site-header {
     align-items: center !important;
     display: grid !important;
@@ -131,55 +308,94 @@ html[lang="zh-CN"] body.portfolio-clean-home:not(.room-open) .email-address {
     -webkit-text-fill-color: #ffffff !important;
     display: inline-block !important;
     font-size: 13px !important;
-    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.86), 0 0 18px rgba(0, 0, 0, 0.52) !important;
+    text-shadow: var(--home-label-shadow) !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .home {
+    min-height: 98svh !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .home-work-title {
-    font-size: 14px !important;
     left: var(--page-gutter, 24px) !important;
-    top: clamp(128px, 16svh, 168px) !important;
+    top: clamp(130px, 16svh, 168px) !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .home-note {
     bottom: auto !important;
-    font-size: 15px !important;
     left: var(--page-gutter, 24px) !important;
     max-width: calc(100vw - var(--page-gutter, 24px) * 2) !important;
     right: var(--page-gutter, 24px) !important;
-    top: clamp(158px, 20svh, 204px) !important;
+    top: clamp(160px, 20svh, 206px) !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .home-note::before {
+    flex-basis: 30px !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .home .floating-stage {
-    inset: clamp(192px, 26svh, 238px) 2px clamp(70px, 9svh, 104px) 2px !important;
+    inset: clamp(214px, 27svh, 252px) 8px clamp(66px, 8svh, 92px) 8px !important;
+    min-height: 420px !important;
+    overflow: visible !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .floating-project {
     max-width: none !important;
-    min-height: 106px !important;
-    width: clamp(114px, 30vw, 158px) !important;
+    min-height: 96px !important;
+    width: clamp(96px, 25vw, 132px) !important;
   }
 
-  html body.portfolio-clean-home:not(.room-open) .sprite-generative,
-  html body.portfolio-clean-home:not(.room-open) .sprite-mossy,
-  html body.portfolio-clean-home:not(.room-open) .sprite-cherries,
-  html body.portfolio-clean-home:not(.room-open) .sprite-trending {
+  html body.portfolio-clean-home:not(.room-open) :is(.sprite-generative, .sprite-mossy, .sprite-cherries, .sprite-trending) {
     max-width: none !important;
-    width: clamp(120px, 31vw, 166px) !important;
+    width: clamp(102px, 26vw, 138px) !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation {
     max-width: none !important;
-    min-height: 90px !important;
-    width: clamp(104px, 26vw, 142px) !important;
+    min-height: 84px !important;
+    width: clamp(88px, 22vw, 116px) !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) :is(.brand-practice, .archive, .about, .contact) {
+    display: block !important;
+    padding-block: 50px !important;
+    padding-inline: var(--page-gutter, 24px) !important;
+    width: 100% !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) :is(.brand-practice > .tiny, .archive > .tiny, .about > .tiny, .contact > .tiny) {
+    margin-bottom: 22px !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .brand-practice-card {
+    display: grid !important;
+    max-width: 100% !important;
+    padding: 8px !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .brand-practice-copy {
+    padding: 24px 20px 26px !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .brand-practice-name {
+    font-size: clamp(28px, 9.2vw, 38px) !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .brand-practice-intro,
+  html body.portfolio-clean-home:not(.room-open) .brand-practice-note {
+    font-size: 15px !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .archive-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+    row-gap: 26px !important;
   }
 
   html body.portfolio-clean-home:not(.room-open) .email-address {
-    font-size: clamp(24px, 7vw, 34px) !important;
-    line-height: 1.14 !important;
+    max-width: 100% !important;
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 430px) {
   html body.portfolio-clean-home:not(.room-open) .site-header {
     padding-inline: 20px !important;
   }
@@ -194,14 +410,20 @@ html[lang="zh-CN"] body.portfolio-clean-home:not(.room-open) .email-address {
     right: 20px !important;
   }
 
-  html body.portfolio-clean-home:not(.room-open) .floating-project {
-    width: clamp(108px, 31vw, 142px) !important;
+  html body.portfolio-clean-home:not(.room-open) .home .floating-stage {
+    inset: 228px 10px 78px 10px !important;
+    min-height: 440px !important;
   }
 
-  html body.portfolio-clean-home:not(.room-open) .sprite-generative,
-  html body.portfolio-clean-home:not(.room-open) .sprite-mossy,
-  html body.portfolio-clean-home:not(.room-open) .sprite-cherries,
-  html body.portfolio-clean-home:not(.room-open) .sprite-trending {
-    width: clamp(114px, 32vw, 150px) !important;
+  html body.portfolio-clean-home:not(.room-open) .floating-project {
+    width: clamp(92px, 27vw, 124px) !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) :is(.sprite-generative, .sprite-mossy, .sprite-cherries, .sprite-trending) {
+    width: clamp(98px, 29vw, 132px) !important;
+  }
+
+  html body.portfolio-clean-home:not(.room-open) .floating-project.sprite-oxidation {
+    width: clamp(82px, 23vw, 106px) !important;
   }
 }
