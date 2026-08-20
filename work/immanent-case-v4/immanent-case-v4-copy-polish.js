@@ -65,7 +65,7 @@
   walk(data);
 
   if (data.product?.useExperience?.titleLines?.zh) {
-    data.product.useExperience.titleLines.zh = ["用简单的动作，", "让关系一眼看懂。"];
+    data.product.useExperience.titleLines.zh = ["清晰的展示，", "简单的操作。"];
   }
 
   if (data.identitySystem?.titleLines?.zh) {
