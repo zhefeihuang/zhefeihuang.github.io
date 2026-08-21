@@ -1,127 +1,101 @@
 (function () {
   const assets = {
-    pulp: "/images/immanent-v4/IMMANENT_08_PULP_measuring_cap_detail.png",
-    peel: "/images/immanent-v4/01_PEEL_exploded_view_final.png"
+    peel: "/images/immanent-v4/01_PEEL_exploded_view_final.png",
+    pulp: "/images/immanent-v4/IMMANENT_case_PULP_open_cap_original_440.webp"
   };
 
   const copy = {
     en: {
       label: "Product & Packaging Detail",
-      title: "The use is built into the object.",
-      body: "PULP makes the 25 mL measure visible at the cap. PEEL shows the fragrance architecture as a small, replaceable object close to skin.",
-      pulpTitle: "PULP 01",
-      pulpCaption: "Measured cap as use ritual.",
+      title: "Open first, then explain the design.",
+      body: "The first view of this section shows the two product openings: PEEL reveals the replaceable fragrance core; PULP shows the measuring cap lifted from the bottle.",
       peelTitle: "PEEL 01",
-      peelCaption: "Replaceable fragrance architecture."
+      peelCaption: "Exploded view of the replaceable fragrance core.",
+      pulpTitle: "PULP 01",
+      pulpCaption: "Open bottle and measuring cap."
     },
     zh: {
       label: "产品与包装细节",
-      title: "把使用动作做进包装里。",
-      body: "PULP 把 25 mL 的量取动作放在瓶盖上。PEEL 用拆解图说明香氛结构：可替换、可握持，也更贴近随身使用。",
-      pulpTitle: "PULP 01",
-      pulpCaption: "瓶盖就是量取动作的一部分。",
+      title: "先看打开后的结构，再看设计判断。",
+      body: "进入这一节时，先展示两款产品如何被打开：PEEL 说明可替换的香氛内芯，PULP 展示瓶盖打开后如何量取。",
       peelTitle: "PEEL 01",
-      peelCaption: "可替换的贴肤香氛结构。"
+      peelCaption: "展示可替换香氛内芯与外壳结构。",
+      pulpTitle: "PULP 01",
+      pulpCaption: "瓶盖打开后，量取方式直接可见。"
     }
   };
 
   const css = `
     .product-detail-insert {
-      min-width: 0;
       display: grid;
-      grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
-      gap: clamp(30px, 5vw, 82px);
-      align-items: end;
-      margin-top: clamp(58px, 7vw, 106px);
+      gap: clamp(20px, 2.8vw, 40px);
+      margin-top: clamp(24px, 3.2vw, 46px);
+      margin-bottom: clamp(42px, 5.8vw, 78px);
       padding-top: clamp(28px, 3vw, 44px);
+      padding-bottom: clamp(28px, 3.4vw, 48px);
       border-top: 1px solid var(--hairline-strong);
-    }
-
-    .product-detail-copy {
+      border-bottom: 1px solid var(--hairline);
       min-width: 0;
-      display: grid;
-      gap: 15px;
-      max-width: 31em;
-      padding-bottom: clamp(10px, 2vw, 28px);
     }
-
+    .product-detail-gallery {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+      gap: clamp(16px, 2.2vw, 34px);
+      align-items: start;
+      min-width: 0;
+    }
+    .product-detail-figure {
+      display: grid;
+      gap: 13px;
+      margin: 0;
+      min-width: 0;
+    }
+    .product-detail-media {
+      overflow: hidden;
+      background: rgba(251, 247, 239, .68);
+      box-shadow: 0 20px 54px rgba(28, 30, 26, .055);
+    }
+    .product-detail-media img {
+      display: block;
+      width: 100%;
+      height: auto;
+      filter: saturate(.96) contrast(.98) brightness(1.01);
+    }
+    .product-detail-copy {
+      display: grid;
+      grid-template-columns: minmax(0, .45fr) minmax(0, .55fr);
+      gap: clamp(18px, 4vw, 70px);
+      align-items: start;
+      max-width: 100%;
+      min-width: 0;
+    }
     .product-detail-copy h3 {
       margin: 0;
       color: var(--ink);
       font-family: var(--font-en-display);
-      font-size: clamp(26px, 2.3vw, 42px);
+      font-size: clamp(25px, 2vw, 38px);
       font-weight: 400;
       line-height: 1.08;
       text-wrap: balance;
     }
-
     html[data-language="zh"] .product-detail-copy h3 {
       font-family: var(--font-zh-display);
-      font-size: clamp(25px, 2.05vw, 38px);
+      font-size: clamp(24px, 1.9vw, 34px);
       line-height: 1.2;
     }
-
     .product-detail-copy p:not(.eyebrow) {
       margin: 0;
-      max-width: 34em;
+      max-width: 36em;
       color: var(--ink-muted);
       font-size: var(--body);
       line-height: 1.7;
       text-wrap: pretty;
     }
-
     html[data-language="zh"] .product-detail-copy p:not(.eyebrow) {
       max-width: 26em;
       line-height: 1.86;
     }
-
-    .product-detail-gallery {
-      min-width: 0;
-      display: grid;
-      grid-template-columns: minmax(0, 0.86fr) minmax(0, 1fr);
-      gap: clamp(16px, 2.2vw, 34px);
-      align-items: end;
-    }
-
-    .product-detail-figure {
-      min-width: 0;
-      margin: 0;
-      display: grid;
-      gap: 13px;
-    }
-
-    .product-detail-media {
-      position: relative;
-      overflow: hidden;
-      background:
-        linear-gradient(145deg, rgba(251, 247, 239, 0.52), rgba(232, 183, 165, 0.08)),
-        rgba(251, 247, 239, 0.72);
-      box-shadow: 0 26px 70px rgba(28, 30, 26, 0.07);
-    }
-
-    .product-detail-figure--pulp .product-detail-media {
-      aspect-ratio: 4 / 5;
-    }
-
-    .product-detail-figure--peel .product-detail-media {
-      aspect-ratio: 1 / 1;
-    }
-
-    .product-detail-media img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      filter: saturate(0.96) contrast(0.98) brightness(1.01);
-    }
-
-    .product-detail-figure--peel .product-detail-media img {
-      object-fit: cover;
-      object-position: 50% 50%;
-    }
-
     .product-detail-figure figcaption {
-      min-width: 0;
       display: grid;
       grid-template-columns: auto minmax(0, 1fr);
       gap: 4px 12px;
@@ -130,58 +104,42 @@
       color: var(--ink-muted);
       font-size: var(--label);
       line-height: 1.45;
+      min-width: 0;
     }
-
     .product-detail-figure figcaption span {
       grid-row: 1 / span 2;
       color: var(--brass);
       font-weight: 500;
-      letter-spacing: 0.08em;
+      letter-spacing: .08em;
     }
-
     .product-detail-figure figcaption strong {
       color: var(--ink);
       font-family: var(--font-en-ui);
       font-size: var(--label);
       font-weight: 600;
-      letter-spacing: 0.08em;
+      letter-spacing: .08em;
       line-height: 1.2;
     }
-
     .product-detail-figure figcaption em {
       font-style: normal;
     }
-
-    html[data-language="zh"] .product-detail-figure figcaption strong {
-      font-family: var(--font-en-ui);
-    }
-
     @media (max-width: 1040px) {
-      .product-detail-insert {
-        grid-template-columns: 1fr;
-        align-items: start;
-      }
-
       .product-detail-copy {
-        max-width: 38em;
-        padding-bottom: 0;
+        grid-template-columns: 1fr;
+        max-width: 42em;
       }
     }
-
     @media (max-width: 680px) {
       .product-detail-insert {
         margin-top: clamp(46px, 14vw, 72px);
         gap: 26px;
       }
-
       .product-detail-gallery {
         grid-template-columns: 1fr;
         gap: 26px;
       }
-
-      .product-detail-figure--pulp .product-detail-media,
-      .product-detail-figure--peel .product-detail-media {
-        aspect-ratio: 4 / 5;
+      .product-detail-copy {
+        gap: 14px;
       }
     }
   `;
@@ -207,27 +165,29 @@
     document.head.appendChild(style);
   }
 
+  function figure(kind, number, title, caption) {
+    const alt = escapeHtml(`${title} - ${caption}`);
+    return `
+      <figure class="product-detail-figure product-detail-figure--${kind}">
+        <div class="product-detail-media">
+          <img src="${assets[kind]}" alt="${alt}" loading="lazy" decoding="async">
+        </div>
+        <figcaption><span>${number}</span><strong>${escapeHtml(title)}</strong><em>${escapeHtml(caption)}</em></figcaption>
+      </figure>
+    `;
+  }
+
   function markup() {
     const t = copy[language()];
     return `
+      <div class="product-detail-gallery">
+        ${figure("peel", "01", t.peelTitle, t.peelCaption)}
+        ${figure("pulp", "02", t.pulpTitle, t.pulpCaption)}
+      </div>
       <div class="product-detail-copy">
         <p class="eyebrow">${escapeHtml(t.label)}</p>
         <h3>${escapeHtml(t.title)}</h3>
         <p>${escapeHtml(t.body)}</p>
-      </div>
-      <div class="product-detail-gallery">
-        <figure class="product-detail-figure product-detail-figure--pulp">
-          <div class="product-detail-media">
-            <img src="${assets.pulp}" alt="${escapeHtml(t.pulpTitle + ' — ' + t.pulpCaption)}" loading="lazy" decoding="async">
-          </div>
-          <figcaption><span>01</span><strong>${escapeHtml(t.pulpTitle)}</strong><em>${escapeHtml(t.pulpCaption)}</em></figcaption>
-        </figure>
-        <figure class="product-detail-figure product-detail-figure--peel">
-          <div class="product-detail-media">
-            <img src="${assets.peel}" alt="${escapeHtml(t.peelTitle + ' — ' + t.peelCaption)}" loading="lazy" decoding="async">
-          </div>
-          <figcaption><span>02</span><strong>${escapeHtml(t.peelTitle)}</strong><em>${escapeHtml(t.peelCaption)}</em></figcaption>
-        </figure>
       </div>
     `;
   }
@@ -235,17 +195,18 @@
   function insertVisuals() {
     installStyles();
     const target = document.getElementById("design-decisions");
-    if (!target) return;
+    const decisionGrid = target?.querySelector(".decision-grid");
+    if (!target || !decisionGrid) return;
 
     let block = target.querySelector(".product-detail-insert");
     if (!block) {
       block = document.createElement("aside");
       block.className = "product-detail-insert";
       block.setAttribute("aria-label", language() === "zh" ? "产品与包装细节" : "Product and packaging detail");
-      target.appendChild(block);
     }
 
     block.innerHTML = markup();
+    if (block.nextElementSibling !== decisionGrid) target.insertBefore(block, decisionGrid);
   }
 
   function scheduleInsert() {
@@ -254,16 +215,11 @@
 
   document.addEventListener("DOMContentLoaded", scheduleInsert);
   window.addEventListener("load", scheduleInsert, { once: true });
-
   const app = document.getElementById("app");
-  if (app) {
-    new MutationObserver(scheduleInsert).observe(app, { childList: true });
-  }
-
+  if (app) new MutationObserver(scheduleInsert).observe(app, { childList: true });
   new MutationObserver(scheduleInsert).observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["data-language"]
   });
-
   scheduleInsert();
 })();
