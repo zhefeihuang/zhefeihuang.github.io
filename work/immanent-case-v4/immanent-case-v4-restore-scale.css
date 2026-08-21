@@ -1,5 +1,14 @@
 /* Targeted V4 case scale restoration: keep the new product detail pair intact. */
 
+.asset-frame {
+  background-size: contain;
+}
+
+.asset-frame img {
+  object-fit: contain;
+  object-position: center;
+}
+
 .identity-section .section-spread {
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
   align-items: center;
@@ -27,6 +36,12 @@
   width: min(720px, 100%);
   height: clamp(260px, 24vw, 390px);
   justify-self: end;
+}
+
+.identity-section .identity-image,
+.system-product-image,
+.decision-image {
+  background-color: rgba(251, 247, 239, 0.72);
 }
 
 @media (min-width: 1600px) {
