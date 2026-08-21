@@ -7,19 +7,19 @@
   const copy = {
     en: {
       label: "Product & Packaging Detail",
-      title: "Open first, then explain the design.",
-      body: "The first view of this section shows the two product openings: PEEL reveals the replaceable fragrance core; PULP shows the measuring cap lifted from the bottle.",
+      title: "Open structure comes first.",
+      body: "This section opens with the two product mechanisms: PEEL shows the replaceable fragrance core; PULP shows the lifted measuring cap and bottle opening.",
       peelTitle: "PEEL 01",
-      peelCaption: "Exploded view of the replaceable fragrance core.",
+      peelCaption: "Replaceable fragrance core and outer structure.",
       pulpTitle: "PULP 01",
-      pulpCaption: "Open bottle and measuring cap."
+      pulpCaption: "Opened bottle with measuring cap."
     },
     zh: {
       label: "产品与包装细节",
-      title: "先看打开后的结构，再看设计判断。",
-      body: "进入这一节时，先展示两款产品如何被打开：PEEL 说明可替换的香氛内芯，PULP 展示瓶盖打开后如何量取。",
+      title: "先看到打开方式，再理解设计。",
+      body: "这一节先展示两款产品的打开结构：PEEL 是可替换的香氛内芯，PULP 是带量取功能的瓶盖与瓶口关系。",
       peelTitle: "PEEL 01",
-      peelCaption: "展示可替换香氛内芯与外壳结构。",
+      peelCaption: "可替换香氛内芯与外壳结构。",
       pulpTitle: "PULP 01",
       pulpCaption: "瓶盖打开后，量取方式直接可见。"
     }
@@ -39,7 +39,7 @@
     }
     .product-detail-gallery {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, .92fr);
       gap: clamp(16px, 2.2vw, 34px);
       align-items: start;
       min-width: 0;
@@ -59,7 +59,7 @@
       display: block;
       width: 100%;
       height: auto;
-      filter: saturate(.96) contrast(.98) brightness(1.01);
+      filter: saturate(.98) contrast(.99) brightness(1.01);
     }
     .product-detail-copy {
       display: grid;
