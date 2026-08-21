@@ -3,16 +3,26 @@
 .asset-frame {
   display: grid;
   place-items: center;
-  padding: clamp(12px, 1.25vw, 22px);
-  overflow: hidden;
-  background-color: rgba(251, 247, 239, 0.76);
+  padding: clamp(8px, 0.8vw, 14px);
+  overflow: visible;
+  background-color: rgba(251, 247, 239, 0.46);
   background-image: none;
+  box-shadow: 0 18px 56px rgba(28, 30, 26, 0.045);
 }
 
-.asset-frame img {
+.asset-frame img,
+.asset-frame[data-fit] img,
+.asset-frame[data-fit="cover"] img,
+.asset-frame[data-fit="contain"] img {
   display: block;
   object-fit: contain;
   object-position: center;
+}
+
+.asset-frame[data-fit],
+.asset-frame[data-fit="cover"],
+.asset-frame[data-fit="contain"] {
+  background-size: contain;
 }
 
 .identity-section .section-spread {
@@ -32,17 +42,17 @@
 }
 
 .system-product-image {
-  height: clamp(280px, 24vw, 420px);
-  aspect-ratio: 1 / 1;
+  height: clamp(340px, 30vw, 500px);
+  aspect-ratio: 4 / 5;
 }
 
 .decision-grid article {
-  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 0.68fr) minmax(0, 1fr);
 }
 
 .decision-image {
-  width: min(720px, 100%);
-  height: clamp(260px, 24vw, 390px);
+  width: min(760px, 100%);
+  height: clamp(340px, 30vw, 520px);
   aspect-ratio: 4 / 3;
   justify-self: end;
 }
@@ -59,11 +69,11 @@
   }
 
   .system-product-image {
-    height: min(410px, 23vw);
+    height: min(500px, 29vw);
   }
 
   .decision-image {
-    height: min(380px, 23vw);
+    height: min(500px, 29vw);
   }
 }
 
