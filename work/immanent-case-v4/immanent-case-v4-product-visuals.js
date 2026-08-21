@@ -1,13 +1,12 @@
 (function () {
   const assets = {
     peel: "/images/immanent-v4/01_PEEL_exploded_view_final.png",
-    pulp: "/images/immanent-v4/IMMANENT_case_PULP_open_cap_original_440.webp"
+    pulp: "/images/immanent-v4/IMMANENT_01_PULP_open_action.png"
   };
 
   const copy = {
     en: {
       label: "Product & Packaging Detail",
-      title: "Open structure comes first.",
       body: "This section opens with the two product mechanisms: PEEL shows the replaceable fragrance core; PULP shows the lifted measuring cap and bottle opening.",
       peelTitle: "PEEL 01",
       peelCaption: "Replaceable fragrance core and outer structure.",
@@ -16,7 +15,6 @@
     },
     zh: {
       label: "产品与包装细节",
-      title: "先看到打开方式，再理解设计。",
       body: "这一节先展示两款产品的打开结构：PEEL 是可替换的香氛内芯，PULP 是带量取功能的瓶盖与瓶口关系。",
       peelTitle: "PEEL 01",
       peelCaption: "可替换香氛内芯与外壳结构。",
@@ -39,8 +37,8 @@
     }
     .product-detail-gallery {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, .92fr);
-      gap: clamp(16px, 2.2vw, 34px);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(18px, 2.4vw, 36px);
       align-items: start;
       min-width: 0;
     }
@@ -51,15 +49,26 @@
       min-width: 0;
     }
     .product-detail-media {
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
       overflow: hidden;
-      background: rgba(251, 247, 239, .68);
+      background: rgba(251, 247, 239, .72);
       box-shadow: 0 20px 54px rgba(28, 30, 26, .055);
+      cursor: zoom-in;
     }
     .product-detail-media img {
       display: block;
       width: 100%;
-      height: auto;
+      height: 100%;
+      object-position: center;
       filter: saturate(.98) contrast(.99) brightness(1.01);
+    }
+    .product-detail-figure--peel .product-detail-media img {
+      object-fit: cover;
+    }
+    .product-detail-figure--pulp .product-detail-media img {
+      object-fit: contain;
     }
     .product-detail-copy {
       display: grid;
@@ -68,20 +77,6 @@
       align-items: start;
       max-width: 100%;
       min-width: 0;
-    }
-    .product-detail-copy h3 {
-      margin: 0;
-      color: var(--ink);
-      font-family: var(--font-en-display);
-      font-size: clamp(25px, 2vw, 38px);
-      font-weight: 400;
-      line-height: 1.08;
-      text-wrap: balance;
-    }
-    html[data-language="zh"] .product-detail-copy h3 {
-      font-family: var(--font-zh-display);
-      font-size: clamp(24px, 1.9vw, 34px);
-      line-height: 1.2;
     }
     .product-detail-copy p:not(.eyebrow) {
       margin: 0;
@@ -169,7 +164,7 @@
     const alt = escapeHtml(`${title} - ${caption}`);
     return `
       <figure class="product-detail-figure product-detail-figure--${kind}">
-        <div class="product-detail-media">
+        <div class="product-detail-media" role="button" tabindex="0" data-lightbox-src="${assets[kind]}" data-lightbox-caption="${alt}">
           <img src="${assets[kind]}" alt="${alt}" loading="lazy" decoding="async">
         </div>
         <figcaption><span>${number}</span><strong>${escapeHtml(title)}</strong><em>${escapeHtml(caption)}</em></figcaption>
@@ -186,7 +181,6 @@
       </div>
       <div class="product-detail-copy">
         <p class="eyebrow">${escapeHtml(t.label)}</p>
-        <h3>${escapeHtml(t.title)}</h3>
         <p>${escapeHtml(t.body)}</p>
       </div>
     `;
