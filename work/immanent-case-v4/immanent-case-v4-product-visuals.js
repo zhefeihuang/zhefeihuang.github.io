@@ -152,12 +152,50 @@
       .replace(/'/g, "&#39;");
   }
 
+  function cssUrl(input) {
+    return String(input).replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "");
+  }
+
   function installStyles() {
     if (document.getElementById("case-product-detail-visuals-style")) return;
     const style = document.createElement("style");
     style.id = "case-product-detail-visuals-style";
     style.textContent = css;
     document.head.appendChild(style);
+  }
+
+  function openDetailLightbox(node) {
+    const src = node.dataset.lightboxSrc;
+    if (!src) return;
+    const box = document.querySelector("[data-lightbox]");
+    const stage = document.querySelector("[data-lightbox-image]");
+    const caption = document.querySelector("[data-lightbox-caption]");
+    if (!box || !stage || !caption) return;
+    const label = node.dataset.lightboxCaption || "";
+    stage.style.backgroundImage = `url("${cssUrl(src)}")`;
+    stage.setAttribute("aria-label", label);
+    caption.textContent = label;
+    box.hidden = false;
+  }
+
+  function bindDetailLightbox() {
+    if (document.documentElement.dataset.productDetailLightboxBound === "true") return;
+    document.documentElement.dataset.productDetailLightboxBound = "true";
+    document.addEventListener("click", (event) => {
+      const node = event.target.closest(".product-detail-media[data-lightbox-src]");
+      if (!node) return;
+      event.preventDefault();
+      event.stopPropagation();
+      openDetailLightbox(node);
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      const node = event.target.closest(".product-detail-media[data-lightbox-src]");
+      if (!node) return;
+      event.preventDefault();
+      event.stopPropagation();
+      openDetailLightbox(node);
+    });
   }
 
   function figure(kind, number, title, caption) {
@@ -188,6 +226,7 @@
 
   function insertVisuals() {
     installStyles();
+    bindDetailLightbox();
     const target = document.getElementById("design-decisions");
     const decisionGrid = target?.querySelector(".decision-grid");
     if (!target || !decisionGrid) return;
