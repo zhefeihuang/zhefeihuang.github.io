@@ -57,10 +57,12 @@
   walk(data);
 
   if (data.strategy?.positioning?.statement) {
+    data.strategy.positioning.statement.en = "";
     data.strategy.positioning.statement.zh = "";
   }
 
   if (data.strategy?.brandIdea?.naming?.body) {
+    data.strategy.brandIdea.naming.body.en = "IMMANENT means something already present within. 蕴 carries the same idea of what is held inside and slowly drawn out.";
     data.strategy.brandIdea.naming.body.zh = "IMMANENT 指向“原本就在其中”的东西；“蕴”也有内在、积蓄、等待被引出的意思。";
   }
 
