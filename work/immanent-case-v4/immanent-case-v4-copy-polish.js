@@ -56,6 +56,18 @@
 
   walk(data);
 
+  if (data.strategy?.positioning?.statement) {
+    data.strategy.positioning.statement.zh = "";
+  }
+
+  if (data.strategy?.brandIdea?.naming?.body) {
+    data.strategy.brandIdea.naming.body.zh = "IMMANENT 指向“原本就在其中”的东西；“蕴”也有内在、积蓄、等待被引出的意思。";
+  }
+
+  const style = document.createElement("style");
+  style.textContent = ".positioning-panel blockquote:empty{display:none!important;}";
+  document.head.appendChild(style);
+
   if (data.product?.useExperience?.titleLines?.zh) {
     data.product.useExperience.titleLines.zh = ["清晰的展示，", "简单的操作。"];
   }
