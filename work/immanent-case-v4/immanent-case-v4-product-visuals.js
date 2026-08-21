@@ -6,16 +6,12 @@
 
   const copy = {
     en: {
-      label: "Product & Packaging Detail",
-      body: "This section opens with the two product mechanisms: PEEL shows the replaceable fragrance core; PULP shows the lifted measuring cap and bottle opening.",
       peelTitle: "PEEL 01",
       peelCaption: "Replaceable fragrance core and outer structure.",
       pulpTitle: "PULP 01",
       pulpCaption: "Opened bottle with measuring cap."
     },
     zh: {
-      label: "产品与包装细节",
-      body: "这一节先展示两款产品的打开结构：PEEL 是可替换的香氛内芯，PULP 是带量取功能的瓶盖与瓶口关系。",
       peelTitle: "PEEL 01",
       peelCaption: "可替换香氛内芯与外壳结构。",
       pulpTitle: "PULP 01",
@@ -216,10 +212,6 @@
       <div class="product-detail-gallery">
         ${figure("peel", "01", t.peelTitle, t.peelCaption)}
         ${figure("pulp", "02", t.pulpTitle, t.pulpCaption)}
-      </div>
-      <div class="product-detail-copy">
-        <p class="eyebrow">${escapeHtml(t.label)}</p>
-        <p>${escapeHtml(t.body)}</p>
       </div>
     `;
   }
