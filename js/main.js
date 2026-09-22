@@ -104,7 +104,7 @@ const uiText = {
 const projectData = {
     generative: {
         theme: "generative",
-        cursor: "images/home-float/generative.webp",
+        cursor: "images/home-float/generative-512.webp",
         background: "images/backgrounds/clean/generative-clean.jpg",
         bgPosition: "64% 45%",
         bgSize: "cover",
@@ -258,7 +258,7 @@ const projectData = {
     },
     oxidation: {
         theme: "oxidation",
-        cursor: "images/home-float/oxidation.webp",
+        cursor: "images/home-float/oxidation-512.webp",
         background: "images/backgrounds/clean/oxidation-clean-no-text.jpg",
         bgPosition: "54% 52%",
         bgSize: "cover",
@@ -411,8 +411,8 @@ bgAudio.volume = Number(soundVolume.value);
 updateVolumeVisual();
 
 const trailImages = [
-    "images/home-float/oxidation.webp",
-    "images/home-float/generative.webp",
+    "images/home-float/oxidation-512.webp",
+    "images/home-float/generative-512.webp",
     "images/cursors/mossy.png",
     "images/cursors/cherries.png",
     "images/cursors/trending.png",
@@ -457,6 +457,43 @@ function escapeHtml(value) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+}
+
+const generativePreviewWidths = {
+    "generative-process-03": 1314,
+    "generative-process-02": 1306,
+    "generative-process-04": 1546,
+    "generative-process-20260615-234119": 1362,
+    "generative-process-05": 2547,
+    "generative-process-08": 2537,
+    "generative-process-10": 2559,
+    "generative-process-11": 2449,
+    "generative-process-20260619-160619": 1321,
+    "generative-process-20260621-083124": 2060
+};
+
+function displayImageAttributes(src, sizes) {
+    const original = escapeHtml(src);
+    let preview = "";
+    let previewWidth = 1600;
+    let originalWidth = 0;
+    const gallery = /^images\/(p[1-4]-\d+)\.jpg$/.exec(src);
+    const generative = /^images\/generative-process\/(generative-process-[\w-]+)\.png$/.exec(src);
+
+    if (gallery && gallery[1] !== "p3-3") {
+        preview = `images/previews/${gallery[1]}.webp`;
+        originalWidth = gallery[1].startsWith("p1-") ? 9584 : /^p3-(?:2|4|5)$/.test(gallery[1]) ? 13800 : 6900;
+    } else if (generative && generativePreviewWidths[generative[1]]) {
+        preview = `images/previews/generative-process/${generative[1]}.webp`;
+        originalWidth = generativePreviewWidths[generative[1]];
+        previewWidth = Math.min(1600, originalWidth);
+    } else {
+        return `src="${original}"`;
+    }
+
+    const display = escapeHtml(preview);
+    if (originalWidth === previewWidth) return `src="${display}"`;
+    return `src="${display}" srcset="${display} ${previewWidth}w, ${original} ${originalWidth}w" sizes="${escapeHtml(sizes)}"`;
 }
 
 function protectChineseTail(value) {
@@ -981,7 +1018,7 @@ function renderStory(project) {
     return `
         <div class="pane story-pane">
             <button class="story-media media-button" type="button" data-lightbox="${escapeHtml(project.storyImage)}" aria-label="Open image">
-                <img src="${escapeHtml(project.storyImage)}" alt="${escapeHtml(localize(project.title))}" decoding="async" fetchpriority="high">
+                <img ${displayImageAttributes(project.storyImage, "(max-width: 760px) calc(100vw - 40px), 700px")} alt="${escapeHtml(localize(project.title))}" decoding="async" fetchpriority="high">
             </button>
             <div class="story-text">
                 ${storyBlock("01", t("labelQuestion"), localize(project.question), "h3")}
@@ -1021,7 +1058,7 @@ function renderImages(project) {
     const images = project.images.map((src, index) => `
         <figure class="process-item">
             <button class="media-button" type="button" data-lightbox="${escapeHtml(src)}" aria-label="Open process image ${index + 1}">
-                <img src="${escapeHtml(src)}" alt="${escapeHtml(localize(project.title))} process image ${index + 1}" loading="lazy" decoding="async">
+                <img ${displayImageAttributes(src, "(max-width: 760px) calc(100vw - 40px), 650px")} alt="${escapeHtml(localize(project.title))} process image ${index + 1}" loading="lazy" decoding="async">
             </button>
             <figcaption class="process-caption">${escapeHtml(t("processItem"))} ${String(index + 1).padStart(2, "0")}</figcaption>
         </figure>`).join("");
@@ -1070,7 +1107,7 @@ function renderRole(project) {
                 ${tools}
             </div>
             <button class="media-button" type="button" data-lightbox="${escapeHtml(project.storyImage)}" aria-label="Open image">
-                <img src="${escapeHtml(project.storyImage)}" alt="${escapeHtml(localize(project.title))}">
+                <img ${displayImageAttributes(project.storyImage, "(max-width: 760px) calc(100vw - 40px), 700px")} alt="${escapeHtml(localize(project.title))}">
             </button>
         </div>`;
 }

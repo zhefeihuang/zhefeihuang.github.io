@@ -21,7 +21,7 @@
     };
     const cursorAssets = {
         default: asset("images/cursors/oxidation.png"),
-        generative: asset("images/home-float/generative.webp"),
+        generative: asset("images/home-float/generative-512.webp"),
         oxidation: asset("images/cursors/oxidation.png"),
         mossy: asset("images/cursors/mossy.png"),
         cherries: asset("images/cursors/cherries.png"),
