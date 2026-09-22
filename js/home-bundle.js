@@ -1,3 +1,274 @@
+(() => {
+    "use strict";
+
+    if (window.PortfolioCursorEffects) return;
+
+    const script = document.currentScript;
+    const assetBase = new URL("../", script ? script.src : window.location.href);
+    const asset = (path) => new URL(path, assetBase).toString();
+    const keys = ["generative", "oxidation", "mossy", "cherries", "trending", "greenpepper", "photography"];
+    const aliases = {
+        project1: "oxidation",
+        project2: "mossy",
+        project3: "cherries",
+        project4: "trending",
+        project5: "greenpepper",
+        project6: "photography",
+        green: "greenpepper",
+        pepper: "greenpepper",
+        photo: "photography",
+        photos: "photography"
+    };
+    const cursorAssets = {
+        default: asset("images/cursors/oxidation.png"),
+        generative: asset("images/home-float/generative-512.webp"),
+        oxidation: asset("images/cursors/oxidation.png"),
+        mossy: asset("images/cursors/mossy.png"),
+        cherries: asset("images/cursors/cherries.png"),
+        trending: asset("images/cursors/trending.png"),
+        greenpepper: asset("images/cursors/greenpepper.png"),
+        photography: asset("images/cursors/photography.png")
+    };
+    const projectPageThemes = [
+        [/project1\.html/i, "oxidation"],
+        [/project2\.html/i, "mossy"],
+        [/project3\.html/i, "cherries"],
+        [/project4\.html/i, "trending"],
+        [/project5\.html/i, "greenpepper"],
+        [/project6\.html/i, "photography"]
+    ];
+
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const cursor = ensureCursor();
+    const pageKey = inferPageKey();
+    let currentKey = pageKey || "oxidation";
+    let hoverKey = "";
+    let pointerX = window.innerWidth / 2;
+    let pointerY = window.innerHeight / 2;
+    let cursorX = pointerX;
+    let cursorY = pointerY;
+    let idleSwapAt = 0;
+    let idleIndex = 1;
+    let raf = 0;
+
+    preloadAssets();
+    applyKey(currentKey);
+    start();
+
+    window.PortfolioCursorEffects = {
+        set(projectKey) {
+            const key = normalizeKey(projectKey);
+            if (!key) return;
+            hoverKey = key;
+            applyKey(key);
+        },
+        reset(fallbackKey) {
+            hoverKey = "";
+            applyKey(normalizeKey(fallbackKey) || pageKey || "oxidation");
+        },
+        trail(x, y, projectKey) {
+            spawnBurst(x, y, normalizeKey(projectKey) || currentKey, 2);
+        },
+        burst(x, y, projectKey) {
+            spawnBurst(x, y, normalizeKey(projectKey) || currentKey, 4);
+        }
+    };
+
+    function start() {
+        document.addEventListener("pointermove", handlePointerMove, { passive: true });
+        document.addEventListener("pointerdown", handlePointerDown, { passive: true });
+        document.addEventListener("pointerover", handlePointerOver, { passive: true });
+        document.addEventListener("pointerout", handlePointerOut, { passive: true });
+        window.addEventListener("blur", () => cursor.root.classList.remove("is-visible"));
+        updatePointerMode();
+        finePointer.addEventListener?.("change", updatePointerMode);
+        reducedMotion.addEventListener?.("change", updatePointerMode);
+    }
+
+    function ensureCursor() {
+        let root = document.querySelector(".cursor");
+        if (!root) {
+            root = document.createElement("div");
+            root.className = "cursor";
+            root.setAttribute("aria-hidden", "true");
+            document.body.appendChild(root);
+        }
+
+        let image = root.querySelector(".cursor-image");
+        if (!image) {
+            image = document.createElement("img");
+            image.className = "cursor-image";
+            image.alt = "";
+            root.appendChild(image);
+        }
+
+        return { root, image };
+    }
+
+    function preloadAssets() {
+        Object.values(cursorAssets).forEach((src) => {
+            const image = new Image();
+            image.src = src;
+        });
+    }
+
+    function inferPageKey() {
+        const path = window.location.pathname;
+        const match = projectPageThemes.find(([pattern]) => pattern.test(path));
+        if (match) return match[1];
+        return "";
+    }
+
+    function normalizeKey(value) {
+        if (!value) return "";
+        const raw = String(value).toLowerCase().replace(/[^a-z0-9]/g, "");
+        const key = aliases[raw] || raw;
+        return cursorAssets[key] ? key : "";
+    }
+
+    function keyFromElement(element) {
+        const target = element?.closest?.("[data-cursor], [data-project]");
+        if (!target) return "";
+        return normalizeKey(target.dataset.cursor || target.dataset.project);
+    }
+
+    function applyKey(key) {
+        currentKey = key || "oxidation";
+        cursor.image.src = cursorAssets[currentKey] || cursorAssets.default;
+        cursor.root.dataset.cursor = currentKey;
+        cursor.root.classList.add("is-active");
+        document.body.dataset.cursorEffect = currentKey;
+    }
+
+    function updatePointerMode() {
+        const isFine = finePointer.matches && !reducedMotion.matches;
+        document.body.classList.toggle("cursor-effects-ready", isFine);
+        if (!isFine) {
+            cursor.root.classList.remove("is-visible");
+            if (raf) window.cancelAnimationFrame(raf);
+            raf = 0;
+        }
+    }
+
+    function handlePointerMove(event) {
+        pointerX = event.clientX;
+        pointerY = event.clientY;
+
+        if (event.pointerType === "touch") return;
+
+        const key = keyFromElement(event.target);
+        if (key && key !== currentKey) {
+            hoverKey = key;
+            applyKey(key);
+        }
+
+        if (finePointer.matches && !reducedMotion.matches) {
+            cursor.root.classList.add("is-visible");
+            if (!raf) raf = window.requestAnimationFrame(animateCursor);
+            maybeSwapIdleCursor(performance.now());
+        }
+    }
+
+    function handlePointerDown(event) {
+        if (event.button && event.button !== 0) return;
+
+        const key = keyFromElement(event.target) || hoverKey || currentKey || randomKey();
+        applyKey(key);
+
+        cursor.root.classList.add("is-pressed");
+        window.setTimeout(() => cursor.root.classList.remove("is-pressed"), 220);
+
+        const isTouchLike = event.pointerType === "touch" || event.pointerType === "pen" || !finePointer.matches;
+        spawnBurst(event.clientX, event.clientY, key, isTouchLike ? 4 : 3);
+    }
+
+    function handlePointerOver(event) {
+        const key = keyFromElement(event.target);
+        if (!key) return;
+        hoverKey = key;
+        applyKey(key);
+    }
+
+    function handlePointerOut(event) {
+        const target = event.target?.closest?.("[data-cursor], [data-project]");
+        if (!target || target.contains(event.relatedTarget)) return;
+        hoverKey = "";
+        applyKey(pageKey || "oxidation");
+    }
+
+    function animateCursor() {
+        if (document.hidden || !cursor.root.classList.contains("is-visible")) {
+            raf = 0;
+            return;
+        }
+
+        const dx = pointerX - cursorX;
+        const dy = pointerY - cursorY;
+        cursorX += dx * 0.28;
+        cursorY += dy * 0.28;
+
+        const speed = Math.min(24, Math.hypot(dx, dy));
+        const tilt = clamp(dx * 0.08, -12, 12);
+        const scale = 1 + speed * 0.003;
+        cursor.root.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0) translate(-50%, -50%) rotate(${tilt.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+
+        raf = window.requestAnimationFrame(animateCursor);
+    }
+
+    function maybeSwapIdleCursor(now) {
+        if (hoverKey || pageKey || now < idleSwapAt) return;
+        idleIndex = (idleIndex + 1 + Math.floor(Math.random() * 2)) % keys.length;
+        applyKey(keys[idleIndex]);
+        idleSwapAt = now + 1600 + Math.random() * 1200;
+    }
+
+    function spawnBurst(x, y, key, count) {
+        if (reducedMotion.matches) return;
+        for (let index = 0; index < count; index += 1) {
+            const burstKey = index % 3 === 0 ? randomKey() : key;
+            const image = makeEffectImage("touch-burst cursor-fx-pop", burstKey);
+            const angle = (Math.PI * 2 * index) / count + Math.random() * 0.3;
+            const distancePx = 24 + Math.random() * 34;
+            image.style.left = `${x}px`;
+            image.style.top = `${y}px`;
+            image.style.setProperty("--dx", `${Math.cos(angle) * distancePx}px`);
+            image.style.setProperty("--dy", `${Math.sin(angle) * distancePx}px`);
+            image.style.setProperty("--rot", `${Math.round((Math.random() - 0.5) * 90)}deg`);
+            image.style.setProperty("--scale", String((0.58 + Math.random() * 0.3).toFixed(2)));
+            window.setTimeout(() => appendEffect(image, 12), index * 18);
+        }
+    }
+
+    function makeEffectImage(className, key) {
+        const image = document.createElement("img");
+        const finalKey = normalizeKey(key) || randomKey();
+        image.className = className;
+        image.src = cursorAssets[finalKey] || cursorAssets.default;
+        image.alt = "";
+        image.dataset.cursor = finalKey;
+        image.decoding = "async";
+        return image;
+    }
+
+    function appendEffect(image, limit) {
+        document.body.appendChild(image);
+        const nodes = document.querySelectorAll(".cursor-fx-trail, .cursor-fx-pop");
+        const overflow = nodes.length - limit;
+        for (let index = 0; index < overflow; index += 1) nodes[index].remove();
+        image.addEventListener("animationend", () => image.remove(), { once: true });
+        window.setTimeout(() => image.remove(), 850);
+    }
+
+    function randomKey() {
+        return keys[Math.floor(Math.random() * keys.length)];
+    }
+
+    function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+    }
+})();
+;
 const uiText = {
     en: {
         siteName: "Zhefei Huang",
@@ -1775,3 +2046,607 @@ window.addEventListener("keydown", (event) => {
     if (lightbox.classList.contains("is-open")) closeLightbox();
     else if (room.classList.contains("is-open")) closeProject();
 });
+;
+(() => {
+  "use strict";
+
+  const reducedMotion = window.matchMedia?.("(prefers-reduced-motion: reduce)");
+  let languageSwitching = false;
+
+  function cleanupOldPatchState() {
+    document.body?.classList.remove("calm-floating", "project-opening");
+    document.getElementById("home-speed-fix-style")?.remove();
+    document.querySelectorAll(".floating-project").forEach((item) => {
+      item.style.pointerEvents = "auto";
+      item.style.animation = "";
+    });
+  }
+
+  function pauseFloatingLoop() {
+    try {
+      if (typeof floatingAnimationFrame !== "undefined" && floatingAnimationFrame) {
+        cancelAnimationFrame(floatingAnimationFrame);
+        floatingAnimationFrame = null;
+      }
+    } catch (_) {}
+  }
+
+  function patchFastLanguageApply() {
+    if (typeof applyLanguage !== "function" || applyLanguage.__homeFast) return;
+
+    applyLanguage = function fastApplyLanguage() {
+      const lang = typeof currentLang !== "undefined" ? currentLang : "en";
+      document.documentElement.lang = lang === "zh" ? "zh-CN" : "en";
+      document.documentElement.dataset.language = lang;
+
+      try {
+        document.querySelectorAll("[data-i18n]").forEach((node) => {
+          node.textContent = t(node.dataset.i18n);
+        });
+      } catch (_) {}
+
+      try {
+        if (typeof lightboxClose !== "undefined" && lightboxClose) {
+          lightboxClose.setAttribute("aria-label", t("close"));
+        }
+      } catch (_) {}
+
+      document.querySelectorAll("[data-lang-choice]").forEach((node) => {
+        node.classList.toggle("is-active", node.dataset.langChoice === lang);
+      });
+
+      try {
+        document.querySelectorAll(".floating-project").forEach((button) => {
+          const project = projectData[button.dataset.project];
+          const label = button.querySelector("span");
+          if (project && label) label.textContent = localize(project.title);
+        });
+      } catch (_) {}
+
+      try {
+        if (typeof updateSoundText === "function") updateSoundText();
+      } catch (_) {}
+
+      try {
+        if (typeof currentProjectKey !== "undefined" && currentProjectKey && typeof renderProjectShell === "function") {
+          renderProjectShell();
+        }
+      } catch (_) {}
+    };
+
+    applyLanguage.__homeFast = true;
+  }
+
+  function patchLanguageToggle() {
+    if (document.documentElement.dataset.fastLanguageGuard === "true") return;
+    document.documentElement.dataset.fastLanguageGuard = "true";
+
+    document.addEventListener("click", (event) => {
+      const toggle = event.target?.closest?.(".language-toggle");
+      if (!toggle) return;
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      if (languageSwitching) return;
+
+      languageSwitching = true;
+      cleanupOldPatchState();
+      pauseFloatingLoop();
+      document.documentElement.classList.add("language-switching");
+
+      try {
+        currentLang = currentLang === "en" ? "zh" : "en";
+        localStorage.setItem("portfolioLanguage", currentLang);
+      } catch (_) {}
+
+      requestAnimationFrame(() => {
+        try {
+          patchFastLanguageApply();
+          if (typeof applyLanguage === "function") applyLanguage();
+        } catch (_) {}
+
+        window.setTimeout(() => {
+          document.documentElement.classList.remove("language-switching");
+          languageSwitching = false;
+          reviveMotion();
+        }, 160);
+      });
+    }, true);
+  }
+
+  function patchProjectOpen() {
+    if (typeof openProject !== "function" || openProject.__homeFloatGuarded) return;
+
+    const originalOpenProject = openProject;
+    let opening = false;
+
+    openProject = function guardedOpenProject(key) {
+      if (opening) return;
+      opening = true;
+      cleanupOldPatchState();
+      pauseFloatingLoop();
+
+      try {
+        return originalOpenProject(key);
+      } finally {
+        window.setTimeout(() => {
+          opening = false;
+        }, 520);
+      }
+    };
+
+    openProject.__homeFloatGuarded = true;
+  }
+
+  function patchMotionSettings() {
+    if (typeof getFloatingMotionSettings !== "function" || getFloatingMotionSettings.__homeFloatTuned) return;
+
+    const originalGetSettings = getFloatingMotionSettings;
+    getFloatingMotionSettings = function tunedFloatingMotion(bounds) {
+      const base = originalGetSettings(bounds);
+      const phone = Boolean(base.phone);
+      const compact = Boolean(base.compact);
+      const touchSafe = Boolean(base.touchSafe);
+
+      return {
+        ...base,
+        speedMin: phone ? 30 : touchSafe ? (compact ? 50 : 70) : 86,
+        speedMax: phone ? 58 : touchSafe ? (compact ? 90 : 128) : 148,
+        radiusScale: phone ? 0.18 : touchSafe ? (compact ? 0.22 : 0.26) : 0.3,
+        gap: phone ? -22 : touchSafe ? (compact ? -12 : -6) : -4,
+        edgeBounce: phone ? 0.84 : touchSafe ? 0.9 : 0.94,
+        turnForce: phone ? 2.8 : touchSafe ? (compact ? 5.8 : 7.8) : 10.5,
+        turnMin: phone ? 2.4 : touchSafe ? 2.1 : 1.7,
+        turnMax: phone ? 5.2 : touchSafe ? 4.5 : 3.4,
+        separationStrength: phone ? 0.08 : touchSafe ? 0.13 : 0.18,
+        impulseScale: phone ? 0.08 : touchSafe ? 0.18 : 0.26,
+        kickScale: phone ? 0.05 : touchSafe ? 0.11 : 0.16
+      };
+    };
+
+    getFloatingMotionSettings.__homeFloatTuned = true;
+  }
+
+  function reviveMotion() {
+    cleanupOldPatchState();
+    patchFastLanguageApply();
+    patchLanguageToggle();
+    patchProjectOpen();
+    patchMotionSettings();
+
+    try {
+      if (typeof refreshFloatingProjectSizes === "function") refreshFloatingProjectSizes();
+    } catch (_) {}
+
+    try {
+      if (
+        !languageSwitching &&
+        !reducedMotion?.matches &&
+        !document.hidden &&
+        !document.body.classList.contains("room-open") &&
+        typeof animateFloatingProjects === "function" &&
+        typeof floatingAnimationFrame !== "undefined" &&
+        !floatingAnimationFrame
+      ) {
+        if (typeof lastFloatingTime !== "undefined") lastFloatingTime = performance.now();
+        floatingAnimationFrame = requestAnimationFrame(animateFloatingProjects);
+      }
+    } catch (_) {}
+  }
+
+  function boot() {
+    reviveMotion();
+    window.setTimeout(reviveMotion, 120);
+    window.setTimeout(reviveMotion, 700);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
+
+  window.addEventListener("load", reviveMotion, { once: true });
+  window.addEventListener("pageshow", reviveMotion);
+  window.addEventListener("resize", () => requestAnimationFrame(reviveMotion), { passive: true });
+})();
+;
+(() => {
+  "use strict";
+
+  function patchMobileSpacing() {
+    if (typeof getFloatingMotionSettings !== "function" || getFloatingMotionSettings.__homeMobileSpacingFinal) return;
+
+    const previousGetSettings = getFloatingMotionSettings;
+    getFloatingMotionSettings = function mobileSpacedFloatingSettings(bounds) {
+      const base = previousGetSettings(bounds);
+      const phone = Boolean(base.phone);
+      const compact = Boolean(base.compact);
+      const touchSafe = Boolean(base.touchSafe);
+
+      if (!phone && !compact && !touchSafe) return base;
+
+      return {
+        ...base,
+        gap: phone ? 14 : compact ? 8 : Math.max(base.gap ?? 0, 4),
+        radiusScale: phone ? 0.34 : compact ? 0.3 : Math.max(base.radiusScale ?? 0.26, 0.28),
+        separationStrength: phone ? 0.46 : compact ? 0.32 : Math.max(base.separationStrength ?? 0.18, 0.24),
+        impulseScale: phone ? 0.16 : compact ? 0.2 : Math.max(base.impulseScale ?? 0.18, 0.2),
+        kickScale: phone ? 0.1 : compact ? 0.13 : Math.max(base.kickScale ?? 0.11, 0.13),
+        turnForce: phone ? Math.max(base.turnForce ?? 0, 3.4) : base.turnForce,
+        turnMin: phone ? Math.max(base.turnMin ?? 0, 2.1) : base.turnMin,
+        turnMax: phone ? Math.min(base.turnMax ?? 5.2, 4.8) : base.turnMax
+      };
+    };
+
+    getFloatingMotionSettings.__homeMobileSpacingFinal = true;
+    getFloatingMotionSettings.__homeFloatTuned = true;
+  }
+
+  function refreshSpacing() {
+    patchMobileSpacing();
+    try {
+      if (typeof refreshFloatingProjectSizes === "function") refreshFloatingProjectSizes();
+    } catch (_) {}
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", refreshSpacing, { once: true });
+  } else {
+    refreshSpacing();
+  }
+
+  window.addEventListener("load", refreshSpacing, { once: true });
+  window.addEventListener("pageshow", refreshSpacing);
+  window.addEventListener("resize", () => requestAnimationFrame(refreshSpacing), { passive: true });
+})();
+;
+(() => {
+    const eagerZones = ".preloader, .cursor, .floating-stage";
+    let homeVisible = true;
+
+    function tuneImages(root = document) {
+        root.querySelectorAll("img").forEach((image) => {
+            if (!image.hasAttribute("decoding")) image.setAttribute("decoding", "async");
+            if (!image.closest(eagerZones) && !image.hasAttribute("loading")) {
+                image.setAttribute("loading", "lazy");
+            }
+        });
+    }
+
+    function clearOldBackgroundArtifacts() {
+        document
+            .querySelectorAll(".home-vertical-bg-canvas, .home-vertical-bg-image")
+            .forEach((node) => node.remove());
+    }
+
+    function pauseFloatingMotion() {
+        try {
+            if (typeof floatingAnimationFrame !== "undefined" && floatingAnimationFrame) {
+                cancelAnimationFrame(floatingAnimationFrame);
+                floatingAnimationFrame = null;
+            }
+        } catch (_) {
+            // Older cached scripts can omit the floating globals.
+        }
+    }
+
+    function resumeFloatingMotion() {
+        try {
+            if (
+                typeof floatingAnimationFrame === "undefined" ||
+                typeof animateFloatingProjects !== "function" ||
+                floatingAnimationFrame ||
+                !homeVisible ||
+                document.hidden ||
+                document.body.classList.contains("room-open")
+            ) {
+                return;
+            }
+            if (typeof lastFloatingTime !== "undefined") lastFloatingTime = performance.now();
+            floatingAnimationFrame = requestAnimationFrame(animateFloatingProjects);
+        } catch (_) {
+            // The visual experience should never depend on this optimisation.
+        }
+    }
+
+    clearOldBackgroundArtifacts();
+    tuneImages();
+
+    const home = document.querySelector(".home");
+    if (home && "IntersectionObserver" in window) {
+        new IntersectionObserver(([entry]) => {
+            homeVisible = entry.isIntersecting;
+            if (homeVisible) resumeFloatingMotion();
+            else pauseFloatingMotion();
+        }, { rootMargin: "100px 0px" }).observe(home);
+    }
+
+    const roomView = document.querySelector("#room-view");
+    if (roomView) {
+        new MutationObserver(() => tuneImages(roomView)).observe(roomView, {
+            childList: true,
+            subtree: true
+        });
+    }
+
+    new MutationObserver(() => {
+        clearOldBackgroundArtifacts();
+        if (document.body.classList.contains("room-open")) {
+            pauseFloatingMotion();
+        } else {
+            resumeFloatingMotion();
+        }
+    }).observe(document.body, {
+        attributes: true,
+        attributeFilter: ["class"]
+    });
+
+    document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+            pauseFloatingMotion();
+        } else {
+            clearOldBackgroundArtifacts();
+            resumeFloatingMotion();
+        }
+    });
+
+    window.addEventListener("pageshow", () => {
+        clearOldBackgroundArtifacts();
+        tuneImages();
+        resumeFloatingMotion();
+    });
+})();
+;
+(() => {
+    "use strict";
+
+    const interactiveSelector = [
+        "a",
+        "button",
+        "input",
+        "textarea",
+        "select",
+        "[role='button']",
+        "[data-project]",
+        "[data-room-tab]",
+        "[data-lightbox]",
+        ".language-toggle",
+        ".room-close",
+        ".sound-toggle",
+        ".sound-volume",
+        ".copy-email"
+    ].join(",");
+
+    const mediaSelector = [
+        "img",
+        "video",
+        "audio",
+        "canvas",
+        "svg",
+        "[data-protected-media]",
+        ".lightbox-image"
+    ].join(",");
+
+    function releaseProtectionState() {
+        document.body?.classList.remove("content-protection-active");
+        const preloader = document.querySelector(".preloader");
+        if (preloader?.classList.contains("is-hidden")) {
+            preloader.setAttribute("hidden", "");
+        }
+    }
+
+    function protectMediaOnly(root = document) {
+        root.querySelectorAll(mediaSelector).forEach((node) => {
+            node.setAttribute("draggable", "false");
+            node.setAttribute("data-protected-media", "true");
+            node.addEventListener("contextmenu", (event) => event.preventDefault(), { capture: true });
+            node.addEventListener("dragstart", (event) => event.preventDefault(), { capture: true });
+        });
+    }
+
+    function keepControlsResponsive(event) {
+        releaseProtectionState();
+        const target = event.target;
+        if (!target?.closest) return;
+
+        const control = target.closest(interactiveSelector);
+        if (!control) return;
+
+        control.style.pointerEvents = "auto";
+    }
+
+    function reduceTouchDecoration() {
+        if (!window.matchMedia("(hover: none), (pointer: coarse)").matches) return;
+        document.documentElement.classList.add("touch-interaction-safe");
+        document.querySelectorAll(".trail-image, .touch-burst, .cursor-fx-trail, .cursor-fx-pop").forEach((node) => {
+            node.remove();
+        });
+    }
+
+    ["pointerdown", "touchstart", "click", "scroll"].forEach((type) => {
+        document.addEventListener(type, keepControlsResponsive, { capture: true, passive: true });
+    });
+
+    window.addEventListener("pageshow", releaseProtectionState, { passive: true });
+    window.addEventListener("load", () => {
+        protectMediaOnly();
+        reduceTouchDecoration();
+        releaseProtectionState();
+        window.setTimeout(releaseProtectionState, 250);
+        window.setTimeout(releaseProtectionState, 1000);
+    }, { passive: true });
+
+    document.addEventListener("visibilitychange", releaseProtectionState, { passive: true });
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+            protectMediaOnly();
+            reduceTouchDecoration();
+            releaseProtectionState();
+        }, { once: true });
+    } else {
+        protectMediaOnly();
+        reduceTouchDecoration();
+        releaseProtectionState();
+    }
+
+    window.setInterval(releaseProtectionState, 1200);
+})();
+;
+(() => {
+  const protectedSelector = [
+    "img",
+    "picture",
+    "video",
+    "canvas",
+    "svg"
+  ].join(",");
+
+  const skipSelector = [
+    ".cursor",
+    ".preloader",
+    ".loader-mark",
+    ".protection-toast",
+    ".site-rights-note"
+  ].join(",");
+
+  const shortcutKeys = new Set(["s", "u", "p", "i", "j", "c"]);
+  let toastTimer = 0;
+  let protectTimer = 0;
+
+  const isZh = () => {
+    const html = document.documentElement;
+    return (html.dataset.language || html.lang || "").toLowerCase().startsWith("zh");
+  };
+
+  const message = () => isZh()
+    ? "\u4f5c\u54c1\u3001\u56fe\u7247\u4e0e\u6587\u5b57\u5df2\u53d7\u7248\u6743\u4fdd\u62a4\u3002"
+    : "Images, copy and concepts are protected.";
+
+  const rightsText = () => isZh()
+    ? "\u00a9 Zhefei Huang\u3002\u672c\u7ad9\u6240\u6709\u9879\u76ee\u6982\u5ff5\u3001\u6587\u5b57\u3001\u89c6\u89c9\u3001\u8bbe\u8ba1\u4e0e\u54c1\u724c\u7ec3\u4e60\u5747\u4e3a\u4e2a\u4eba\u539f\u521b\u4f5c\u54c1\u3002\u672a\u7ecf\u8bb8\u53ef\uff0c\u8bf7\u52ff\u4fdd\u5b58\u3001\u590d\u5236\u3001\u8f6c\u8f7d\u6216\u7528\u4e8e\u5546\u4e1a\u7528\u9014\u3002"
+    : "\u00a9 Zhefei Huang. All project concepts, copy, visuals, design and brand practice work on this site are original. Please do not save, copy, reproduce or use commercially without permission.";
+
+  const isEditable = (target) => {
+    if (!target || target === document) return false;
+    return Boolean(target.closest("input, textarea, select, [contenteditable='true']"));
+  };
+
+  const isAllowedCopyTarget = (target) => {
+    if (!target || target === document) return false;
+    return Boolean(target.closest(".contact, .email-address, .email-links, .copy-email"));
+  };
+
+  const showToast = () => {
+    let toast = document.querySelector(".protection-toast");
+    if (!toast) {
+      toast = document.createElement("div");
+      toast.className = "protection-toast";
+      toast.setAttribute("role", "status");
+      toast.setAttribute("aria-live", "polite");
+      document.body.appendChild(toast);
+    }
+
+    toast.textContent = message();
+    toast.classList.add("is-visible");
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => {
+      toast.classList.remove("is-visible");
+    }, 1600);
+  };
+
+  const block = (event) => {
+    if (isEditable(event.target)) return;
+    event.preventDefault();
+    showToast();
+  };
+
+  const protectNode = (node) => {
+    if (!node || node.closest?.(skipSelector)) return;
+    node.setAttribute("draggable", "false");
+    node.dataset.protectedAsset = "true";
+  };
+
+  const protectMedia = (root = document) => {
+    if (root instanceof Element && root.matches(protectedSelector)) protectNode(root);
+    root.querySelectorAll?.(protectedSelector).forEach(protectNode);
+  };
+
+  const scheduleProtectMedia = () => {
+    window.clearTimeout(protectTimer);
+    protectTimer = window.setTimeout(() => protectMedia(), 180);
+  };
+
+  const addRightsNote = () => {
+    if (document.querySelector(".site-rights-note")) return;
+    const note = document.createElement("p");
+    note.className = "site-rights-note";
+    note.textContent = rightsText();
+
+    const target = document.querySelector("main") || document.querySelector("#app") || document.body;
+    target.appendChild(note);
+  };
+
+  const installObserver = () => {
+    const observer = new MutationObserver((mutations) => {
+      let hasMediaChange = false;
+
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (!(node instanceof Element)) return;
+          if (node.matches(protectedSelector) || node.querySelector?.(protectedSelector)) {
+            hasMediaChange = true;
+          }
+        });
+      });
+
+      if (hasMediaChange) scheduleProtectMedia();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  };
+
+  const installEvents = () => {
+    document.addEventListener("contextmenu", (event) => {
+      if (isEditable(event.target) || isAllowedCopyTarget(event.target)) return;
+      event.preventDefault();
+      showToast();
+    }, true);
+
+    document.addEventListener("dragstart", (event) => {
+      if (event.target.closest(protectedSelector)) block(event);
+    }, true);
+
+    document.addEventListener("copy", (event) => {
+      if (isEditable(event.target) || isAllowedCopyTarget(event.target)) return;
+      event.preventDefault();
+      event.clipboardData?.setData("text/plain", rightsText());
+      showToast();
+    }, true);
+
+    document.addEventListener("keydown", (event) => {
+      const key = event.key.toLowerCase();
+      const protectedCombo = (event.ctrlKey || event.metaKey) && shortcutKeys.has(key);
+      const devtoolsCombo = (event.ctrlKey || event.metaKey) && event.shiftKey && ["i", "j", "c"].includes(key);
+      if (!protectedCombo && !devtoolsCombo) return;
+      if (isEditable(event.target) || (key === "c" && isAllowedCopyTarget(event.target))) return;
+      event.preventDefault();
+      showToast();
+    }, true);
+  };
+
+  const boot = () => {
+    document.documentElement.classList.add("protection-active");
+    protectMedia();
+    addRightsNote();
+    installEvents();
+    installObserver();
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", boot, { once: true });
+  } else {
+    boot();
+  }
+})();
