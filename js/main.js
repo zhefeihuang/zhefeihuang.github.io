@@ -104,7 +104,7 @@ const uiText = {
 const projectData = {
     generative: {
         theme: "generative",
-        cursor: "images/cursors/generative.png",
+        cursor: "images/home-float/generative.webp",
         background: "images/backgrounds/clean/generative-clean.jpg",
         bgPosition: "64% 45%",
         bgSize: "cover",
@@ -258,7 +258,7 @@ const projectData = {
     },
     oxidation: {
         theme: "oxidation",
-        cursor: "images/project1.png",
+        cursor: "images/home-float/oxidation.webp",
         background: "images/backgrounds/clean/oxidation-clean-no-text.jpg",
         bgPosition: "54% 52%",
         bgSize: "cover",
@@ -298,7 +298,7 @@ const projectData = {
             "images/oxidation-supplement/oxidation-outcome-detail-04.jpg"
         ],
         video: "videos/video1.mp4",
-        audio: "videos/video1.mp4",
+        audio: "audio/oxidation-audio.m4a",
         audioStart: 3.2,
         soundTitle: { en: "Flute / Space / Memory", zh: "长笛 / 空间 / 记忆" },
         soundText: {
@@ -411,8 +411,8 @@ bgAudio.volume = Number(soundVolume.value);
 updateVolumeVisual();
 
 const trailImages = [
-    "images/project1.png",
-    "images/cursors/generative.png",
+    "images/home-float/oxidation.webp",
+    "images/home-float/generative.webp",
     "images/cursors/mossy.png",
     "images/cursors/cherries.png",
     "images/cursors/trending.png",
@@ -981,7 +981,7 @@ function renderStory(project) {
     return `
         <div class="pane story-pane">
             <button class="story-media media-button" type="button" data-lightbox="${escapeHtml(project.storyImage)}" aria-label="Open image">
-                <img src="${escapeHtml(project.storyImage)}" alt="${escapeHtml(localize(project.title))}">
+                <img src="${escapeHtml(project.storyImage)}" alt="${escapeHtml(localize(project.title))}" decoding="async" fetchpriority="high">
             </button>
             <div class="story-text">
                 ${storyBlock("01", t("labelQuestion"), localize(project.question), "h3")}
@@ -1003,7 +1003,7 @@ function storyBlock(number, label, copy, tagName) {
 function renderPhotoStory(project) {
     const stack = (project.stackImages || project.images.slice(0, 5)).map((src, index) => `
         <button class="photo-stack-item" type="button" data-lightbox="${escapeHtml(src)}" aria-label="Open photograph ${index + 1}">
-            <img src="${escapeHtml(src)}" alt="${escapeHtml(localize(project.title))} photograph ${index + 1}">
+            <img src="${escapeHtml(src)}" alt="${escapeHtml(localize(project.title))} photograph ${index + 1}" decoding="async">
         </button>`).join("");
     return `
         <div class="pane photo-cover">
@@ -1021,7 +1021,7 @@ function renderImages(project) {
     const images = project.images.map((src, index) => `
         <figure class="process-item">
             <button class="media-button" type="button" data-lightbox="${escapeHtml(src)}" aria-label="Open process image ${index + 1}">
-                <img src="${escapeHtml(src)}" alt="${escapeHtml(localize(project.title))} process image ${index + 1}" loading="lazy">
+                <img src="${escapeHtml(src)}" alt="${escapeHtml(localize(project.title))} process image ${index + 1}" loading="lazy" decoding="async">
             </button>
             <figcaption class="process-caption">${escapeHtml(t("processItem"))} ${String(index + 1).padStart(2, "0")}</figcaption>
         </figure>`).join("");
@@ -1034,7 +1034,7 @@ function renderImages(project) {
 function renderPhotoTable(project) {
     const images = project.images.map((src, index) => `
         <button class="photo-tile ${index === 0 ? "photo-lead" : "photo-sequence"}" type="button" data-lightbox="${escapeHtml(src)}" aria-label="Open photograph ${index + 1}">
-            <img src="${escapeHtml(src)}" alt="${escapeHtml(localize(project.title))} photograph ${index + 1}" loading="lazy">
+            <img src="${escapeHtml(src)}" alt="${escapeHtml(localize(project.title))} photograph ${index + 1}" loading="lazy" decoding="async">
         </button>`).join("");
     return `<div class="pane photo-table ordered-photos">${images}</div>`;
 }

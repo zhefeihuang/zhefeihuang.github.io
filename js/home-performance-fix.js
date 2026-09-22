@@ -1,5 +1,6 @@
 (() => {
     const eagerZones = ".preloader, .cursor, .floating-stage";
+    let homeVisible = true;
 
     function tuneImages(root = document) {
         root.querySelectorAll("img").forEach((image) => {
@@ -33,6 +34,7 @@
                 typeof floatingAnimationFrame === "undefined" ||
                 typeof animateFloatingProjects !== "function" ||
                 floatingAnimationFrame ||
+                !homeVisible ||
                 document.hidden ||
                 document.body.classList.contains("room-open")
             ) {
@@ -47,6 +49,15 @@
 
     clearOldBackgroundArtifacts();
     tuneImages();
+
+    const home = document.querySelector(".home");
+    if (home && "IntersectionObserver" in window) {
+        new IntersectionObserver(([entry]) => {
+            homeVisible = entry.isIntersecting;
+            if (homeVisible) resumeFloatingMotion();
+            else pauseFloatingMotion();
+        }, { rootMargin: "100px 0px" }).observe(home);
+    }
 
     const roomView = document.querySelector("#room-view");
     if (roomView) {

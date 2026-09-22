@@ -21,7 +21,7 @@
     };
     const cursorAssets = {
         default: asset("images/cursors/oxidation.png"),
-        generative: asset("images/cursors/generative.png"),
+        generative: asset("images/home-float/generative.webp"),
         oxidation: asset("images/cursors/oxidation.png"),
         mossy: asset("images/cursors/mossy.png"),
         cherries: asset("images/cursors/cherries.png"),
@@ -144,8 +144,11 @@
     function updatePointerMode() {
         const isFine = finePointer.matches && !reducedMotion.matches;
         document.body.classList.toggle("cursor-effects-ready", isFine);
-        if (isFine && !raf) raf = window.requestAnimationFrame(animateCursor);
-        if (!isFine) cursor.root.classList.remove("is-visible");
+        if (!isFine) {
+            cursor.root.classList.remove("is-visible");
+            if (raf) window.cancelAnimationFrame(raf);
+            raf = 0;
+        }
     }
 
     function handlePointerMove(event) {
@@ -162,6 +165,7 @@
 
         if (finePointer.matches && !reducedMotion.matches) {
             cursor.root.classList.add("is-visible");
+            if (!raf) raf = window.requestAnimationFrame(animateCursor);
             maybeSwapIdleCursor(performance.now());
         }
     }
@@ -194,6 +198,11 @@
     }
 
     function animateCursor() {
+        if (document.hidden || !cursor.root.classList.contains("is-visible")) {
+            raf = 0;
+            return;
+        }
+
         const dx = pointerX - cursorX;
         const dy = pointerY - cursorY;
         cursorX += dx * 0.28;
