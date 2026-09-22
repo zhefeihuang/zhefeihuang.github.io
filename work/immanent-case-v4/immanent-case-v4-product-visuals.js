@@ -1,7 +1,7 @@
 (function () {
   const assets = {
-    peel: "/images/immanent-v4/01_PEEL_exploded_view_final.png",
-    pulp: "/images/immanent-v4/IMMANENT_01_PULP_open_action.png"
+    peel: "/images/immanent-v4/01_PEEL_exploded_view_final.webp",
+    pulp: "/images/immanent-v4/IMMANENT_01_PULP_open_action.webp"
   };
 
   const copy = {

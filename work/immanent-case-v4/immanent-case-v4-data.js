@@ -3,7 +3,7 @@
 
   const assets = {
     heroDuo: {
-      src: assetBase + "IMMANENT_14_DUO_pair_styled_pomelo.png",
+      src: assetBase + "IMMANENT_14_DUO_pair_styled_pomelo.webp",
       ratio: "1086:1448",
       type: "photography",
       fit: "cover",
@@ -11,7 +11,7 @@
       alt: { en: "PEEL 01 and PULP 01 styled with pomelo.", zh: "PEEL 01 与 PULP 01 以柚子素材共同呈现。" }
     },
     sourceStill: {
-      src: assetBase + "04_Duo_luxury_mood_source_still_life.png",
+      src: assetBase + "04_Duo_luxury_mood_source_still_life.webp",
       ratio: "1448:1086",
       type: "photography",
       fit: "cover",
@@ -19,7 +19,7 @@
       alt: { en: "Pomelo source still life with PEEL 01 and PULP 01.", zh: "以柚子来源为核心的 PEEL 01 与 PULP 01 静物图。" }
     },
     peelMain: {
-      src: assetBase + "IMMANENT_05_PEEL_front_main.png",
+      src: assetBase + "IMMANENT_05_PEEL_front_main.webp",
       ratio: "1086:1448",
       type: "packshot",
       fit: "contain",
@@ -27,7 +27,7 @@
       alt: { en: "PEEL 01 front packshot.", zh: "PEEL 01 正面产品图。" }
     },
     peelTactile: {
-      src: assetBase + "03_PEEL_tactile_detail_hero.png",
+      src: assetBase + "03_PEEL_tactile_detail_hero.webp",
       ratio: "1122:1402",
       type: "photography",
       fit: "cover",
@@ -35,7 +35,7 @@
       alt: { en: "PEEL 01 tactile cap detail.", zh: "PEEL 01 触感盖体细节。" }
     },
     peelCapDetail: {
-      src: assetBase + "IMMANENT_04_PEEL_cap_detail.png",
+      src: assetBase + "IMMANENT_04_PEEL_cap_detail.webp",
       ratio: "1086:1448",
       type: "photography",
       fit: "cover",
@@ -43,7 +43,7 @@
       alt: { en: "PEEL 01 cap and material detail.", zh: "PEEL 01 盖体与材料细节。" }
     },
     peelOpen: {
-      src: assetBase + "IMMANENT_03_PEEL_open_action_rollerball.png",
+      src: assetBase + "IMMANENT_03_PEEL_open_action_rollerball.webp",
       ratio: "1086:1448",
       type: "photography",
       fit: "cover",
@@ -51,7 +51,7 @@
       alt: { en: "PEEL 01 open roller-ball action.", zh: "PEEL 01 打开后的滚珠使用状态。" }
     },
     peelAngled: {
-      src: assetBase + "IMMANENT_02_PEEL_front_angled.png",
+      src: assetBase + "IMMANENT_02_PEEL_front_angled.webp",
       ratio: "1086:1448",
       type: "photography",
       fit: "cover",
@@ -59,7 +59,7 @@
       alt: { en: "PEEL 01 angled product view.", zh: "PEEL 01 斜角产品视图。" }
     },
     peelExploded: {
-      src: assetBase + "01_PEEL_exploded_view_final.png",
+      src: assetBase + "01_PEEL_exploded_view_final.webp",
       ratio: "1254:1254",
       type: "diagram",
       fit: "contain",
@@ -67,7 +67,7 @@
       alt: { en: "PEEL 01 concept architecture diagram.", zh: "PEEL 01 概念结构方案图。" }
     },
     pulpMain: {
-      src: assetBase + "IMMANENT_07_PULP_front_main.png",
+      src: assetBase + "IMMANENT_07_PULP_front_main.webp",
       ratio: "1086:1448",
       type: "packshot",
       fit: "contain",
@@ -75,7 +75,7 @@
       alt: { en: "PULP 01 front packshot.", zh: "PULP 01 正面产品图。" }
     },
     pulpCap: {
-      src: assetBase + "IMMANENT_08_PULP_measuring_cap_detail.png",
+      src: assetBase + "IMMANENT_08_PULP_measuring_cap_detail.webp",
       ratio: "1086:1448",
       type: "photography",
       fit: "cover",
@@ -83,7 +83,7 @@
       alt: { en: "PULP 01 measuring cap detail.", zh: "PULP 01 量杯盖细节。" }
     },
     pulpOpen: {
-      src: assetBase + "IMMANENT_01_PULP_open_action.png",
+      src: assetBase + "IMMANENT_01_PULP_open_action.webp",
       ratio: "1086:1448",
       type: "photography",
       fit: "cover",
@@ -91,7 +91,7 @@
       alt: { en: "PULP 01 open bottle state.", zh: "PULP 01 打开状态。" }
     },
     pulpRitual: {
-      src: assetBase + "02_PULP_ritual_measured_pour_hero.png",
+      src: assetBase + "02_PULP_ritual_measured_pour_hero.webp",
       ratio: "1448:1086",
       type: "photography",
       fit: "cover",
@@ -99,7 +99,7 @@
       alt: { en: "PULP 01 measured pouring ritual.", zh: "PULP 01 计量倒取仪式。" }
     },
     pulpPour: {
-      src: assetBase + "IMMANENT_06_PULP_usage_pouring.png",
+      src: assetBase + "IMMANENT_06_PULP_usage_pouring.webp",
       ratio: "1086:1448",
       type: "photography",
       fit: "cover",
@@ -107,7 +107,7 @@
       alt: { en: "PULP 01 serving pour.", zh: "PULP 01 调饮倒取。" }
     },
     pulpStill: {
-      src: assetBase + "IMMANENT_12_PULP_still_life_pomelo.png",
+      src: assetBase + "IMMANENT_12_PULP_still_life_pomelo.webp",
       ratio: "1086:1448",
       type: "photography",
       fit: "cover",
@@ -115,7 +115,7 @@
       alt: { en: "PULP 01 still life with pomelo.", zh: "PULP 01 与柚子静物图。" }
     },
     duoClean: {
-      src: assetBase + "IMMANENT_10_DUO_pair_front_clean.png",
+      src: assetBase + "IMMANENT_10_DUO_pair_front_clean.webp",
       ratio: "1086:1448",
       type: "packshot",
       fit: "contain",
@@ -123,7 +123,7 @@
       alt: { en: "Clean PEEL 01 and PULP 01 duo packshot.", zh: "PEEL 01 与 PULP 01 组合产品图。" }
     },
     giftBox: {
-      src: assetBase + "IMMANENT_13_PACKAGING_gift_box.png",
+      src: assetBase + "IMMANENT_13_PACKAGING_gift_box.webp",
       ratio: "1086:1448",
       type: "photography",
       fit: "cover",
@@ -131,7 +131,7 @@
       alt: { en: "IMMANENT gift box and product pair.", zh: "IMMANENT 礼盒与产品套组。" }
     },
     retail: {
-      src: assetBase + "05_Retail_counter_display_refined_scene.png",
+      src: assetBase + "05_Retail_counter_display_refined_scene.webp",
       ratio: "1448:1086",
       type: "photography",
       fit: "cover",
@@ -139,7 +139,7 @@
       alt: { en: "Refined retail counter scene for IMMANENT.", zh: "IMMANENT 精修零售台面场景。" }
     },
     moodDuo: {
-      src: assetBase + "IMMANENT_16_DUO_pair_styled_luxe.png",
+      src: assetBase + "IMMANENT_16_DUO_pair_styled_luxe.webp",
       ratio: "1122:1402",
       type: "photography",
       fit: "cover",
