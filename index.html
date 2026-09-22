@@ -89,6 +89,57 @@
                 transform: scale(0.88) !important;
             }
         }
+
+        html body.portfolio-clean-home:not(.room-open) .home-work-title,
+        html body.portfolio-clean-home:not(.room-open) .home-note {
+            left: calc(50% - 50vw + max(0px, 50vw - 660px) + var(--page-gutter)) !important;
+        }
+
+        html body.portfolio-clean-home:not(.room-open) .home-note::before {
+            order: 2 !important;
+        }
+
+        @media (max-width: 820px) {
+            html body.portfolio-clean-home:not(.room-open) .floating-stage {
+                --mobile-floater-size: clamp(112px, 20vw, 140px);
+            }
+
+            html body.portfolio-clean-home:not(.room-open) .floating-stage .floating-project {
+                width: var(--mobile-floater-size) !important;
+                height: var(--mobile-floater-size) !important;
+                min-height: 0 !important;
+                max-width: var(--mobile-floater-size) !important;
+                padding: 0 !important;
+                display: grid !important;
+                place-items: center !important;
+            }
+
+            html body.portfolio-clean-home:not(.room-open) .floating-stage .floating-project img,
+            html body.portfolio-clean-home:not(.room-open) .floating-stage .floating-project:is(:hover, :focus-visible, :active) img {
+                display: block !important;
+                width: 100% !important;
+                height: 100% !important;
+                max-width: 100% !important;
+                max-height: 100% !important;
+                margin: 0 !important;
+                object-fit: contain !important;
+                transform: none !important;
+            }
+        }
+
+        @media (max-width: 430px) {
+            html body.portfolio-clean-home:not(.room-open) .floating-stage {
+                --mobile-floater-size: clamp(94px, 28vw, 118px);
+            }
+
+            html body.portfolio-clean-home:not(.room-open) .home-note {
+                top: 180px !important;
+            }
+
+            html body.portfolio-clean-home:not(.room-open) .home-note::before {
+                display: none !important;
+            }
+        }
     </style>
 </head>
 <body class="portfolio-clean-home">
