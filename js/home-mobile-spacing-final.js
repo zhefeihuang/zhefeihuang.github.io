@@ -13,11 +13,12 @@
 
       if (!phone && !compact && !touchSafe) return base;
 
+      const smallViewport = window.innerWidth <= 820;
       return {
         ...base,
         gap: phone ? 14 : compact ? 8 : Math.max(base.gap ?? 0, 4),
-        radiusScale: phone ? 0.34 : compact ? 0.3 : Math.max(base.radiusScale ?? 0.26, 0.28),
-        separationStrength: phone ? 0.46 : compact ? 0.32 : Math.max(base.separationStrength ?? 0.18, 0.24),
+        radiusScale: smallViewport ? 0.55 : compact ? 0.3 : Math.max(base.radiusScale ?? 0.26, 0.28),
+        separationStrength: smallViewport ? 0.5 : compact ? 0.32 : Math.max(base.separationStrength ?? 0.18, 0.24),
         impulseScale: phone ? 0.16 : compact ? 0.2 : Math.max(base.impulseScale ?? 0.18, 0.2),
         kickScale: phone ? 0.1 : compact ? 0.13 : Math.max(base.kickScale ?? 0.11, 0.13),
         turnForce: phone ? Math.max(base.turnForce ?? 0, 3.4) : base.turnForce,

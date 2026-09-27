@@ -991,8 +991,14 @@ function refreshFloatingProjectSizes() {
     floaters.forEach((floater) => {
         const rect = floater.element.getBoundingClientRect();
         const minSize = floatingMotionSettings.phone ? 56 : 96;
-        floater.width = Math.max(rect.width || 0, floater.width, minSize);
-        floater.height = Math.max(rect.height || 0, floater.height, minSize);
+        if (window.innerWidth <= 820) {
+            // Layout dimensions exclude rotation and can shrink after a viewport change.
+            floater.width = Math.max(floater.element.offsetWidth, 1);
+            floater.height = Math.max(floater.element.offsetHeight, 1);
+        } else {
+            floater.width = Math.max(rect.width || 0, floater.width, minSize);
+            floater.height = Math.max(rect.height || 0, floater.height, minSize);
+        }
         bounceFloatingProject(floater);
         keepFloatingSpeed(floater);
     });
@@ -1008,8 +1014,8 @@ function setupFloatingProjects() {
     floaters = items.map((element, index) => {
         const rect = element.getBoundingClientRect();
         const minSize = floatingMotionSettings.phone ? 56 : 96;
-        const width = Math.max(rect.width || 0, minSize);
-        const height = Math.max(rect.height || 0, minSize);
+        const width = window.innerWidth <= 820 ? Math.max(element.offsetWidth, 1) : Math.max(rect.width || 0, minSize);
+        const height = window.innerWidth <= 820 ? Math.max(element.offsetHeight, 1) : Math.max(rect.height || 0, minSize);
         const position = placeFloatingProject(index, items.length, width, height);
         const angle = randomBetween(0, Math.PI * 2);
         const speed = randomBetween(floatingMotionSettings.speedMin, floatingMotionSettings.speedMax);
@@ -2266,11 +2272,12 @@ window.addEventListener("keydown", (event) => {
 
       if (!phone && !compact && !touchSafe) return base;
 
+      const smallViewport = window.innerWidth <= 820;
       return {
         ...base,
         gap: phone ? 14 : compact ? 8 : Math.max(base.gap ?? 0, 4),
-        radiusScale: phone ? 0.34 : compact ? 0.3 : Math.max(base.radiusScale ?? 0.26, 0.28),
-        separationStrength: phone ? 0.46 : compact ? 0.32 : Math.max(base.separationStrength ?? 0.18, 0.24),
+        radiusScale: smallViewport ? 0.55 : compact ? 0.3 : Math.max(base.radiusScale ?? 0.26, 0.28),
+        separationStrength: smallViewport ? 0.5 : compact ? 0.32 : Math.max(base.separationStrength ?? 0.18, 0.24),
         impulseScale: phone ? 0.16 : compact ? 0.2 : Math.max(base.impulseScale ?? 0.18, 0.2),
         kickScale: phone ? 0.1 : compact ? 0.13 : Math.max(base.kickScale ?? 0.11, 0.13),
         turnForce: phone ? Math.max(base.turnForce ?? 0, 3.4) : base.turnForce,

@@ -720,8 +720,14 @@ function refreshFloatingProjectSizes() {
     floaters.forEach((floater) => {
         const rect = floater.element.getBoundingClientRect();
         const minSize = floatingMotionSettings.phone ? 56 : 96;
-        floater.width = Math.max(rect.width || 0, floater.width, minSize);
-        floater.height = Math.max(rect.height || 0, floater.height, minSize);
+        if (window.innerWidth <= 820) {
+            // Layout dimensions exclude rotation and can shrink after a viewport change.
+            floater.width = Math.max(floater.element.offsetWidth, 1);
+            floater.height = Math.max(floater.element.offsetHeight, 1);
+        } else {
+            floater.width = Math.max(rect.width || 0, floater.width, minSize);
+            floater.height = Math.max(rect.height || 0, floater.height, minSize);
+        }
         bounceFloatingProject(floater);
         keepFloatingSpeed(floater);
     });
@@ -737,8 +743,8 @@ function setupFloatingProjects() {
     floaters = items.map((element, index) => {
         const rect = element.getBoundingClientRect();
         const minSize = floatingMotionSettings.phone ? 56 : 96;
-        const width = Math.max(rect.width || 0, minSize);
-        const height = Math.max(rect.height || 0, minSize);
+        const width = window.innerWidth <= 820 ? Math.max(element.offsetWidth, 1) : Math.max(rect.width || 0, minSize);
+        const height = window.innerWidth <= 820 ? Math.max(element.offsetHeight, 1) : Math.max(rect.height || 0, minSize);
         const position = placeFloatingProject(index, items.length, width, height);
         const angle = randomBetween(0, Math.PI * 2);
         const speed = randomBetween(floatingMotionSettings.speedMin, floatingMotionSettings.speedMax);
