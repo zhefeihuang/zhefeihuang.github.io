@@ -13,6 +13,7 @@ const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 if (pagesElement) {
   const figures = [...pagesElement.querySelectorAll('.pdf-page')];
   const states = figures.map((figure, index) => {
+    const preserveAppearance = figure.dataset.renderMode === 'vector';
     figure.dataset.page = String(index + 1);
     if (!figure.id) figure.id = `page-${index + 1}`;
     figure.setAttribute('aria-label', `作品集第 ${index + 1} 页，共 ${figures.length} 页`);
@@ -24,9 +25,9 @@ if (pagesElement) {
     }
     canvas.hidden = true;
     canvas.setAttribute('aria-hidden', 'true');
-    figure.dataset.renderState = 'idle';
+    figure.dataset.renderState = preserveAppearance ? 'ready' : 'idle';
     return {
-      number: index + 1, figure, canvas, visible: false, near: false,
+      number: index + 1, figure, canvas, preserveAppearance, visible: false, near: false,
       renderedWidth: 0, renderedScale: 0, rendering: false, renderTask: null, page: null,
       pixels: 0, lastUsed: 0, revision: 0,
     };
@@ -153,6 +154,9 @@ if (pagesElement) {
   }
 
   function requestRender(state) {
+    // Verified vector previews preserve nested transparency that this PDF.js
+    // version cannot composite faithfully. Keep them sharp at any zoom level.
+    if (state.preserveAppearance) return;
     if (!pdf || state.rendering) return;
     if (!needsRender(state)) return;
     queue.add(state);
