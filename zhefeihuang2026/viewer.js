@@ -27,7 +27,7 @@ if (pagesElement) {
     figure.dataset.renderState = 'idle';
     return {
       number: index + 1, figure, canvas, visible: false, near: false,
-      renderedWidth: 0, rendering: false, renderTask: null, page: null,
+      renderedWidth: 0, renderedScale: 0, rendering: false, renderTask: null, page: null,
       pixels: 0, lastUsed: 0, revision: 0,
     };
   });
@@ -38,6 +38,7 @@ if (pagesElement) {
   let pdf = null;
   let activeRenders = 0;
   let resizeTimer;
+  let viewportTimer;
   let readerWidth = Math.round(pagesElement.getBoundingClientRect().width);
   const queue = new Set();
   const narrowScreen = () => window.innerWidth < 800;
@@ -111,6 +112,21 @@ if (pagesElement) {
     return Math.max(1, Math.round(state.figure.getBoundingClientRect().width));
   }
 
+  function targetRenderScale(state, width = currentRenderWidth(state)) {
+    const rect = state.figure.getBoundingClientRect();
+    const aspect = rect.width / Math.max(1, rect.height);
+    const cssPixels = width * width / aspect;
+    const zoom = Math.max(1, window.visualViewport?.scale || 1);
+    const desiredScale = (window.devicePixelRatio || 1) * zoom;
+    return Math.min(desiredScale, Math.sqrt(maxCanvasPixels() / cssPixels));
+  }
+
+  function needsRender(state) {
+    const width = currentRenderWidth(state);
+    return !state.pixels || Math.abs(width - state.renderedWidth) > 1 ||
+      targetRenderScale(state, width) > state.renderedScale * 1.05;
+  }
+
   function unload(state) {
     if (state.rendering || !state.pixels) return;
     state.canvas.hidden = true;
@@ -118,6 +134,7 @@ if (pagesElement) {
     state.canvas.height = 0;
     state.pixels = 0;
     state.renderedWidth = 0;
+    state.renderedScale = 0;
     state.figure.dataset.renderState = 'idle';
     state.page?.cleanup();
   }
@@ -137,8 +154,7 @@ if (pagesElement) {
 
   function requestRender(state) {
     if (!pdf || state.rendering) return;
-    const width = currentRenderWidth(state);
-    if (state.pixels && Math.abs(width - state.renderedWidth) <= 1) return;
+    if (!needsRender(state)) return;
     queue.add(state);
     pumpQueue();
   }
@@ -157,7 +173,7 @@ if (pagesElement) {
       state.renderTask = null;
       activeRenders -= 1;
       trimCanvases();
-      if (state.near && (!state.pixels || Math.abs(currentRenderWidth(state) - state.renderedWidth) > 1)) {
+      if (state.near && needsRender(state)) {
         // A resize can invalidate a render while it is finishing.
         if (state.figure.dataset.renderState !== 'failed') queue.add(state);
       }
@@ -176,9 +192,7 @@ if (pagesElement) {
       const width = currentRenderWidth(state);
       const baseViewport = page.getViewport({ scale: 1 });
       const cssScale = width / baseViewport.width;
-      const desiredDpr = Math.min(window.devicePixelRatio || 1, 2.5);
-      const cssPixels = width * (baseViewport.height * cssScale);
-      const outputScale = Math.min(desiredDpr, Math.sqrt(maxCanvasPixels() / cssPixels));
+      const outputScale = targetRenderScale(state, width);
       const viewport = page.getViewport({ scale: cssScale * outputScale });
       canvas.hidden = true;
       canvas.width = Math.max(1, Math.floor(viewport.width));
@@ -196,6 +210,7 @@ if (pagesElement) {
       canvas.hidden = false;
       state.figure.dataset.renderState = 'ready';
       state.renderedWidth = width;
+      state.renderedScale = outputScale;
       state.pixels = canvas.width * canvas.height;
       state.lastUsed = performance.now();
       if (state.number === 1) setStatus('作品集已就绪');
@@ -206,6 +221,7 @@ if (pagesElement) {
       canvas.height = 0;
       state.pixels = 0;
       state.renderedWidth = 0;
+      state.renderedScale = 0;
       if (error?.name === 'RenderingCancelledException' || revision !== state.revision) {
         state.figure.dataset.renderState = 'idle';
       } else {
@@ -283,6 +299,20 @@ if (pagesElement) {
   }
   if ('ResizeObserver' in window) new ResizeObserver(handleWidthChange).observe(pagesElement);
   else window.addEventListener('resize', handleWidthChange, { passive: true });
+
+  function handleVisualViewportChange() {
+    clearTimeout(viewportTimer);
+    viewportTimer = window.setTimeout(() => {
+      const viewportTop = window.visualViewport?.offsetTop || 0;
+      const viewportBottom = viewportTop + (window.visualViewport?.height || window.innerHeight);
+      for (const state of states) {
+        const rect = state.figure.getBoundingClientRect();
+        if (rect.bottom > viewportTop && rect.top < viewportBottom) requestRender(state);
+      }
+    }, 180);
+  }
+  window.visualViewport?.addEventListener('resize', handleVisualViewportChange, { passive: true });
+  window.visualViewport?.addEventListener('scroll', handleVisualViewportChange, { passive: true });
   scheduleScrollUpdate();
 
   async function enhanceWithPDF() {
@@ -292,7 +322,8 @@ if (pagesElement) {
       const pdfjs = await import('./vendor/pdf.mjs');
       pdfjs.GlobalWorkerOptions.workerSrc = new URL('./vendor/pdf.worker.mjs', import.meta.url).href;
       const task = pdfjs.getDocument({
-        url: new URL('./ZhefeiHuang_SelectedWorks202611.pdf', import.meta.url).href,
+        url: document.querySelector('#native-open')?.href ||
+          new URL('./ZhefeiHuang_SelectedWorks202611.pdf', import.meta.url).href,
         cMapUrl: new URL('./vendor/cmaps/', import.meta.url).href,
         cMapPacked: true,
         standardFontDataUrl: new URL('./vendor/standard_fonts/', import.meta.url).href,
