@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="referrer" content="no-referrer">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self' https://raw.githubusercontent.com; base-uri 'none'; form-action 'none'; object-src 'none'">
   <title>黄浙菲 · 作品集</title>
   <style>
     :root{color-scheme:light;--paper:#f4f1e9;--ink:#333a31;--muted:#777a70;--line:#d4d2c7}
@@ -45,6 +45,7 @@
   </main>
   <script>
     'use strict';
+    const ASSET_BASE='https://raw.githubusercontent.com/zhefeihuang/zhefeihuang.github.io/main/receive/af3b263cab1343da2a78e5d886659b65/';
     const statusElement=document.getElementById('status');
     const progressElement=document.getElementById('progress');
     let objectURL;
@@ -76,12 +77,14 @@
       try{
         const keyBytes=decodeKey(location.hash.slice(1));
         if(!globalThis.crypto || !crypto.subtle)throw new Error('insecure-browser');
-        const manifestResponse=await fetch('./manifest.json',{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'});
+        const manifestURL=new URL('manifest.json',ASSET_BASE);manifestURL.searchParams.set('t',String(Date.now()));
+        const manifestResponse=await fetch(manifestURL,{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'});
         if(!manifestResponse.ok)throw new Error('fetch-failed');
         const manifest=await manifestResponse.json();
         if(!Number.isSafeInteger(manifest.bytes)||manifest.bytes<=0||!Number.isSafeInteger(manifest.pages)||!/^[a-fA-F0-9]{64}$/.test(manifest.sha256)||typeof manifest.filename!=='string')throw new Error('manifest-invalid');
         document.getElementById('details').textContent=manifest.pages+' 页 · '+(manifest.bytes/1000000).toFixed(1)+' MB · PDF';
-        const response=await fetch('./portfolio.enc',{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'});
+        const encryptedURL=new URL('portfolio.enc',ASSET_BASE);encryptedURL.searchParams.set('v',manifest.sha256);
+        const response=await fetch(encryptedURL,{cache:'no-store',credentials:'omit',referrerPolicy:'no-referrer'});
         if(!response.ok)throw new Error('fetch-failed');
         const encrypted=await readEncrypted(response);
         if(encrypted.length<29)throw new Error('file-invalid');
