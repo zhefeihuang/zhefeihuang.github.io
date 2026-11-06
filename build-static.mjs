@@ -10,7 +10,8 @@ const entries = [
   "images",
   "videos",
   "audio",
-  "projects"
+  "projects",
+  "zhefeihuang2026"
 ];
 
 await rm(dist, { recursive: true, force: true });
