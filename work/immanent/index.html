@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#F4EBDF">
+  <meta name="robots" content="noindex,nofollow,noai,noimageai">
+  <meta name="copyright" content="© 2026 黄浙菲 Zhefei Huang">
+  <meta name="description" content="IMMANENT 蕴 — 一枚柚子，连接贴肤香氛与植物调饮。黄浙菲 Zhefei Huang 的自主品牌设计概念。">
+  <title>IMMANENT 蕴 — One pomelo. Two rituals.</title>
+  <link rel="canonical" href="https://zhefeihuang.github.io/work/immanent/">
+  <link rel="preload" href="assets/Newsreader.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/duo.webp" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="style.css?v=20261109-1">
+  <script src="app.js?v=20261109-1" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">跳至内容</a>
+  <header class="site-header">
+    <a href="./" class="brand" data-home aria-label="IMMANENT 蕴 首页">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><path d="M54.85 14.15A29 29 0 1 1 52.15 11.14M51.86 16.49A25.2 25.2 0 1 1 49.51 13.87"/><circle cx="32" cy="32" r="2.6"/><path d="M32 6.8v22.6M32 34.6v22.6M6.8 32h22.6M34.6 32h22.6M14.18 14.18l15.98 15.98M33.84 33.84l15.98 15.98M49.82 14.18 33.84 30.16M30.16 33.84 14.18 49.82"/></svg>
+      <span>IMMANENT</span>
+    </a>
+    <nav class="header-nav" aria-label="主要导航">
+      <a href="./#products" data-section="products">产品</a>
+      <a href="./#source" data-section="source">来源</a>
+      <a href="./#rituals" data-section="rituals">使用仪式</a>
+    </nav>
+    <button class="bag-trigger" data-bag aria-haspopup="dialog" aria-controls="bag-dialog" aria-label="打开购物袋，0件商品">
+      <span class="bag-label">购物袋</span><span data-bag-count>0</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12l1 13H5L6 8Zm3 0V6a3 3 0 0 1 6 0v2"/></svg>
+    </button>
+  </header>
+  <main id="main" tabindex="-1"></main>
+  <footer class="site-footer">
+    <span class="footer-brand">IMMANENT / 蕴</span>
+    <span>One pomelo. Two rituals.</span>
+    <small>品牌设计交互原型 · 价格为概念零售目标，不产生真实交易。</small>
+    <small class="copyright">© 2026 黄浙菲 Zhefei Huang · 未授权转载、改编或商用 · 禁止冒名发布</small>
+  </footer>
+  <dialog id="bag-dialog" aria-labelledby="bag-title">
+    <div class="bag-shell">
+      <header class="bag-header">
+        <div><p class="eyebrow">YOUR SELECTION</p><h2 id="bag-title">购物袋 <span data-dialog-count>0</span></h2></div>
+        <button class="close-button" data-close aria-label="关闭购物袋"><svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+      </header>
+      <div id="bag-content"></div>
+    </div>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  <noscript><p class="script-note">此页面的产品浏览与购物袋需要开启 JavaScript。你也可以<a href="../../zhefeihuang2026/">查看完整作品集</a>。</p></noscript>
+</body>
+</html>

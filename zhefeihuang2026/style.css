@@ -94,5 +94,15 @@ main,.header-inner,.reader,.reader-toolbar,.pdf-pages{min-width:0}
 .page-fallback a{font-size:11px;text-underline-offset:4px;text-decoration:underline}
 .nojs-preview{visibility:visible!important}
 @supports not (overflow:clip){html{overflow-x:hidden}}
+.brand-site-hotspot{position:absolute;z-index:2;display:block;border-radius:2px}
+.brand-site-hotspot:focus-visible{outline:2px solid var(--accent);outline-offset:3px;background:rgba(245,243,237,.12)}
+.brand-site-cta{left:5.5235%;top:72.4641%;width:9.873%;height:4.8896%}
+.brand-site-url{left:3.2174%;top:90.4%;width:25.5%;height:3.2%}
+.project-website{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 0 16px;border-bottom:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.8}
+.project-website p{margin:0;letter-spacing:.12em}.project-website p span{margin-left:14px;letter-spacing:.04em}
+.project-website>a{display:flex;align-items:center;gap:9px;min-height:44px;flex-wrap:wrap;padding-block:6px;letter-spacing:.04em}
+.project-website>a:hover{color:var(--ink)}.project-website .icon{width:14px;height:14px}
+.project-website-address{margin-left:12px;font-size:10px;letter-spacing:0;overflow-wrap:anywhere}
+@media(max-width:600px){.project-website{gap:8px;align-items:flex-start;padding-bottom:12px;font-size:10px}.project-website p{padding-top:8px;white-space:nowrap}.project-website p span{display:block;margin-left:0;font-size:9px}.project-website>a{max-width:75%;justify-content:flex-end;gap:7px;font-size:11px;min-height:44px}.project-website-address{flex-basis:100%;text-align:right;margin-left:0;font-size:9px}.project-website .icon{width:12px;height:12px}}
 @media(max-width:600px){.page-fallback{padding:10px;gap:7px}.page-fallback p{font-size:11px}.page-fallback>div{gap:18px}.page-fallback button{min-height:36px;font-size:11px;padding:6px 12px}.page-fallback a{font-size:10px}.reader-label,.native-open{min-width:0;flex:1 1 0}.pagination{flex:0 0 auto}.native-open{white-space:nowrap}.pdf-page::before{font-size:21px}}
 @media(max-width:350px){.reader-label span:first-child{font-size:15px}.reader-toolbar{column-gap:4px}.native-open{font-size:9px}}
