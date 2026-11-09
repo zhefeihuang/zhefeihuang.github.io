@@ -100,10 +100,10 @@ main,.header-inner,.reader,.reader-toolbar,.pdf-pages{min-width:0}
 .brand-site-invitation{left:3.2174%;top:89.9%;width:8.7826%;height:4.1%}
 .project-website{display:flex;align-items:center;gap:28px;min-width:0;margin-top:-12px;padding:2px 0 0;color:var(--muted);background:transparent;border:0;border-top:.6px solid var(--line);box-shadow:none}
 .project-website-note{margin-left:auto;font-size:11px;line-height:1.65;letter-spacing:.02em;white-space:nowrap}
-.project-website-link{display:inline-flex;align-items:center;justify-content:flex-start;gap:12px;flex:0 0 auto;min-height:48px;padding:9px 0;background:transparent;border:0;color:var(--ink);font-size:20px;font-weight:400;line-height:1.5;letter-spacing:.035em}
+.project-website-link{display:inline-flex;align-items:center;justify-content:flex-start;gap:12px;flex:0 0 auto;min-height:48px;padding:9px 0;background:transparent;border:0;color:var(--ink);font-size:12px;font-weight:400;line-height:1.5;letter-spacing:.035em}
 .project-website-link>span{text-decoration:underline;text-decoration-color:#87917b;text-decoration-thickness:.7px;text-underline-offset:6px}
-.project-website-link:hover>span{text-decoration-color:var(--ink)}.project-website-link .icon{width:16px;height:16px;stroke-width:1.15;transition:transform .2s}
+.project-website-link:hover>span{text-decoration-color:var(--ink)}.project-website-link .icon{width:12px;height:12px;stroke-width:1.15;transition:transform .2s}
 .project-website-link:hover .icon{transform:translate(2px,-2px)}
-@media(max-width:600px){.project-website{gap:16px;margin-top:-4px;padding-top:2px}.project-website-note{font-size:10px;letter-spacing:0}.project-website-link{font-size:18px;gap:10px;min-height:46px;padding:9px 0;letter-spacing:.02em}.project-website-link .icon{width:15px;height:15px}}
+@media(max-width:600px){.project-website{gap:16px;margin-top:-4px;padding-top:2px}.project-website-note{font-size:10px;letter-spacing:0}.project-website-link{font-size:11px;gap:10px;min-height:46px;padding:9px 0;letter-spacing:.02em}.project-website-link .icon{width:11px;height:11px}}
 @media(max-width:600px){.page-fallback{padding:10px;gap:7px}.page-fallback p{font-size:11px}.page-fallback>div{gap:18px}.page-fallback button{min-height:36px;font-size:11px;padding:6px 12px}.page-fallback a{font-size:10px}.reader-label,.native-open{min-width:0;flex:1 1 0}.pagination{flex:0 0 auto}.native-open{white-space:nowrap}.pdf-page::before{font-size:21px}}
 @media(max-width:350px){.reader-label span:first-child{font-size:15px}.reader-toolbar{column-gap:4px}.native-open{font-size:9px}}
