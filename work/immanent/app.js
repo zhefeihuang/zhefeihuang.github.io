@@ -64,10 +64,10 @@ document.addEventListener('click',e=>{
  if(target.hasAttribute('data-bag')){openBag();return}
  if(target.hasAttribute('data-close')){closeBag();return}
  if(target.hasAttribute('data-continue')){closeBag();route(null);return}
- if(target.hasAttribute('data-product-quantity')){selectedQuantity=Math.max(1,Math.min(9,selectedQuantity+Number(target.dataset.productQuantity)));document.querySelector('#product-quantity').textContent=selectedQuantity;document.querySelector('[data-product-quantity="-1"]').disabled=selectedQuantity===1;document.querySelector('[data-product-quantity="1"]').disabled=selectedQuantity===9;return}
+ if(target.hasAttribute('data-product-quantity')){const delta=Number(target.dataset.productQuantity);selectedQuantity=Math.max(1,Math.min(9,selectedQuantity+delta));document.querySelector('#product-quantity').textContent=selectedQuantity;const minus=document.querySelector('[data-product-quantity="-1"]');const plus=document.querySelector('[data-product-quantity="1"]');minus.disabled=selectedQuantity===1;plus.disabled=selectedQuantity===9;const sameControl=delta<0?minus:plus;const nextControl=sameControl.disabled?(delta<0?plus:minus):sameControl;nextControl.focus();return}
  if(target.dataset.add){const id=target.dataset.add;bag[id]=Math.min(9,(bag[id]||0)+selectedQuantity);saveBag();notify(PRODUCTS[id].code+' 已加入购物袋');target.textContent='已加入购物袋 ✓';setTimeout(()=>{if(target.isConnected)target.innerHTML='加入购物袋 '+icon('arrow')},2200);return}
  if(target.dataset.change){const id=target.dataset.change;bag[id]=Math.max(1,Math.min(9,bag[id]+Number(target.dataset.delta)));saveBag();renderBag();const next=dialog.querySelector('[data-change="'+id+'"][data-delta="'+target.dataset.delta+'"]:not(:disabled)')||dialog.querySelector('[data-change="'+id+'"]:not(:disabled)');if(next)next.focus();return}
- if(target.dataset.remove){delete bag[target.dataset.remove];saveBag();renderBag();return}
+ if(target.dataset.remove){delete bag[target.dataset.remove];saveBag();renderBag();const nextControl=dialog.querySelector('.bag-item [data-change]:not(:disabled), .bag-empty [data-continue]');if(nextControl)nextControl.focus();return}
  if(target.hasAttribute('data-review')){renderBag(true);dialog.querySelector('[data-finish]').focus();return}
  if(target.hasAttribute('data-return-bag')){renderBag();dialog.querySelector('[data-review]').focus();return}
  if(target.hasAttribute('data-finish')){closeBag();notify('演示已完成 · 未产生真实交易');return}

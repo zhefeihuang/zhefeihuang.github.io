@@ -17,6 +17,7 @@ if (pagesElement) {
   let zoomTimer = 0;
   let lastJumpPage = 0;
   let lastJumpTime = 0;
+  let pumping = false;
   const normalQueue = new Set();
   const zoomQueue = new Map();
   const maxConcurrentLoads = 2;
@@ -67,7 +68,7 @@ if (pagesElement) {
       fullSrc: img.dataset.fullSrc || '', candidates,
       near: false, visible: false, phase: 'idle', active: false, token: 0,
       retries: 0, triedStandard: false, timer: 0, zoomTier: 'preview',
-      zoomBusy: false, zoomToken: 0, zoomFailedUntil: 0,
+      zoomBusy: false, zoomToken: 0, zoomFailedUntil: 0, cancelZoom: null,
     };
     figure.dataset.resolution = 'preview';
     let fallback = figure.querySelector('.page-fallback');
@@ -103,8 +104,7 @@ if (pagesElement) {
         enqueueNormal(state, true);
       });
     });
-    img.addEventListener('load', () => onImageLoad(state));
-    img.addEventListener('error', () => onImageError(state));
+    bindImage(state, img);
     if (img.getAttribute('src') && img.complete && img.naturalWidth > 0) {
       setPhase(state, 'ready');
     } else if (img.getAttribute('src')) {
@@ -120,6 +120,31 @@ if (pagesElement) {
     return state;
   });
   const totalPages = states.length;
+
+  function bindImage(state, img) {
+    // A cancelled offscreen element may still dispatch a late event. A fresh
+    // element keeps that event from being mistaken for its replacement.
+    img.addEventListener('load', () => { if (state.img === img) onImageLoad(state); });
+    img.addEventListener('error', () => { if (state.img === img) onImageError(state); });
+  }
+  function pauseOffscreenLoad(state) {
+    if (!state.active || state.visible || state.number === currentPage) return;
+    const old = state.img;
+    const replacement = document.createElement('img');
+    for (const attribute of old.attributes) {
+      if (!['src', 'srcset', 'sizes'].includes(attribute.name)) replacement.setAttribute(attribute.name, attribute.value);
+    }
+    replacement.hidden = true;
+    state.token += 1;
+    finishNormal(state);
+    state.img = replacement;
+    bindImage(state, replacement);
+    old.replaceWith(replacement);
+    old.removeAttribute('srcset');
+    old.removeAttribute('src');
+    normalQueue.delete(state);
+    setPhase(state, 'idle');
+  }
 
   function startTimer(state) {
     clearTimeout(state.timer);
@@ -151,6 +176,13 @@ if (pagesElement) {
     }
     finishNormal(state);
     state.img.hidden = true;
+    if (!state.visible && state.number !== currentPage &&
+        Array.from(normalQueue).some(queued => queued.urgent || queued.visible)) {
+      setPhase(state, 'idle');
+      normalQueue.add(state);
+      pumpQueue();
+      return;
+    }
     if (state.retries < 1 && state.smallSrc) {
       state.retries += 1;
       const url = new URL(state.smallSrc, document.baseURI);
@@ -210,22 +242,24 @@ if (pagesElement) {
     const probe = new Image();
     probe.decoding = 'async';
     let completed = false;
-    const done = success => {
+    const done = (success, cancelled = false) => {
       if (completed) return;
       completed = true;
       clearTimeout(timer);
       activeLoads = Math.max(0, activeLoads - 1);
       state.zoomBusy = false;
+      state.cancelZoom = null;
       if (success && token === state.zoomToken && state.visible && viewport().scale >= 1.25) {
         state.zoomTier = target.tier;
         state.figure.dataset.resolution = target.tier;
         state.img.removeAttribute('srcset');
         state.img.removeAttribute('sizes');
         state.img.src = target.url;
-      } else if (!success) {
+      } else if (!success && !cancelled) {
         state.zoomFailedUntil = Date.now() + 30000;
       }
       probe.onload = null; probe.onerror = null;
+      if (cancelled) probe.removeAttribute('src');
       pumpQueue(); scheduleZoom();
     };
     const timer = window.setTimeout(() => {
@@ -237,6 +271,7 @@ if (pagesElement) {
       else done(true);
     };
     probe.onerror = () => done(false);
+    state.cancelZoom = () => { state.zoomToken += 1; done(false, true); };
     probe.src = target.url;
   }
   function restorePreview(state) {
@@ -248,6 +283,20 @@ if (pagesElement) {
     state.img.src = state.normalSrc;
   }
   function pumpQueue() {
+    if (pumping) return;
+    pumping = true;
+    try {
+    const visibleWaiting = Array.from(normalQueue).some(state =>
+      !state.active && state.phase !== 'ready' && state.phase !== 'failed' && (state.urgent || state.visible));
+    if (visibleWaiting && activeLoads >= maxConcurrentLoads) {
+      const offscreen = states.filter(state => !state.visible && state.number !== currentPage && (state.active || state.cancelZoom))
+        .sort((a, b) => Math.abs(b.number - currentPage) - Math.abs(a.number - currentPage));
+      for (const state of offscreen) {
+        if (state.cancelZoom) state.cancelZoom();
+        if (state.active) pauseOffscreenLoad(state);
+        if (activeLoads < maxConcurrentLoads) break;
+      }
+    }
     while (activeLoads < maxConcurrentLoads) {
       const candidates = Array.from(normalQueue).filter(state => !state.active && state.phase !== 'ready' && state.phase !== 'failed');
       candidates.sort((a, b) => Number(b.urgent || b.visible) - Number(a.urgent || a.visible) || Math.abs(a.number - currentPage) - Math.abs(b.number - currentPage));
@@ -269,6 +318,9 @@ if (pagesElement) {
       if (!nearby) break;
       normalQueue.delete(nearby);
       startNormal(nearby, nearby.normalSrc, nearby.normalSet, nearby.normalSizes);
+    }
+    } finally {
+      pumping = false;
     }
   }
 
@@ -333,6 +385,14 @@ if (pagesElement) {
     });
     if (view.scale <= 1.05 && window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 12 && states.length && states[states.length - 1].visible) chosen = states[states.length - 1];
     if (chosen && performance.now() >= jumpUntil) updateControls(chosen.number);
+    // A paused prefetch can remain inside the observer's root margin. On a
+    // return scroll it becomes visible without a new intersection event.
+    states.forEach(state => {
+      if (state.visible && state.phase === 'idle' && !state.active) {
+        state.urgent = true;
+        normalQueue.add(state);
+      }
+    });
     pumpQueue(); scheduleZoom();
   }
   function scheduleScrollUpdate() {

@@ -1,0 +1,14 @@
+{
+  "pdf": "zhefeihuang_selectedworks.pdf",
+  "legacy_pdf_alias": "ZhefeiHuang_SelectedWorks202611.pdf",
+  "page_count": 30,
+  "page_width": 2300,
+  "page_height": 1000,
+  "preview_widths": {
+    "small": 960,
+    "medium": 1440,
+    "standard": 2300,
+    "large": 4600
+  },
+  "canonical_url": "https://zhefeihuang.github.io/zhefeihuang2026/"
+}
