@@ -226,14 +226,16 @@ if (pagesElement) {
   }
   function desiredZoom(state) {
     if (!state || !state.visible || state.phase !== 'ready' || state.zoomBusy || Date.now() < state.zoomFailedUntil) return null;
-    const scale = viewport().scale;
-    if (scale < 1.25) return null;
-    const required = state.figure.getBoundingClientRect().width * (window.devicePixelRatio || 1) * scale;
+    // Desktop display density and browser zoom can require more pixels while
+    // visualViewport.scale remains 1. Keep an adequate preview as-is.
+    const required = state.figure.getBoundingClientRect().width * (window.devicePixelRatio || 1) * viewport().scale;
+    const current = pixelsInCurrentSource(state);
+    if (current >= required * .95) return null;
     const tier = required > 2450 ? 'full' : 'standard';
     const width = tier === 'full' ? 4600 : 2300;
     const url = tier === 'full' ? state.fullSrc : state.standardSrc;
-    if (!url || pixelsInCurrentSource(state) >= width * .95) return null;
-    return { tier, url: absolute(url) };
+    if (!url || current >= width * .95) return null;
+    return { tier, width, url: absolute(url) };
   }
   function loadZoom(state, target) {
     state.zoomBusy = true;
@@ -249,7 +251,8 @@ if (pagesElement) {
       activeLoads = Math.max(0, activeLoads - 1);
       state.zoomBusy = false;
       state.cancelZoom = null;
-      if (success && token === state.zoomToken && state.visible && viewport().scale >= 1.25) {
+      const stillNeeded = desiredZoom(state);
+      if (success && token === state.zoomToken && stillNeeded && target.width > pixelsInCurrentSource(state)) {
         state.zoomTier = target.tier;
         state.figure.dataset.resolution = target.tier;
         state.img.removeAttribute('srcset');
