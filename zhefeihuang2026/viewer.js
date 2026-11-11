@@ -416,6 +416,18 @@ if (pagesElement) {
   }
 
   if (totalElement) totalElement.textContent = String(totalPages);
+  // PDF contents links need the same visible-page loading priority and sticky
+  // header offset as the page controls. Keep ordinary modified-link behavior.
+  pagesElement.addEventListener('click', event => {
+    if (event.defaultPrevented || event.button !== 0 || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
+    if (!(event.target instanceof Element)) return;
+    const link = event.target.closest('a[data-go-to-page]');
+    if (!link) return;
+    const number = Number(link.dataset.goToPage);
+    if (!Number.isInteger(number) || number < 1 || number > totalPages) return;
+    event.preventDefault();
+    goToPage(number);
+  });
   if (currentInput) {
     currentInput.min = '1'; currentInput.max = String(totalPages); currentInput.value = '1';
     currentInput.addEventListener('change', () => goToPage(currentInput.value));

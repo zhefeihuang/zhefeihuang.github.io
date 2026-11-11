@@ -1,10 +1,13 @@
 from pathlib import Path
 import hashlib,json
+from html import escape
+from urllib.parse import urlsplit
 import fitz
 root=Path(__file__).resolve().parents[1]/'zhefeihuang2026'
 config=json.loads((root/'portfolio.config.json').read_text())
 pdf=config['pdf']
 assert pdf=='zhefeihuang_selectedworks.pdf', 'The portfolio filename is permanent.'
+assert (root/pdf).stat().st_size < config['max_pdf_bytes'], 'The download PDF must remain below 20 MB.'
 download_name=pdf
 version=hashlib.sha256((root/pdf).read_bytes()).hexdigest()[:12]
 viewer_version=hashlib.sha256((root/'viewer.js').read_bytes()).hexdigest()[:12]
@@ -12,20 +15,50 @@ style_version=hashlib.sha256((root/'style.css').read_bytes()).hexdigest()[:12]
 pdf_url=pdf+'?v='+version
 file_size=f'{(root/pdf).stat().st_size/1000000:.1f}'
 brand_url='https://zhefeihuang.github.io/work/immanent/'
-# Use the native PDF links as the source of truth for the preview hotspots.
-brand_pdf_links=[]
+# Keep every native PDF link usable when the page is shown as a raster preview.
+# Positions are normalized against each actual PDF page, not copied by hand.
+page_links={}
 link_rules=[]
 with fitz.open(root/pdf) as document:
  assert len(document)==30
- page=document[6]
- for link in page.get_links():
-  if link.get('uri')!=brand_url: continue
-  x0,y0,x1,y1=link['from']
-  role='invitation' if y0>page.rect.height*.85 else ('address' if y1-y0<35 else 'cta')
-  cls='brand-site-'+role
-  brand_pdf_links.append(cls)
-  link_rules.append('.'+cls+'{left:'+f'{x0/page.rect.width*100:.6f}'+'%;top:'+f'{y0/page.rect.height*100:.6f}'+'%;width:'+f'{(x1-x0)/page.rect.width*100:.6f}'+'%;height:'+f'{(y1-y0)/page.rect.height*100:.6f}'+'%}')
-assert len(brand_pdf_links)==3 and len(set(brand_pdf_links))==3
+ for number,page in enumerate(document,1):
+  links=[]
+  for index,link in enumerate(page.get_links(),1):
+   box=fitz.Rect(link['from']) & page.rect
+   if box.is_empty: continue
+   x0,y0,x1,y1=box
+   cls=f'pdf-link-p{number}-{index}'
+   aliases=[]
+   if link['kind']==fitz.LINK_URI:
+    url=link.get('uri','')
+    scheme=urlsplit(url).scheme.lower()
+    if scheme not in ('http','https','mailto'): continue
+    if url.rstrip('/')=='https://zhefeihuang.github.io':
+     label='打开黄浙菲个人网站（新窗口）'
+    elif url.rstrip('/')==brand_url.rstrip('/'):
+     label='打开 IMMANENT 品牌网站，可查看商品详情、加入购物袋（新窗口）'
+     if number==7:
+      role='invitation' if y0>page.rect.height*.85 else ('address' if y1-y0<35 else 'cta')
+      aliases=['brand-site-hotspot','brand-site-'+role]
+    elif scheme=='mailto':
+     label='发送邮件至 '+url[7:]
+    else:
+     label='打开链接 '+url+'（新窗口）'
+    attrs=f'data-pdf-link-kind="uri" data-pdf-uri="{escape(url,quote=True)}"'
+    if scheme in ('http','https'): attrs+=' target="_blank" rel="noopener"'
+    row=dict(href=url,label=label,attrs=attrs,classes=['pdf-uri-link',*aliases])
+   elif link['kind']==fitz.LINK_GOTO:
+    target=link.get('page',-1)+1
+    if not 1<=target<=len(document): continue
+    row=dict(href=f'#page-{target}',label=f'跳转至作品集第{target}页',
+             attrs=f'data-pdf-link-kind="goto" data-go-to-page="{target}"',classes=['pdf-goto-link'])
+   else:
+    continue
+   row['classes'].insert(0,cls)
+   links.append(row)
+   link_rules.append('.'+cls+'{left:'+f'{x0/page.rect.width*100:.6f}'+'%;top:'+f'{y0/page.rect.height*100:.6f}'+'%;width:'+f'{(x1-x0)/page.rect.width*100:.6f}'+'%;height:'+f'{(y1-y0)/page.rect.height*100:.6f}'+'%}')
+  page_links[number]=links
+assert any(page_links.values()), 'The PDF must retain its native navigation and website links.'
 (root/'page-links.css').write_text('/* Generated from the portfolio PDF link rectangles. */\n'+'\n'.join(link_rules)+'\n')
 links_version=hashlib.sha256((root/'page-links.css').read_bytes()).hexdigest()[:12]
 icons={
@@ -49,13 +82,14 @@ for i in range(1,31):
   attrs=f'src="{small}" srcset="{srcset}" sizes="{sizes}" loading="eager" fetchpriority="high"'
  else:
   attrs=f'data-src="{small}" data-srcset="{srcset}" data-sizes="{sizes}" loading="lazy"'
- brand_hotspots=''
- if i==7:
-  brand_hotspots='\n          '.join(f'<a class="brand-site-hotspot {cls}" href="{brand_url}" target="_blank" rel="noopener" aria-label="打开 IMMANENT 品牌网站，可查看商品详情、加入购物袋"><span class="sr-only">打开品牌网站</span></a>' for cls in brand_pdf_links)
+ hotspots='\n          '.join(
+  '<a class="pdf-link-hotspot '+ ' '.join(link['classes'])+'" href="'+escape(link['href'],quote=True)+'" '+link['attrs']+
+  ' aria-label="'+escape(link['label'],quote=True)+'"><span class="sr-only">'+escape(link['label'])+'</span></a>'
+  for link in page_links.get(i,[]))
  figures.append(f'''<figure class="pdf-page" data-page="{i}" id="page-{i}" data-render-state="idle" aria-label="作品集第{i}页，共30页">
           <img class="page-preview" {attrs} data-preview-src="{small}" data-standard-src="{standard}" data-full-src="{full}" width="2300" height="1000" alt="黄浙菲作品集，第{i}页" decoding="async">
           <noscript><img class="page-preview nojs-preview" src="{small}" srcset="{srcset}" sizes="{sizes}" width="2300" height="1000" alt="黄浙菲作品集，第{i}页" loading="lazy"></noscript>
-          {brand_hotspots}
+          {hotspots}
           <div class="page-fallback" hidden>
             <p data-error-copy>这一页暂时没加载出来</p>
             <div><button type="button" data-retry>重试此页</button><a href="./{pdf_url}#page={i}" target="_blank" rel="noopener" data-open-page>用 PDF 查看 ↗</a></div>
@@ -153,4 +187,4 @@ for placeholder,value in {'HEADER_DOWNLOAD':download(),'FOOTER_DOWNLOAD':downloa
  html=html.replace('{'+placeholder+'}',value)
 assert '{HEADER_DOWNLOAD}' not in html
 (root/'index.html').write_text(html)
-print('Wrote site HTML with 30 static page previews and direct PDF links.')
+print('Wrote site HTML with 30 static page previews, '+str(sum(map(len,page_links.values())))+' native PDF link hotspots and direct PDF downloads.')

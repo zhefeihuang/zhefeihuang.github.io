@@ -94,10 +94,12 @@ main,.header-inner,.reader,.reader-toolbar,.pdf-pages{min-width:0}
 .page-fallback a{font-size:11px;text-underline-offset:4px;text-decoration:underline}
 .nojs-preview{visibility:visible!important}
 @supports not (overflow:clip){html{overflow-x:hidden}}
-.brand-site-hotspot{position:absolute;z-index:2;display:block;border-radius:2px}
-.brand-site-hotspot:focus-visible{outline:2px solid var(--accent);outline-offset:3px;background:rgba(245,243,237,.12)}
-.brand-site-cta{left:5.5235%;top:72.4641%;width:9.873%;height:4.8896%}
-.brand-site-invitation{left:3.2174%;top:89.9%;width:8.7826%;height:4.1%}
+.pdf-link-hotspot{position:absolute;z-index:3;display:block;border-radius:2px;touch-action:manipulation}
+.pdf-page[data-render-state='failed']>.pdf-link-hotspot{display:none}
+.pdf-link-hotspot:focus-visible{outline:2px solid var(--accent);outline-offset:3px;background:rgba(245,243,237,.12)}
+/* Quiet cover URLs are small at page-fit scale. Enlarge only their invisible
+   touch area; dense contents rows keep their separate native rectangles. */
+.pdf-uri-link::after{content:"";position:absolute;left:0;right:0;top:50%;height:max(100%,24px);transform:translateY(-50%)}
 .project-website{display:flex;align-items:center;gap:28px;min-width:0;margin-top:-12px;padding:2px 0 0;color:var(--muted);background:transparent;border:0;border-top:.6px solid var(--line);box-shadow:none}
 .project-website-note{margin-left:auto;font-size:11px;line-height:1.65;letter-spacing:.02em;white-space:nowrap}
 .project-website-link{display:inline-flex;align-items:center;justify-content:flex-start;gap:12px;flex:0 0 auto;min-height:48px;padding:9px 0;background:transparent;border:0;color:var(--ink);font-size:12px;font-weight:400;line-height:1.5;letter-spacing:.035em}
